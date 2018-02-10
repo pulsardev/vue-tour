@@ -1,21 +1,21 @@
 <template>
   <div>
-    <v-step v-for="(step, index) in steps" :step="step" :key="index" :index="index"></v-step>
+    <slot>
+      Default slot
+      <v-step
+        v-if="currentStep === index"
+        v-for="(step, index) of steps"
+        :target="step.el"
+        :step="step"
+        :key="index"
+        @previous-step="previousStep"
+        @next-step="nextStep"
+      ></v-step>
+    </slot>
   </div>
 </template>
 
 <script>
-  class Tour {
-    constructor (name, steps) {
-      this.name = name
-      this.steps = steps
-    }
-
-    addStep (el, ...params) {
-      this.steps.push({el, params})
-    }
-  }
-
   export default {
     name: 'v-tour',
     props: {
@@ -25,11 +25,20 @@
       },
       name: {
         type: String
+      },
+      currentStep: {
+        type: Number
       }
     },
     mounted () {
-      console.log(this.$tours)
-      this.$tours[this.name] = new Tour(this.name, this.steps)
+    },
+    methods: {
+      previousStep () {
+        this.currentStep--;
+      },
+      nextStep () {
+        this.currentStep++;
+      }
     }
   }
 </script>

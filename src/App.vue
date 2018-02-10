@@ -2,21 +2,21 @@
   <div id="app">
     <img src="./assets/logo.png">
     <h1>{{ msg }}</h1>
-    <!--<v-tour tag="h2">Essential Links</v-tour>-->
+    <h2 id="v-step-2" ref="v-step-2">Essential Links</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
       <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
       <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
       <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
     </ul>
-    <h2 v-tour="{id: 'myFirstTour', stepNumber: 1, stepContent: 'Test'}">Ecosystem</h2>
+    <h2 id="v-step-0" ref="v-step-0">Ecosystem</h2>
     <ul>
       <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
       <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
-    <h2 ref="step0">Test</h2>
+    <h2 id="v-step-1" ref="v-step-1">Test</h2>
     <ul>
       <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
       <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
@@ -24,7 +24,17 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
 
-    <v-tour name="myFirstTour" :steps="steps"></v-tour>
+    <v-tour name="myFirstTour" :steps="steps" :current-step.sync="currentStep">
+      App slot
+      <v-step
+        v-if="currentStep === index"
+        v-for="(step, index) of steps"
+        :step="step"
+        :key="index"
+        @previous-step="previousStep"
+        @next-step="nextStep"
+      ></v-step>
+    </v-tour>
   </div>
 </template>
 
@@ -34,16 +44,32 @@
     data () {
       return {
         msg: 'Welcome to Your Vue.js App',
-        steps: []
+        currentStep: 0,
+        steps: [
+          {
+            target: 'v-step-0',
+            params: {}
+          },
+          {
+            target: 'v-step-1',
+            params: {}
+          },
+          {
+            target: 'v-step-2',
+            params: {}
+          }
+        ]
       }
     },
     mounted: function () {
-      this.steps = [
-        {
-          el: this.$refs.step0,
-          params: {}
-        }
-      ]
+    },
+    methods: {
+      previousStep () {
+        this.currentStep--;
+      },
+      nextStep () {
+        this.currentStep++;
+      }
     }
   }
 </script>
