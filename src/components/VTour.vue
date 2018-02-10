@@ -1,6 +1,6 @@
 <template>
   <div>
-    <slot>
+    <slot v-if="isReady">
       Default slot
       <v-step
         v-if="currentStep === index"
@@ -30,7 +30,16 @@
         type: Number
       }
     },
+    data () {
+      return {
+        isReady: false
+      }
+    },
     mounted () {
+      // Wait until all DOM elements are rendered
+      setTimeout(() => {
+        this.isReady = true
+      })
     },
     methods: {
       previousStep () {

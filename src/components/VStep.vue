@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  // import Vue from 'vue'
   import Popper from 'popper.js'
   import sum from 'hash-sum'
 
@@ -26,19 +27,20 @@
     },
     mounted () {
       // this.hash = sum(this.target)
-      console.log('hash from ' + this.step.target, this.hash)
+      // Vue.nextTick(() => {
+        console.log('hash from ' + this.step.target, this.hash)
 
-      let targetElement = document.querySelector('#' + this.step.target)
-      console.log('targetElement', targetElement)
+        let targetElement = document.querySelector(this.step.target)
+        console.log('targetElement', targetElement)
 
-      new Popper(
-        targetElement,
-        this.$refs['v-step-' + this.hash],
-        {
-          attachment: 'top right',
-          targetAttachment: 'top left'
-        }
-      )
+        new Popper(
+          targetElement,
+          this.$refs['v-step-' + this.hash],
+          {
+            placement: 'bottom'
+          }
+        )
+      // })
     },
     methods: {
       previousStep () {
