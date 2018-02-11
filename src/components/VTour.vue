@@ -1,16 +1,19 @@
 <template>
   <div>
-    <slot v-if="isReady">
+    <slot v-if="isRunning">
       Default slot
       <v-step
         v-if="currentStep === index"
         v-for="(step, index) of steps"
-        :target="step.el"
-        :step="step"
         :key="index"
-        @previous-step="previousStep"
-        @next-step="nextStep"
-      ></v-step>
+        :step="step"
+        :previous-step="previousStep"
+        :next-step="nextStep"
+      >
+        <div v-if="index === 2" slot="actions">
+          <a @click="nextStep">TEST</a>
+        </div>
+      </v-step>
     </slot>
   </div>
 </template>
@@ -26,22 +29,26 @@
       name: {
         type: String
       },
-      currentStep: {
-        type: Number
-      }
+      // currentStep: {
+      //   type: Number
+      // }
     },
     data () {
       return {
-        isReady: false
+        isRunning: false,
+        currentStep: 0
       }
     },
     mounted () {
-      // Wait until all DOM elements are rendered
-      setTimeout(() => {
-        this.isReady = true
-      })
+      this.$tours[this.name] = this
     },
     methods: {
+      start () {
+        // Wait until all DOM elements are rendered
+        setTimeout(() => {
+          this.isRunning = true
+        })
+      },
       previousStep () {
         this.currentStep--;
       },

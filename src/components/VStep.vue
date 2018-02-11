@@ -1,10 +1,13 @@
 <template>
   <div class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
     This is a step! {{ hash }} {{ step.target }}
-    <div>
-      <button @click="previousStep">Previous</button>
-      <button @click="nextStep">Next</button>
-    </div>
+
+    <slot name="actions">
+      <div>
+        <button @click="previousStep">Previous</button>
+        <button @click="nextStep">Next</button>
+      </div>
+    </slot>
   </div>
 </template>
 
@@ -18,6 +21,12 @@
     props: {
       step: {
         type: Object
+      },
+      previousStep: {
+        type: Function
+      },
+      nextStep: {
+        type: Function
       }
     },
     data () {
@@ -41,16 +50,6 @@
           }
         )
       // })
-    },
-    methods: {
-      previousStep () {
-        console.log('previousStep v-step')
-        this.$emit('previous-step')
-      },
-      nextStep () {
-        console.log('nextStep v-step')
-        this.$emit('next-step')
-      }
     }
   }
 </script>

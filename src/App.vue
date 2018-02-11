@@ -17,6 +17,8 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
     <h2 id="v-step-1">Test</h2>
+    <button @click="externalNextStep">Next step</button>
+    <button @click="showStep">Show step</button>
     <ul>
       <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
       <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
@@ -24,16 +26,13 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
 
-    <v-tour name="myFirstTour" :steps="steps" :current-step.sync="currentStep">
-      App slot
-      <v-step
-        v-if="currentStep === index"
-        v-for="(step, index) of steps"
-        :step="step"
-        :key="index"
-        @previous-step="previousStep"
-        @next-step="nextStep"
-      ></v-step>
+    <v-tour name="myFirstTour" :steps="steps">
+      <!--App slot-->
+      <!--<v-step-->
+        <!--v-for="(step, index) of steps"-->
+        <!--:step="step"-->
+        <!--:key="index"-->
+      <!--&gt;</v-step>-->
     </v-tour>
   </div>
 </template>
@@ -44,7 +43,6 @@
     data () {
       return {
         msg: 'Welcome to Your Vue.js App',
-        currentStep: 0,
         steps: [
           {
             target: '#v-step-0',
@@ -62,13 +60,15 @@
       }
     },
     mounted: function () {
+      console.log('TOUR', this.$tours)
+      this.$tours['myFirstTour'].start()
     },
     methods: {
-      previousStep () {
-        this.currentStep--;
+      externalNextStep () {
+        this.$tours['myFirstTour'].nextStep()
       },
-      nextStep () {
-        this.currentStep++;
+      showStep () {
+        this.$tours['myFirstTour'].currentStep = 1
       }
     }
   }
