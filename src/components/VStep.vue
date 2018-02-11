@@ -12,7 +12,7 @@
       </div>
     </slot>
 
-    <div class="v-step__arrow" x-arrow=""></div>
+    <div class="v-step__arrow"></div>
   </div>
 </template>
 

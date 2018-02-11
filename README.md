@@ -2,6 +2,11 @@
 
 > A Vue.js project
 
+## Roadmap
+- Animations
+- Fully customizable step templates
+- Autoscroll to step if out of the viewport
+
 ## Build Setup
 
 ``` bash
