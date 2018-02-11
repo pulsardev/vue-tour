@@ -1,6 +1,12 @@
 <template>
   <div>
-    <slot v-if="isRunning">
+    <slot
+      v-if="isRunning"
+      :current-step="currentStep"
+      :steps="steps"
+      :previous-step="previousStep"
+      :next-step="nextStep"
+    >
       Default slot
       <v-step
         v-if="currentStep === index"
@@ -10,9 +16,9 @@
         :previous-step="previousStep"
         :next-step="nextStep"
       >
-        <div v-if="index === 2" slot="actions">
+        <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">TEST</a>
-        </div>
+        </div>-->
       </v-step>
     </slot>
   </div>

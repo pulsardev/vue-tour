@@ -27,12 +27,21 @@
     </ul>
 
     <v-tour name="myFirstTour" :steps="steps">
-      <!--App slot-->
-      <!--<v-step-->
-        <!--v-for="(step, index) of steps"-->
-        <!--:step="step"-->
-        <!--:key="index"-->
-      <!--&gt;</v-step>-->
+      <!--<template slot-scope="tour">
+        App slot {{ tour.currentStep }}
+        <v-step
+          v-if="tour.currentStep === index"
+          v-for="(step, index) of tour.steps"
+          :key="index"
+          :step="step"
+          :previous-step="tour.previousStep"
+          :next-step="tour.nextStep"
+        >
+          <div v-if="index === 2" slot="actions">
+            <a @click="tour.nextStep">TEST</a>
+          </div>
+        </v-step>
+      </template>-->
     </v-tour>
   </div>
 </template>
