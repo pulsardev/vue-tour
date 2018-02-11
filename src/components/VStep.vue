@@ -1,14 +1,17 @@
 <template>
   <div class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
     <slot name="content">
-      <span v-if="step.content" v-html="step.content"></span>
-      <span v-else>This is a step! {{ hash }} {{ step.target }}</span>
+      <div class="v-step__content">
+        <span v-if="step.content" v-html="step.content"></span>
+        <span v-else>This is a step! {{ hash }} {{ step.target }}</span>
+      </div>
     </slot>
 
     <slot name="actions">
-      <div>
-        <button @click="previousStep">Previous</button>
-        <button @click="nextStep">Next</button>
+      <div class="v-step__buttons">
+        <button @click="stop" class="v-step__button">Quitter</button>
+        <button @click="previousStep" class="v-step__button">Previous</button>
+        <button @click="nextStep" class="v-step__button">Next</button>
       </div>
     </slot>
 
@@ -31,6 +34,9 @@
         type: Function
       },
       nextStep: {
+        type: Function
+      },
+      stop: {
         type: Function
       }
     },
@@ -58,14 +64,14 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .v-step {
-    background: #ffc107;
+    background: #ffc107; /* #ffc107 */
     color: black;
     max-width: 256px;
     border-radius: 3px;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-    padding: 10px;
+    padding: 1rem;
     text-align: center;
   }
 
@@ -74,70 +80,87 @@
     height: 0;
     border-style: solid;
     position: absolute;
-    margin: 5px;
+    margin: 0.5rem;
   }
 
   .v-step .v-step__arrow {
-    border-color: #ffc107;
+    border-color: #ffc107; /* #ffc107 */
   }
 
   .v-step[x-placement^="top"] {
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
   }
 
   .v-step[x-placement^="top"] .v-step__arrow {
-    border-width: 5px 5px 0 5px;
+    border-width: 0.5rem 0.5rem 0 0.5rem;
     border-left-color: transparent;
     border-right-color: transparent;
     border-bottom-color: transparent;
-    bottom: -5px;
-    left: calc(50% - 5px);
+    bottom: -0.5rem;
+    left: calc(50% - 1rem);
     margin-top: 0;
     margin-bottom: 0;
   }
 
   .v-step[x-placement^="bottom"] {
-    margin-top: 5px;
+    margin-top: 0.5rem;
   }
 
   .v-step[x-placement^="bottom"] .v-step__arrow {
-    border-width: 0 5px 5px 5px;
+    border-width: 0 0.5rem 0.5rem 0.5rem;
     border-left-color: transparent;
     border-right-color: transparent;
     border-top-color: transparent;
-    top: -5px;
-    left: calc(50% - 5px);
+    top: -0.5rem;
+    left: calc(50% - 1rem);
     margin-top: 0;
     margin-bottom: 0;
   }
 
   .v-step[x-placement^="right"] {
-    margin-left: 5px;
+    margin-left: 0.5rem;
   }
 
   .v-step[x-placement^="right"] .v-step__arrow {
-    border-width: 5px 5px 5px 0;
+    border-width: 0.5rem 0.5rem 0.5rem 0;
     border-left-color: transparent;
     border-top-color: transparent;
     border-bottom-color: transparent;
-    left: -5px;
-    top: calc(50% - 5px);
+    left: -0.5rem;
+    top: calc(50% - 1rem);
     margin-left: 0;
     margin-right: 0;
   }
 
   .v-step[x-placement^="left"] {
-    margin-right: 5px;
+    margin-right: 0.5rem;
   }
 
   .v-step[x-placement^="left"] .v-step__arrow {
-    border-width: 5px 0 5px 5px;
+    border-width: 0.5rem 0 0.5rem 0.5rem;
     border-top-color: transparent;
     border-right-color: transparent;
     border-bottom-color: transparent;
-    right: -5px;
-    top: calc(50% - 5px);
+    right: -0.5rem;
+    top: calc(50% - 1rem);
     margin-left: 0;
     margin-right: 0;
+  }
+
+  /* Custom */
+
+  .v-step__content {
+    margin: 0 0 1rem 0;
+  }
+
+  .v-step__button {
+    cursor: pointer;
+    padding: 0.5rem;
+    background-color: transparent;
+    border: 1px solid black;
+
+    &:hover {
+      background-color: rgba(white, 0.5);
+    }
   }
 </style>

@@ -6,6 +6,7 @@
       :steps="steps"
       :previous-step="previousStep"
       :next-step="nextStep"
+      :stop="stop"
     >
       Default slot
       <v-step
@@ -15,6 +16,7 @@
         :step="step"
         :previous-step="previousStep"
         :next-step="nextStep"
+        :stop="stop"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">TEST</a>
@@ -53,11 +55,15 @@
         })
       },
       previousStep () {
-        this.currentStep--;
+        this.currentStep--
       },
       nextStep () {
-        this.currentStep++;
-      }
+        this.currentStep++
+      },
+      stop () {
+        this.currentStep = 0
+        this.isRunning = false
+      },
     }
   }
 </script>

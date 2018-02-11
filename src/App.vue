@@ -36,6 +36,7 @@
           :step="step"
           :previous-step="tour.previousStep"
           :next-step="tour.nextStep"
+          :stop="tour.stop"
         >
           <div v-if="index === 2" slot="actions">
             <a @click="tour.nextStep">TEST</a>
@@ -83,9 +84,11 @@
     },
     methods: {
       externalNextStep () {
+        this.$tours['myFirstTour'].start()
         this.$tours['myFirstTour'].nextStep()
       },
       showStep () {
+        this.$tours['myFirstTour'].start()
         this.$tours['myFirstTour'].currentStep = 1
       }
     }
