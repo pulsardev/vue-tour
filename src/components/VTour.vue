@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="v-tour">
     <slot
       v-if="isRunning"
       :current-step="currentStep"
@@ -34,10 +34,7 @@
       },
       name: {
         type: String
-      },
-      // currentStep: {
-      //   type: Number
-      // }
+      }
     },
     data () {
       return {
@@ -50,7 +47,7 @@
     },
     methods: {
       start () {
-        // Wait until all DOM elements are rendered
+        // Wait for the DOM to be loaded, then start the tour
         setTimeout(() => {
           this.isRunning = true
         })

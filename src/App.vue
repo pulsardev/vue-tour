@@ -4,7 +4,7 @@
     <h1>{{ msg }}</h1>
     <h2 id="v-step-2">Essential Links</h2>
     <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
+      <li><a id="v-step-3" href="https://vuejs.org" target="_blank">Core Docs</a></li>
       <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
       <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
       <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
@@ -55,15 +55,24 @@
         steps: [
           {
             target: '#v-step-0',
-            params: {}
+            content: `Découvrez <strong>Vue Tour</strong> !`
           },
           {
             target: '#v-step-1',
-            params: {}
+            content: 'Un super plugin en Vue !'
           },
           {
             target: '#v-step-2',
-            params: {}
+            content: 'L\'essayer c\'est l\'adopter',
+            params: {
+              placement: 'top'
+            }
+          },
+          {
+            target: '#v-step-3',
+            params: {
+              placement: 'left'
+            }
           }
         ]
       }
