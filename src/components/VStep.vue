@@ -10,8 +10,8 @@
     <slot name="actions">
       <div class="v-step__buttons">
         <button @click="stop" class="v-step__button">Quitter</button>
-        <button @click="previousStep" class="v-step__button">Previous</button>
-        <button @click="nextStep" class="v-step__button">Next</button>
+        <button @click="previousStep" v-if="!isFirst" class="v-step__button">Previous</button>
+        <button @click="nextStep" v-if="!isLast" class="v-step__button">Next</button>
       </div>
     </slot>
 
@@ -38,6 +38,12 @@
       },
       stop: {
         type: Function
+      },
+      isFirst: {
+        type: Boolean
+      },
+      isLast: {
+        type: Boolean
       }
     },
     data () {

@@ -1,14 +1,15 @@
 <template>
   <div class="v-tour">
     <slot
-      v-if="isRunning"
       :current-step="currentStep"
       :steps="steps"
       :previous-step="previousStep"
       :next-step="nextStep"
       :stop="stop"
+      :isFirst="isFirst"
+      :isLast="isLast"
     >
-      Default slot
+      Default slot {{ currentStep }}
       <v-step
         v-if="currentStep === index"
         v-for="(step, index) of steps"
@@ -17,9 +18,11 @@
         :previous-step="previousStep"
         :next-step="nextStep"
         :stop="stop"
+        :isFirst="isFirst"
+        :isLast="isLast"
       >
         <!--<div v-if="index === 2" slot="actions">
-          <a @click="nextStep">TEST</a>
+          <a @click="nextStep">NEXT STEP</a>
         </div>-->
       </v-step>
     </slot>
@@ -40,18 +43,25 @@
     },
     data () {
       return {
-        isRunning: false,
-        currentStep: 0
+        currentStep: -1
       }
     },
     mounted () {
       this.$tours[this.name] = this
     },
+    computed: {
+      isFirst () {
+        return this.currentStep === 0
+      },
+      isLast () {
+        return this.currentStep === this.steps.length - 1
+      }
+    },
     methods: {
       start () {
         // Wait for the DOM to be loaded, then start the tour
         setTimeout(() => {
-          this.isRunning = true
+          this.currentStep = 0
         })
       },
       previousStep () {
@@ -61,9 +71,8 @@
         this.currentStep++
       },
       stop () {
-        this.currentStep = 0
-        this.isRunning = false
-      },
+        this.currentStep = -1
+      }
     }
   }
 </script>

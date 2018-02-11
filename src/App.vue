@@ -27,8 +27,9 @@
     </ul>
 
     <v-tour name="myFirstTour" :steps="steps">
-      <!--<template slot-scope="tour">
+      <template slot-scope="tour">
         App slot {{ tour.currentStep }}
+        <transition name="fade">
         <v-step
           v-if="tour.currentStep === index"
           v-for="(step, index) of tour.steps"
@@ -37,12 +38,15 @@
           :previous-step="tour.previousStep"
           :next-step="tour.nextStep"
           :stop="tour.stop"
+          :isFirst="tour.isFirst"
+          :isLast="tour.isLast"
         >
           <div v-if="index === 2" slot="actions">
-            <a @click="tour.nextStep">TEST</a>
+            <a @click="tour.nextStep">NEXT STEP</a>
           </div>
         </v-step>
-      </template>-->
+        </transition>
+      </template>
     </v-tour>
   </div>
 </template>
@@ -79,17 +83,14 @@
       }
     },
     mounted: function () {
-      console.log('TOUR', this.$tours)
       this.$tours['myFirstTour'].start()
     },
     methods: {
       externalNextStep () {
-        this.$tours['myFirstTour'].start()
         this.$tours['myFirstTour'].nextStep()
       },
       showStep () {
-        this.$tours['myFirstTour'].start()
-        this.$tours['myFirstTour'].currentStep = 1
+        this.$tours['myFirstTour'].currentStep = 2
       }
     }
   }
@@ -121,5 +122,12 @@
 
   a {
     color: #42b983;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 </style>
