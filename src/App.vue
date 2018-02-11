@@ -41,9 +41,11 @@
           :isFirst="tour.isFirst"
           :isLast="tour.isLast"
         >
-          <div v-if="index === 2" slot="actions">
-            <a @click="tour.nextStep">NEXT STEP</a>
-          </div>
+          <template v-if="index === 1">
+            <div slot="actions">
+              <a @click="tour.nextStep">NEXT STEP</a>
+            </div>
+          </template>
         </v-step>
         </transition>
       </template>
