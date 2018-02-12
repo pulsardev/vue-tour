@@ -1,0 +1,26 @@
+// Chips
+.chip {
+  align-items: center;
+  background: $bg-color-dark;
+  border-radius: 5rem;
+  color: $gray-color-dark;
+  display: inline-flex;
+  font-size: 90%;
+  height: $unit-6;
+  line-height: $unit-4;
+  margin: $unit-h;
+  max-width: 100%;
+  padding: $unit-1 $unit-2;
+  text-decoration: none;
+  vertical-align: middle;
+
+  &.active {
+    background: $primary-color;
+    color: $light-color;
+  }
+
+  .avatar {
+    margin-left: -$unit-2;
+    margin-right: $unit-1;
+  }
+}

@@ -1,0 +1,65 @@
+// Margin utility mixin
+@mixin margin-variant($id: 1, $size: $unit-1) {
+  .m-#{$id} {
+    margin: $size;
+  }
+
+  .mb-#{$id} {
+    margin-bottom: $size;
+  }
+
+  .ml-#{$id} {
+    margin-left: $size;
+  }
+
+  .mr-#{$id} {
+    margin-right: $size;
+  }
+
+  .mt-#{$id} {
+    margin-top: $size;
+  }
+
+  .mx-#{$id} {
+    margin-left: $size;
+    margin-right: $size;
+  }
+
+  .my-#{$id} {
+    margin-bottom: $size;
+    margin-top: $size;
+  }
+}
+
+// Padding utility mixin
+@mixin padding-variant($id: 1, $size: $unit-1) {
+  .p-#{$id} {
+    padding: $size;
+  }
+
+  .pb-#{$id} {
+    padding-bottom: $size;
+  }
+
+  .pl-#{$id} {
+    padding-left: $size;
+  }
+
+  .pr-#{$id} {
+    padding-right: $size;
+  }
+
+  .pt-#{$id} {
+    padding-top: $size;
+  }
+
+  .px-#{$id} {
+    padding-left: $size;
+    padding-right: $size;
+  }
+  
+  .py-#{$id} {
+    padding-bottom: $size;
+    padding-top: $size;
+  }
+}

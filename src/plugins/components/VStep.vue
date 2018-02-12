@@ -59,6 +59,8 @@
       let targetElement = document.querySelector(this.step.target)
       console.log('targetElement', targetElement)
 
+      targetElement.scrollIntoView({behavior: 'smooth'});
+
       new Popper(
         targetElement,
         this.$refs['v-step-' + this.hash],

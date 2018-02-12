@@ -1,0 +1,56 @@
+// Menus
+.menu {
+  @include shadow-variant(.05rem);
+  background: $bg-color-light;
+  border-radius: $border-radius;
+  list-style: none;
+  margin: 0;
+  min-width: $control-width-xs;
+  padding: $unit-2;
+  transform: translateY($layout-spacing-sm);
+  z-index: $zindex-1;
+
+  &.menu-nav {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .menu-item {
+    margin-top: 0;
+    padding: 0 $unit-2;
+    text-decoration: none;
+    user-select: none;
+
+    & > a {
+      border-radius: $border-radius;
+      color: inherit;
+      display: block;
+      margin: 0 (-$unit-2);
+      padding: $unit-1 $unit-2;
+      text-decoration: none;
+      &:focus,
+      &:hover {
+        background: $secondary-color;
+        color: $primary-color;
+      }
+      &:active,
+      &.active {
+        background: $secondary-color;
+        color: $primary-color;
+      }
+    }
+
+    & + .menu-item {
+      margin-top: $unit-1;
+    }
+  }
+
+  .menu-badge {
+    float: right;
+    padding: $unit-1 0;
+
+    .btn {
+      margin-top: -$unit-h;
+    }
+  }
+}
