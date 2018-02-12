@@ -17,8 +17,6 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
     <h2 id="v-step-1">Test</h2>
-    <button @click="externalNextStep">Next step</button>
-    <button @click="showStep">Show step</button>
     <ul>
       <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
       <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
@@ -26,73 +24,21 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
 
-    <v-tour name="myFirstTour" :steps="steps">
-      <template slot-scope="tour">
-        App slot {{ tour.currentStep }}
-        <transition name="fade">
-        <v-step
-          v-if="tour.currentStep === index"
-          v-for="(step, index) of tour.steps"
-          :key="index"
-          :step="step"
-          :previous-step="tour.previousStep"
-          :next-step="tour.nextStep"
-          :stop="tour.stop"
-          :isFirst="tour.isFirst"
-          :isLast="tour.isLast"
-        >
-          <template v-if="index === 1">
-            <div slot="actions">
-              <a @click="tour.nextStep">NEXT STEP</a>
-            </div>
-          </template>
-        </v-step>
-        </transition>
-      </template>
-    </v-tour>
+    <tour-demo></tour-demo>
   </div>
 </template>
 
 <script>
+  import TourDemo from './TourDemo'
+
   export default {
     name: 'app',
+    components: {
+      TourDemo
+    },
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App',
-        steps: [
-          {
-            target: '#v-step-0',
-            content: `Découvrez <strong>Vue Tour</strong> !`
-          },
-          {
-            target: '#v-step-1',
-            content: 'Un super plugin en Vue !'
-          },
-          {
-            target: '#v-step-2',
-            content: 'L\'essayer c\'est l\'adopter',
-            params: {
-              placement: 'top'
-            }
-          },
-          {
-            target: '#v-step-3',
-            params: {
-              placement: 'left'
-            }
-          }
-        ]
-      }
-    },
-    mounted: function () {
-      this.$tours['myFirstTour'].start()
-    },
-    methods: {
-      externalNextStep () {
-        this.$tours['myFirstTour'].nextStep()
-      },
-      showStep () {
-        this.$tours['myFirstTour'].currentStep = 2
+        msg: 'Welcome to Your Vue.js App'
       }
     }
   }
