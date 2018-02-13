@@ -78,7 +78,8 @@
     color: black;
     max-width: 256px;
     border-radius: 3px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    /*box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);*/
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
     padding: 1rem;
     text-align: center;
   }

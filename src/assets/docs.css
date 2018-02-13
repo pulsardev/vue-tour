@@ -81,7 +81,7 @@
 }
 
 .docs-content .anchor {
-  color: #6362dc;
+  color: #4fc08d;
   height: 0;
   margin-left: -2em;
   overflow: hidden;
@@ -218,7 +218,7 @@
 }
 
 .docs-content .code .tag {
-  color: #5755d9;
+  color: #4fc08d;
 }
 
 .docs-content .code .atn {
@@ -256,7 +256,7 @@
 .docs-content .example-tile-icon {
   align-content: space-around;
   align-items: center;
-  background: #5755d9;
+  background: #4fc08d;
   border-radius: .1rem;
   color: #fff;
   display: flex;
@@ -294,7 +294,7 @@
 }
 
 .docs-brand {
-  color: #5755d9;
+  color: #4fc08d;
   left: 1.5rem;
   position: fixed;
   top: .85rem;
@@ -357,7 +357,7 @@
 }
 
 .section-hero .docs-brand h2 {
-  color: #5755d9;
+  color: #4fc08d;
 }
 
 .section-hero .column {
@@ -426,7 +426,7 @@
 }
 
 .grid-hero .card .card-title {
-  color: #5755d9;
+  color: #4fc08d;
   font-size: .9rem;
   margin-bottom: 0;
 }
