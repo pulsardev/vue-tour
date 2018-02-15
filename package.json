@@ -1,0 +1,29 @@
+{
+  "name": "vue-tour",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve --open",
+    "build": "vue-cli-service build",
+    "test": "vue-cli-service test",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "vue": "^2.5.13"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0-alpha.13",
+    "@vue/cli-plugin-eslint": "^3.0.0-alpha.13",
+    "@vue/cli-plugin-unit-mocha": "^3.0.0-alpha.13",
+    "@vue/cli-service": "^3.0.0-alpha.13",
+    "@vue/eslint-config-standard": "^3.0.0-alpha.13",
+    "@vue/test-utils": "^1.0.0-beta.10",
+    "chai": "^4.1.2",
+    "vue-template-compiler": "^2.5.13"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
