@@ -1,8 +1,14 @@
-import Vue from 'vue'
-import App from './App.vue'
+import VTour from './components/VTour'
+import VStep from './components/VStep'
 
-Vue.config.productionTip = false
+const VueTour = {
+  install (Vue, options) {
+    Vue.component(VTour.name, VTour)
+    Vue.component(VStep.name, VStep)
 
-new Vue({
-  render: h => h(App)
-}).$mount('#app')
+    // Object containing Tour objects (see VTour.vue) where the tour name is used as key
+    Vue.prototype.$tours = {}
+  }
+}
+
+export default VueTour
