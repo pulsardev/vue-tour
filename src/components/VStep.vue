@@ -60,7 +60,7 @@
       let targetElement = document.querySelector(this.step.target)
       console.log('targetElement', targetElement)
 
-      targetElement.scrollIntoView({behavior: 'smooth'});
+      targetElement.scrollIntoView({behavior: 'smooth'})
 
       new Popper(
         targetElement,
@@ -77,7 +77,7 @@
   .v-step {
     background: #ffc107; /* #ffc107 */
     color: black;
-    max-width: 256px;
+    max-width: 320px;
     border-radius: 3px;
     /*box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);*/
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
@@ -165,7 +165,7 @@
 
   .v-step__button {
     cursor: pointer;
-    padding: 0.5rem;
+    padding: .35rem .4rem;
     background-color: transparent;
     border: 1px solid black;
 

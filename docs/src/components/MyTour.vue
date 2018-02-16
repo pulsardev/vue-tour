@@ -1,10 +1,14 @@
 <template>
   <div>
-    <button @click="$tours['myFirstTour'].start()" class="btn btn-primary">Start the tour</button>
-    <button @click="externalNextStep" class="btn btn-primary">External next step</button>
-    <button @click="showStep" class="btn btn-primary">Show step</button>
+    <div class="card">
+      <div class="card-body">
+        <button @click="$tours['myFirstTour'].start()" class="btn btn-primary">Start the tour</button>
+        <button @click="nextStep" class="btn btn-primary">Next step</button>
+        <button @click="showLastStep" class="btn btn-primary">Show last step</button>
+      </div>
+    </div>
 
-    <v-tour name="myFirstTour" :steps="steps" :on-next-step="onNextStep">
+    <v-tour name="myFirstTour" :steps="steps">
       <template slot-scope="tour">
         <transition name="fade">
           <v-step
@@ -20,8 +24,8 @@
           >
             <template v-if="tour.currentStep === 1">
               <div slot="actions">
-                <a @click="tour.previousStep">Previous step</a>
-                <a @click="tour.nextStep">Next step</a>
+                <button @click="tour.previousStep" class="btn btn-primary">Previous step</button>
+                <button @click="tour.nextStep" class="btn btn-primary">Next step</button>
               </div>
             </template>
           </v-step>
@@ -66,14 +70,11 @@
 
     },
     methods: {
-      onNextStep (step) {
-        
-      },
-      externalNextStep () {
+      nextStep () {
         this.$tours['myFirstTour'].nextStep()
       },
-      showStep () {
-        this.$tours['myFirstTour'].currentStep = 2
+      showLastStep () {
+        this.$tours['myFirstTour'].currentStep = this.steps.length - 1
       }
     }
   }
