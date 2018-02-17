@@ -75,11 +75,10 @@
 
 <style lang="scss" scoped>
   .v-step {
-    background: #ffc107; /* #ffc107 */
-    color: black;
+    background: #50596c; /* #ffc107, #35495e */
+    color: white;
     max-width: 320px;
     border-radius: 3px;
-    /*box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);*/
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
     padding: 1rem;
     text-align: center;
@@ -94,7 +93,7 @@
   }
 
   .v-step .v-step__arrow {
-    border-color: #ffc107; /* #ffc107 */
+    border-color: #50596c; /* #ffc107, #35495e */
   }
 
   .v-step[x-placement^="top"] {
@@ -164,13 +163,26 @@
   }
 
   .v-step__button {
+    background: transparent;
+    border: .05rem solid white;
+    border-radius: .1rem;
+    color: white;
     cursor: pointer;
-    padding: .35rem .4rem;
-    background-color: transparent;
-    border: 1px solid black;
+    display: inline-block;
+    line-height: 1rem;
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+    transition: all .2s ease;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-size: .9rem;
+    height: 2rem;
+    padding: .45rem .6rem;
 
     &:hover {
-      background-color: rgba(white, 0.5);
+      background-color: rgba(white, 0.95);
+      color: #50596c;
     }
   }
 </style>

@@ -1,14 +1,10 @@
 <template>
   <div>
-    <div class="card">
-      <div class="card-body">
-        <button @click="$tours['myFirstTour'].start()" class="btn btn-primary">Start the tour</button>
-        <button @click="nextStep" class="btn btn-primary">Next step</button>
-        <button @click="showLastStep" class="btn btn-primary">Show last step</button>
-      </div>
-    </div>
+    <button @click="$tours['myTour'].start()" class="btn btn-lg">Start the tour</button>
+    <button @click="nextStep" class="btn btn-lg">Next step</button>
+    <button @click="showLastStep" class="btn btn-lg">Show last step</button>
 
-    <v-tour name="myFirstTour" :steps="steps">
+    <v-tour name="myTour" :steps="steps">
       <template slot-scope="tour">
         <transition name="fade">
           <v-step
@@ -22,10 +18,10 @@
             :isFirst="tour.isFirst"
             :isLast="tour.isLast"
           >
-            <template v-if="tour.currentStep === 1">
+            <template v-if="tour.currentStep === 2">
               <div slot="actions">
-                <button @click="tour.previousStep" class="btn btn-primary">Previous step</button>
-                <button @click="tour.nextStep" class="btn btn-primary">Next step</button>
+                <button @click="tour.previousStep" class="btn btn-primary btn-lg">Previous step</button>
+                <button @click="tour.nextStep" class="btn btn-primary btn-lg">Next step</button>
               </div>
             </template>
           </v-step>
@@ -51,7 +47,7 @@
           },
           {
             target: '#v-step-2',
-            content: 'Try it, you\'ll love it!',
+            content: 'Try it, you\'ll love it!<br>You can put HTML in the steps and completely customize the DOM to suit your needs.',
             params: {
               placement: 'top'
             }
@@ -66,15 +62,14 @@
       }
     },
     mounted: function () {
-      // this.$tours['myFirstTour'].start()
-
+      this.$tours['myTour'].start()
     },
     methods: {
       nextStep () {
-        this.$tours['myFirstTour'].nextStep()
+        this.$tours['myTour'].nextStep()
       },
       showLastStep () {
-        this.$tours['myFirstTour'].currentStep = this.steps.length - 1
+        this.$tours['myTour'].currentStep = this.steps.length - 1
       }
     }
   }
@@ -84,6 +79,7 @@
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
   }
+
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }

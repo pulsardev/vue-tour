@@ -9,12 +9,10 @@
           </a>
         </div>
         <h1>vue-tour</h1>
-        <h2>a <u>Lightweight</u>, <u>Responsive</u> and <u>Modern</u> tour plugin for use with Vue.js</h2>
-
-        <my-tour></my-tour>
+        <h2>a <u>Lightweight</u>, <u>Simple</u> and <u>Customizable</u> tour plugin for use with Vue.js</h2>
 
         <p>
-          <!--<a href="getting-started.html" class="btn btn-primary btn-lg">Docs</a>-->
+          <a href="https://pulsar.gitbooks.io/vue-tour/" class="btn btn-primary btn-lg">Docs</a>
           <a href="https://github.com/pulsar/vue-tour" target="_blank" class="btn btn-primary btn-lg">GitHub</a>
         </p>
         <p class="text-gray">Latest version: <span class="version">1.0.0</span></p>
@@ -25,27 +23,27 @@
                 <span class="card-title">Lightweight</span>
               </div>
               <div class="card-body">
-                Lightweight  (~10KB gzipped) starting point for your projects
+                Vue Tour is composed of just two Vue components and a very small JavaScript file.
               </div>
             </div>
           </div>
           <div class="column col-4 col-xs-12">
             <div class="card text-center" id="v-step-1">
               <div class="card-header">
-                <span class="card-title">Responsive</span>
+                <span class="card-title">Simple</span>
               </div>
               <div class="card-body">
-                Flexbox-based, responsive and mobile-friendly layout
+                Add an array of steps in your component and a 'v-tour' component in your template and you're good to go!
               </div>
             </div>
           </div>
           <div class="column col-4 col-xs-12">
             <div class="card text-center">
               <div class="card-header">
-                <span class="card-title">Modern</span>
+                <span class="card-title">Customizable</span>
               </div>
               <div class="card-body">
-                Elegantly designed and developed elements and components
+                You can change the DOM of every steps independently, use your own classes and even add custom animations.
               </div>
             </div>
           </div>
@@ -58,10 +56,16 @@
         <h2>Introduction</h2>
         <div class="columns">
           <div class="column col-10 col-sm-12 col-mx-auto text-left">
-            <p class="text-secondary">Spectre provides basic styles for typography and elements, flexbox based responsive layout system, pure CSS components and utilities with best practice coding and consistent design language.</p>
+            <p class="text-secondary">
+              Vue Tour provides a quick and easy way to guide your users through your application.
+              You can control the tour on this page by clicking the following buttons.
+            </p>
           </div>
           <div class="column col-10 col-sm-12 col-mx-auto">
-            <a href="getting-started.html#installation" class="btn btn-lg" id="v-step-2">Install Spectre.css</a>
+            <my-tour></my-tour>
+          </div>
+          <div class="column col-10 col-sm-12 col-mx-auto">
+            <a href="https://github.com/pulsar/vue-tour" class="btn btn-lg" id="v-step-2">Install Vue Tour</a>
           </div>
         </div>
       </div>
@@ -70,42 +74,29 @@
     <div class="section section-updates bg-gray">
       <div class="container grid-lg">
         <div class="columns">
-          <div class="column col-4 col-xs-12">
-            <div class="card">
-              <div class="card-header">
-                <div class="card-title h6">Spectre Twitter</div>
-              </div>
-              <div class="card-body">
-                For the latest announcements and updates, follow on Twitter: <a href="https://twitter.com/spectrecss" target="_blank">@spectrecss</a>.
-              </div>
-              <div class="card-footer">
-                <a href="https://twitter.com/spectrecss" class="btn btn-primary" target="_blank">Follow</a>
-              </div>
-            </div>
-          </div>
-          <div class="column col-4 col-xs-12">
+          <div class="column col-6 col-xs-12">
             <div class="card" id="v-step-3">
               <div class="card-header">
                 <div class="card-title h6">PayPal Donate</div>
               </div>
               <div class="card-body">
-                Spectre.css is completely free to use. If you enjoy it, please consider donating for the further development. ♥
+                Vue Tour is completely free to use. If you enjoy it, please consider donating for the further development. ♥
               </div>
               <div class="card-footer">
-                <a href="https://www.paypal.me/picturepan2" class="btn btn-primary" target="_blank">Donate</a>
+                <a href="https://www.paypal.me/pulsar" class="btn btn-primary" target="_blank">Donate</a>
               </div>
             </div>
           </div>
-          <div class="column col-4 col-xs-12">
+          <div class="column col-6 col-xs-12">
             <div class="card">
               <div class="card-header">
-                <div class="card-title h6">Spectre Docs</div>
+                <div class="card-title h6">Vue Tour Docs</div>
               </div>
               <div class="card-body">
-                Spectre Docs experience has been completely rewritten and improved.
+                Go to our documentation if you want to use Vue Tour in a more advanced way.
               </div>
               <div class="card-footer">
-                <a href="getting-started.html" class="btn btn-primary">Explore</a>
+                <a href="https://pulsar.gitbooks.io/vue-tour/" class="btn btn-primary">Explore</a>
               </div>
             </div>
           </div>
@@ -115,8 +106,8 @@
 
     <footer class="section section-footer">
       <div id="copyright" class="grid-footer container grid-lg">
-        <p><a href="getting-started.html" target="_blank">Documents</a> | <a href="https://github.com/picturepan2/spectre" target="_blank">GitHub</a> | <a href="https://twitter.com/spectrecss" target="_blank">Twitter</a> | <a href="https://www.paypal.me/picturepan2" target="_blank">PayPal Donate</a> | Version <span class="version"></span></p>
-        <p>Designed and built with <span class="text-error">♥</span> by <a href="https://twitter.com/picturepan2" target="_blank">Yan Zhu</a>. Licensed under the <a href="https://github.com/picturepan2/spectre/blob/master/LICENSE" target="_blank">MIT License</a>.</p>
+        <p><a href="https://pulsar.gitbooks.io/vue-tour/" target="_blank">Documents</a> | <a href="https://github.com/pulsar/vue-tour" target="_blank">GitHub</a> | <a href="https://www.paypal.me/pulsar" target="_blank">PayPal Donate</a> | Version <span class="version">1.0.0</span></p>
+        <p>Built with <span class="text-error">♥</span> by <a href="https://pulsar.surge.sh" target="_blank">Pulsar</a>. Licensed under the <a href="https://github.com/pulsar/vue-tour/blob/master/LICENSE" target="_blank">MIT License</a>.</p>
       </div>
     </footer>
   </div>
