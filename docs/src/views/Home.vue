@@ -83,7 +83,7 @@
                 Vue Tour is completely free to use. If you enjoy it, please consider donating for the further development. ♥
               </div>
               <div class="card-footer">
-                <a href="https://www.paypal.me/pulsar" class="btn btn-primary" target="_blank">Donate</a>
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CLK49A83DXCQ8" class="btn btn-primary" target="_blank">Donate</a>
               </div>
             </div>
           </div>
@@ -106,7 +106,7 @@
 
     <footer class="section section-footer">
       <div id="copyright" class="grid-footer container grid-lg">
-        <p><a href="https://pulsar.gitbooks.io/vue-tour/" target="_blank">Documents</a> | <a href="https://github.com/pulsar/vue-tour" target="_blank">GitHub</a> | <a href="https://www.paypal.me/pulsar" target="_blank">PayPal Donate</a> | Version <span class="version">1.0.0</span></p>
+        <p><a href="https://pulsar.gitbooks.io/vue-tour/" target="_blank">Documents</a> | <a href="https://github.com/pulsar/vue-tour" target="_blank">GitHub</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CLK49A83DXCQ8" target="_blank">PayPal Donate</a> | Version <span class="version">1.0.0</span></p>
         <p>Built with <span class="text-error">♥</span> by <a href="https://pulsar.surge.sh" target="_blank">Pulsar</a>. Licensed under the <a href="https://github.com/pulsar/vue-tour/blob/master/LICENSE" target="_blank">MIT License</a>.</p>
       </div>
     </footer>
