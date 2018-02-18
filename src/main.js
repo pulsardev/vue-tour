@@ -12,3 +12,7 @@ const VueTour = {
 }
 
 export default VueTour
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(VueTour)
+}
