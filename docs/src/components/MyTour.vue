@@ -20,8 +20,8 @@
           >
             <template v-if="tour.currentStep === 2">
               <div slot="actions">
-                <button @click="tour.previousStep" class="btn btn-primary btn-lg">Previous step</button>
-                <button @click="tour.nextStep" class="btn btn-primary btn-lg">Next step</button>
+                <button @click="tour.previousStep" class="btn btn-primary">Previous step</button>
+                <button @click="tour.nextStep" class="btn btn-primary">Next step</button>
               </div>
             </template>
           </v-step>

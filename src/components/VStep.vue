@@ -3,7 +3,7 @@
     <slot name="content">
       <div class="v-step__content">
         <span v-if="step.content" v-html="step.content"></span>
-        <span v-else>This is a demo step! The id of this step is {{ hash }} and it targets {{ step.target }}</span>
+        <span v-else>This is a demo step! The id of this step is {{ hash }} and it targets {{ step.target }}.</span>
       </div>
     </slot>
 
@@ -169,16 +169,16 @@
     color: white;
     cursor: pointer;
     display: inline-block;
+    font-size: .8rem;
+    height: 1.8rem;
     line-height: 1rem;
     outline: none;
+    padding: .35rem .4rem;
     text-align: center;
     text-decoration: none;
     transition: all .2s ease;
     vertical-align: middle;
     white-space: nowrap;
-    font-size: .9rem;
-    height: 2rem;
-    padding: .45rem .6rem;
 
     &:hover {
       background-color: rgba(white, 0.95);
