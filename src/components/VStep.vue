@@ -21,47 +21,45 @@
 </template>
 
 <script>
-  // import Vue from 'vue'
-  import Popper from 'popper.js'
-  import sum from 'hash-sum'
+import Popper from 'popper.js'
+import sum from 'hash-sum'
 
-  export default {
-    name: 'v-step',
-    props: {
-      step: {
-        type: Object
-      },
-      previousStep: {
-        type: Function
-      },
-      nextStep: {
-        type: Function
-      },
-      stop: {
-        type: Function
-      },
-      isFirst: {
-        type: Boolean
-      },
-      isLast: {
-        type: Boolean
-      }
+export default {
+  name: 'v-step',
+  props: {
+    step: {
+      type: Object
     },
-    data () {
-      return {
-        hash: sum(this.step.target)
-      }
+    previousStep: {
+      type: Function
     },
-    mounted () {
-      let params = this.step.params ? this.step.params : {}
+    nextStep: {
+      type: Function
+    },
+    stop: {
+      type: Function
+    },
+    isFirst: {
+      type: Boolean
+    },
+    isLast: {
+      type: Boolean
+    }
+  },
+  data () {
+    return {
+      hash: sum(this.step.target)
+    }
+  },
+  mounted () {
+    let params = this.step.params ? this.step.params : {}
+    let targetElement = document.querySelector(this.step.target)
+    console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
-      console.log('hash from ' + this.step.target, this.hash)
-
-      let targetElement = document.querySelector(this.step.target)
-      console.log('targetElement', targetElement)
-
+    if (targetElement) {
       targetElement.scrollIntoView({behavior: 'smooth'})
 
+      /* eslint-disable no-new */
       new Popper(
         targetElement,
         this.$refs['v-step-' + this.hash],
@@ -69,8 +67,12 @@
           placement: params.placement ? params.placement : 'bottom'
         }
       )
+    } else {
+      console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
+      this.stop()
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

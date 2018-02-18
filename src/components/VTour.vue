@@ -30,49 +30,49 @@
 </template>
 
 <script>
-  export default {
-    name: 'v-tour',
-    props: {
-      steps: {
-        type: Array,
-        default: []
-      },
-      name: {
-        type: String
-      }
+export default {
+  name: 'v-tour',
+  props: {
+    steps: {
+      type: Array,
+      default: () => []
     },
-    data () {
-      return {
-        currentStep: -1
-      }
+    name: {
+      type: String
+    }
+  },
+  data () {
+    return {
+      currentStep: -1
+    }
+  },
+  mounted () {
+    this.$tours[this.name] = this
+  },
+  computed: {
+    isFirst () {
+      return this.currentStep === 0
     },
-    mounted () {
-      this.$tours[this.name] = this
+    isLast () {
+      return this.currentStep === this.steps.length - 1
+    }
+  },
+  methods: {
+    start () {
+      // Wait for the DOM to be loaded, then start the tour
+      setTimeout(() => {
+        this.currentStep = 0
+      })
     },
-    computed: {
-      isFirst () {
-        return this.currentStep === 0
-      },
-      isLast () {
-        return this.currentStep === this.steps.length - 1
-      }
+    previousStep () {
+      this.currentStep--
     },
-    methods: {
-      start () {
-        // Wait for the DOM to be loaded, then start the tour
-        setTimeout(() => {
-          this.currentStep = 0
-        })
-      },
-      previousStep () {
-        this.currentStep--
-      },
-      nextStep () {
-        this.currentStep++
-      },
-      stop () {
-        this.currentStep = -1
-      }
+    nextStep () {
+      this.currentStep++
+    },
+    stop () {
+      this.currentStep = -1
     }
   }
+}
 </script>
