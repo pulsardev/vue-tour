@@ -1,0 +1,30 @@
+<title>vue-tour demo</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="./vue-tour.umd.js"></script>
+<link rel="stylesheet" href="./vue-tour.css">
+
+<div id="app">
+  <div id="v-step-0">Hello World!</div>
+  <div id="v-step-1">This is a small demo file for Vue Tour.</div>
+  <button @click="$tours['myTour'].start()">Start tour</button>
+  <v-tour name="myTour" :steps="steps"></v-tour>
+</div>
+
+<script>
+new Vue({
+  data () {
+    return {
+      steps: [
+        {
+          target: '#v-step-0',
+          content: `Discover <strong>Vue Tour</strong>!`
+        },
+        {
+          target: '#v-step-1',
+          content: 'An awesome plugin made with Vue.js!'
+        }
+      ]
+    }
+  }
+}).$mount('#app')
+</script>
