@@ -32,47 +32,47 @@
 </template>
 
 <script>
-  export default {
-    name: 'my-tour',
-    data () {
-      return {
-        steps: [
-          {
-            target: '#v-step-0',
-            content: `Discover <strong>Vue Tour</strong>!`
-          },
-          {
-            target: '#v-step-1',
-            content: 'An awesome plugin made with Vue.js!'
-          },
-          {
-            target: '#v-step-2',
-            content: 'Try it, you\'ll love it!<br>You can put HTML in the steps and completely customize the DOM to suit your needs.',
-            params: {
-              placement: 'top'
-            }
-          },
-          {
-            target: '#v-step-3',
-            params: {
-              placement: 'left'
-            }
+export default {
+  name: 'my-tour',
+  data () {
+    return {
+      steps: [
+        {
+          target: '#v-step-0',
+          content: `Discover <strong>Vue Tour</strong>!`
+        },
+        {
+          target: '#v-step-1',
+          content: 'An awesome plugin made with Vue.js!'
+        },
+        {
+          target: '#v-step-2',
+          content: 'Try it, you\'ll love it!<br>You can put HTML in the steps and completely customize the DOM to suit your needs.',
+          params: {
+            placement: 'top'
           }
-        ]
-      }
+        },
+        {
+          target: '#v-step-3',
+          params: {
+            placement: 'left'
+          }
+        }
+      ]
+    }
+  },
+  mounted: function () {
+    this.$tours['myTour'].start()
+  },
+  methods: {
+    nextStep () {
+      this.$tours['myTour'].nextStep()
     },
-    mounted: function () {
-      this.$tours['myTour'].start()
-    },
-    methods: {
-      nextStep () {
-        this.$tours['myTour'].nextStep()
-      },
-      showLastStep () {
-        this.$tours['myTour'].currentStep = this.steps.length - 1
-      }
+    showLastStep () {
+      this.$tours['myTour'].currentStep = this.steps.length - 1
     }
   }
+}
 </script>
 
 <style scoped>
