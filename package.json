@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib src/main.js",
     "test": "vue-cli-service test",
     "lint": "vue-cli-service lint"
   },
