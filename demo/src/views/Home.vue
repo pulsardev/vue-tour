@@ -13,7 +13,7 @@
 
         <p>
           <a href="https://pulsar.gitbooks.io/vue-tour/" class="btn btn-primary btn-lg">Docs</a>
-          <a href="https://github.com/pulsar/vue-tour" target="_blank" class="btn btn-primary btn-lg">GitHub</a>
+          <a href="https://github.com/pulsardev/vue-tour" target="_blank" class="btn btn-primary btn-lg">GitHub</a>
         </p>
         <p class="text-gray">Latest version: <span class="version">1.0.0</span></p>
         <div class="columns">
@@ -65,7 +65,7 @@
             <my-tour></my-tour>
           </div>
           <div class="column col-10 col-sm-12 col-mx-auto">
-            <a href="https://github.com/pulsar/vue-tour" class="btn btn-lg" id="v-step-2">Install Vue Tour</a>
+            <a href="https://github.com/pulsardev/vue-tour" class="btn btn-lg" id="v-step-2">Install Vue Tour</a>
           </div>
         </div>
       </div>
@@ -106,8 +106,8 @@
 
     <footer class="section section-footer">
       <div id="copyright" class="grid-footer container grid-lg">
-        <p><a href="https://pulsar.gitbooks.io/vue-tour/" target="_blank">Documents</a> | <a href="https://github.com/pulsar/vue-tour" target="_blank">GitHub</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CLK49A83DXCQ8" target="_blank">PayPal Donate</a> | Version <span class="version">1.0.0</span></p>
-        <p>Built with <span class="text-error">♥</span> by <a href="https://pulsar.surge.sh" target="_blank">Pulsar</a>. Licensed under the <a href="https://github.com/pulsar/vue-tour/blob/master/LICENSE" target="_blank">MIT License</a>.</p>
+        <p><a href="https://pulsar.gitbooks.io/vue-tour/" target="_blank">Documents</a> | <a href="https://github.com/pulsardev/vue-tour" target="_blank">GitHub</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CLK49A83DXCQ8" target="_blank">PayPal Donate</a> | Version <span class="version">1.0.0</span></p>
+        <p>Built with <span class="text-error">♥</span> by <a href="https://pulsar.surge.sh" target="_blank">Pulsar</a>. Licensed under the <a href="https://github.com/pulsardev/vue-tour/blob/master/LICENSE" target="_blank">MIT License</a>.</p>
       </div>
     </footer>
   </div>
