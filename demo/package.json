@@ -10,10 +10,9 @@
     "e2e:open": "vue-cli-service e2e:open"
   },
   "dependencies": {
-    "hash-sum": "^1.0.2",
-    "popper.js": "^1.12.9",
     "vue": "^2.5.13",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-tour": "^0.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-alpha.13",

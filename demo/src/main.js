@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import VueTour from '../../src/main'
+import VueTour from 'vue-tour'
+
+require('vue-tour/dist/vue-tour.css')
 
 Vue.use(VueTour)
 

@@ -6,6 +6,7 @@ import About from './views/About.vue'
 Vue.use(Router)
 
 export default new Router({
+  base: '/vue-tour/',
   mode: 'history',
   routes: [
     {
