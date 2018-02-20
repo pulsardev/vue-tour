@@ -32,14 +32,14 @@ new Vue({
 }).$mount('#app')
 ```
 
-Finally put a v-tour component in your template anywhere in your app (usually in App.vue) and pass it an array of steps.
+Finally put a v-tour component in your template on any page where you need it and pass it an array of steps.
 
 ```html
 <template>
   <div>
     <div id="v-step-0">A DOM element on your page. The first step will pop on this element because its ID is 'v-step-0'.</div>
-    <div id="v-step-1">A DOM element on your page. The second step will pop on this element because its ID is 'v-step-1'.</div>
-    <div id="v-step-2">A DOM element on your page. The third and final step will pop on this element because its ID is 'v-step-2'.</div>
+    <div class="v-step-1">A DOM element on your page. The second step will pop on this element because its ID is 'v-step-1'.</div>
+    <div data-v-step="2">A DOM element on your page. The third and final step will pop on this element because its ID is 'v-step-2'.</div>
 
     <v-tour name="myTour" :steps="steps"></v-tour>
   </div>
@@ -52,15 +52,15 @@ Finally put a v-tour component in your template anywhere in your app (usually in
       return {
         steps: [
           {
-            target: '#v-step-0',
+            target: '#v-step-0',  // We're using document.querySelector() under the hood
             content: `Discover <strong>Vue Tour</strong>!`
           },
           {
-            target: '#v-step-1',
+            target: '.v-step-1',
             content: 'An awesome plugin made with Vue.js!'
           },
           {
-            target: '#v-step-2',
+            target: '[data-v-step="2"]',
             content: 'Try it, you\'ll love it!<br>You can put HTML in the steps and completely customize the DOM to suit your needs.',
             params: {
               placement: 'top'
@@ -76,6 +76,7 @@ Finally put a v-tour component in your template anywhere in your app (usually in
 </script>
 ```
 
+For all individual elements you want to add a step on, make sure it can be retrieved with `document.querySelector()`. You can use any selector, an ID, a CSS class, data attributes, etc.
 Once this is done and your steps correctly target some DOM elements of your application, you can start the tour by calling the following method.
 
 ```javascript
@@ -86,4 +87,4 @@ For a more detailed documentation, checkout the [docs for vue-tour](https://puls
 
 ## Something Missing?
 
-If you have a feature request or found a bug, [let me know](https://github.com/pulsardev/vue-tour/issues).
+If you have a feature request or found a bug, [let us know](https://github.com/pulsardev/vue-tour/issues) by submitting an issue.
