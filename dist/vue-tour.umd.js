@@ -161,13 +161,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "DjJc":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ "DuR2":
 /***/ (function(module, exports) {
 
@@ -505,9 +498,9 @@ var hash_sum_default = /*#__PURE__*/__webpack_require__.n(hash_sum);
     };
   },
   mounted: function mounted() {
-    var params = this.step.params ? this.step.params : {};
-    var targetElement = document.querySelector(this.step.target);
-    console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement);
+    var params = this.step.params || {};
+    var targetElement = document.querySelector(this.step.target); // Add a debug mode?
+    // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
     if (targetElement) {
       targetElement.scrollIntoView({
@@ -524,13 +517,13 @@ var hash_sum_default = /*#__PURE__*/__webpack_require__.n(hash_sum);
     }
   }
 });
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-c2e55388","hasScoped":true,"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./src/components/VStep.vue
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-fca314f4","hasScoped":true,"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./src/components/VStep.vue
 var VStep_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:'v-step-' + _vm.hash,staticClass:"v-step",attrs:{"id":'v-step-' + _vm.hash}},[_vm._t("content",[_c('div',{staticClass:"v-step__content"},[(_vm.step.content)?_c('span',{domProps:{"innerHTML":_vm._s(_vm.step.content)}}):_c('span',[_vm._v("This is a demo step! The id of this step is "+_vm._s(_vm.hash)+" and it targets "+_vm._s(_vm.step.target)+".")])])]),_vm._v(" "),_vm._t("actions",[_c('div',{staticClass:"v-step__buttons"},[(!_vm.isLast)?_c('button',{staticClass:"v-step__button",on:{"click":_vm.stop}},[_vm._v("Skip tour")]):_vm._e(),_vm._v(" "),(!_vm.isFirst)?_c('button',{staticClass:"v-step__button",on:{"click":_vm.previousStep}},[_vm._v("Previous")]):_vm._e(),_vm._v(" "),(!_vm.isLast)?_c('button',{staticClass:"v-step__button",on:{"click":_vm.nextStep}},[_vm._v("Next")]):_vm._e(),_vm._v(" "),(_vm.isLast)?_c('button',{staticClass:"v-step__button",on:{"click":_vm.stop}},[_vm._v("Finish")]):_vm._e()])]),_vm._v(" "),_c('div',{staticClass:"v-step__arrow"})],2)}
 var VStep_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/VStep.vue
 function injectStyle (context) {
-  __webpack_require__("DjJc")
+  __webpack_require__("eyC8")
 }
 /* script */
 
@@ -542,7 +535,7 @@ var VStep___vue_template_functional__ = false
 /* styles */
 var VStep___vue_styles__ = injectStyle
 /* scopeId */
-var VStep___vue_scopeId__ = "data-v-c2e55388"
+var VStep___vue_scopeId__ = "data-v-fca314f4"
 /* moduleIdentifier (server only) */
 var VStep___vue_module_identifier__ = null
 
@@ -3055,6 +3048,13 @@ module.exports = !__webpack_require__("zgIt")(function () {
   return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
 
+
+/***/ }),
+
+/***/ "eyC8":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 
