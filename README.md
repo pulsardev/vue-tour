@@ -18,12 +18,15 @@ You can install `vue-tour` using npm or by downloading the minified build on Git
 npm install vue-tour
 ```
 
-Then import the plugin in your application entry point (typically main.js if you used vue-cli to scaffhold your project) and tell Vue to use it.
+Then import the plugin in your application entry point (typically main.js if you used vue-cli to scaffold your project) and tell Vue to use it.
+Also don't forget to include the styles. You can add the styles provided by default or customize them to your own liking.
 
 ```javascript
 import Vue from 'vue'
 import App from './App.vue'
 import VueTour from 'vue-tour'
+
+require('vue-tour/dist/vue-tour.css')
 
 Vue.use(VueTour)
 

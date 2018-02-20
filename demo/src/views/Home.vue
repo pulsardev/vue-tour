@@ -3,7 +3,7 @@
     <div class="section section-hero bg-gray">
       <div id="overview" class="grid-hero container grid-lg text-center">
         <div class="docs-brand">
-          <a href="index.html" class="docs-logo" id="v-step-0">
+          <a href="#" @click="$tours['myTour'].start()" class="docs-logo" id="v-step-0">
             <img src="../assets/logo.png" alt="Vue Tour">
             <h2>VUE TOUR</h2>
           </a>
