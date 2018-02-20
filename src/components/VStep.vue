@@ -52,9 +52,11 @@ export default {
     }
   },
   mounted () {
-    let params = this.step.params ? this.step.params : {}
+    let params = this.step.params || {}
     let targetElement = document.querySelector(this.step.target)
-    console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
+
+    // Add a debug mode?
+    // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
     if (targetElement) {
       targetElement.scrollIntoView({behavior: 'smooth'})
