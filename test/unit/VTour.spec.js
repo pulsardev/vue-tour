@@ -7,7 +7,7 @@ import VTour from '@/components/VTour.vue'
 Vue.use(VueTour)
 
 describe('VTour.vue', () => {
-  it('haves the correct number of steps', () => {
+  it('has the correct number of steps', () => {
     const steps = [
       {
         target: '#v-step-0',
