@@ -3,7 +3,7 @@ import { shallow } from '@vue/test-utils'
 import VStep from '@/components/VStep.vue'
 
 describe('VStep.vue', () => {
-  it('renders props.step.content when passed', () => {
+  it('renders props.step.content', () => {
     const step = {
       target: 'v-step-0',
       content: 'This is a demo step!'
@@ -13,8 +13,7 @@ describe('VStep.vue', () => {
       propsData: {
         step,
         stop: () => {}
-      },
-      mounted: () => {}
+      }
     })
 
     expect(wrapper.text()).to.include(step.content)

@@ -35,7 +35,8 @@ new Vue({
 }).$mount('#app')
 ```
 
-Finally put a v-tour component in your template on any page where you need it and pass it an array of steps.
+Finally put a `v-tour` component in your template anywhere in your app (usually in App.vue) and pass it an array of steps.
+The `target` property of each step can target a DOM element in any component of your app (as long as it exists in the DOM when the concerned step pops up).
 
 ```html
 <template>
