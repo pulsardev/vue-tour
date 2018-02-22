@@ -7,9 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: cypress/base:6
-          environment:
-            TERM: xterm
+      - image: circleci/node:7.10
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -31,6 +29,9 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+
+      # install Cypress dependencies
+      - run: sudo apt-get update && apt-get install -y libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 xvfb
 
       - run: npm install
 
