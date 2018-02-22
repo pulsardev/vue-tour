@@ -62,4 +62,8 @@ jobs:
       - run: cd ./demo/ && npm run e2e
       - run: cd ./demo/ && npm run build
 
+      - run: rm -rf ./docs/
+      - run: mv ./demo/dist/ ./docs/
+      - run: cp ./public/demo.html ./dist
+
       - run: git status
