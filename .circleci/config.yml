@@ -31,7 +31,7 @@ jobs:
           - v1-dependencies-
 
       # install Cypress dependencies
-      - run: sudo apt-get update && apt-get install -y libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 xvfb
+      - run: sudo apt-get update && sudo apt-get install -y libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 xvfb
 
       - run: npm install
 
