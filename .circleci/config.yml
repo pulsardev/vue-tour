@@ -7,7 +7,9 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
+      - image: cypress/base:6
+          environment:
+            TERM: xterm
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -52,8 +54,11 @@ jobs:
           command: cd ./demo/ && npm run serve
           background: true
 
+      # wait for the webserver to be started in a little hacky way
+      - run: sleep 5
+
       # run tests!
-      - run: cd ./demo/ && npx cypress run
+      - run: cd ./demo/ && npm run e2e
       - run: cd ./demo/ && npm run build
 
       - run: git status
