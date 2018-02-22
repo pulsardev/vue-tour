@@ -48,8 +48,12 @@ jobs:
             - demo/node_modules
           key: v1-dependencies-{{ checksum "demo/package.json" }}
 
+      - run:
+          command: cd ./demo/ && npm run serve
+          background: true
+
       # run tests!
-      - run: cd ./demo/ && npm run e2e
+      - run: cd ./demo/ && npx cypress run
       - run: cd ./demo/ && npm run build
 
       - run: git status
