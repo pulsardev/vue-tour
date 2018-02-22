@@ -41,17 +41,15 @@ jobs:
       - run: npm run test
       - run: npm run build
 
-      - run: cd ./demo/
-      - run: npm install
+      - run: cd ./demo/ && npm install
 
       - save_cache:
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+            - demo/node_modules
+          key: v1-dependencies-{{ checksum "demo/package.json" }}
 
       # run tests!
-      - run: npm run e2e
-      - run: npm run build
+      - run: cd ./demo/ && npm run e2e
+      - run: cd ./demo/ && npm run build
 
-      - run: cd ../
       - run: git status
