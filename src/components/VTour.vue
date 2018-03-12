@@ -119,7 +119,7 @@ export default {
       if (this.currentStep > this.minStep + 1  && !this.isFinished) this.currentStep--
     },
     nextStep () {
-      if (this.currentStep < this.maxStep -1 && !this.isFinished) this.currentStep++
+      if (this.currentStep < this.maxStep - 1 && !this.isFinished) this.currentStep++
     },
     stop () {
       this.currentStep = -1
