@@ -30,6 +30,9 @@
 </template>
 
 <script>
+import constant from '../misc/constant'
+const KEY = constant.KEY
+
 export default {
   name: 'v-tour',
   props: {
@@ -39,22 +42,69 @@ export default {
     },
     name: {
       type: String
+    },
+    config: {
+      type: Object,
+      default: () => {return {}}
     }
   },
   data () {
     return {
-      currentStep: -1
+      currentStep: -1,
+      minStep: -1,
+      isFinished: false,
+      defaultConfig: {
+        useKeyboardNavigation: true,
+        startTimeout: 0
+      }
     }
   },
   mounted () {
     this.$tours[this.name] = this
+
+    window.addEventListener('keypress', el => {
+      if (this.mergedConfig.useKeyboardNavigation) {
+        switch (el.keyCode) {
+          case KEY.RIGHT:
+            this.nextStep()
+            break
+          case KEY.LEFT:
+            this.previousStep()
+            break
+          case KEY.ESC:
+            this.stop()
+            break
+        }
+      }
+    })
+  },
+  beforeDestroy () {
+    // Remove keypress events before getting rid of the component.
+    // Might have side-effect if the user already defined a listener on this event.
+    window.removeEventListener('keypress')
   },
   computed: {
+    // Allow us to define a custom config and merge it with default options
+    // so that the user doesn't need to redefine the whole config object.
+    // You should only retrieve params from the returned object here and not use this.config
+    // Also since defaultConfig is defined in data, it is reactive so the config can be
+    // updated during runtime.
+    mergedConfig () {
+      return Object.assign({}, this.defaultConfig, this.config)
+    },
+    // Return true if the tour is active, which means that there's a VStep component currently
+    // on screen.
+    isActive () {
+      return this.currentStep > this.minStep && this.currentStep < this.maxStep
+    },
     isFirst () {
       return this.currentStep === 0
     },
     isLast () {
       return this.currentStep === this.steps.length - 1
+    },
+    maxStep () {
+      return this.steps.length
     }
   },
   methods: {
@@ -62,16 +112,17 @@ export default {
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(() => {
         this.currentStep = 0
-      })
+      }, this.mergedConfig.startTimeout)
     },
     previousStep () {
-      this.currentStep--
+      if (this.currentStep > this.minStep) this.currentStep--
     },
     nextStep () {
-      this.currentStep++
+      if (this.currentStep < this.maxStep) this.currentStep++
     },
     stop () {
       this.currentStep = -1
+      this.isFinished = true
     }
   }
 }
