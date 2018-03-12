@@ -111,14 +111,15 @@ export default {
     start () {
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(() => {
+        this.isFinished = false
         this.currentStep = 0
       }, this.mergedConfig.startTimeout)
     },
     previousStep () {
-      if (this.currentStep > this.minStep) this.currentStep--
+      if (this.currentStep > this.minStep && !this.isFinished) this.currentStep--
     },
     nextStep () {
-      if (this.currentStep < this.maxStep) this.currentStep++
+      if (this.currentStep < this.maxStep && !this.isFinished) this.currentStep++
     },
     stop () {
       this.currentStep = -1
