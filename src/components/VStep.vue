@@ -55,7 +55,7 @@ export default {
     let params = this.step.params || {}
     let targetElement = document.querySelector(this.step.target)
 
-    // Add a debug mode?
+    // TODO: debug mode
     // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
     if (targetElement) {

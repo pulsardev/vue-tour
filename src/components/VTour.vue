@@ -30,8 +30,7 @@
 </template>
 
 <script>
-import constant from '../misc/constant'
-const KEY = constant.KEY
+import { DEFAULT_OPTIONS, KEYS } from '../shared/constants'
 
 export default {
   name: 'v-tour',
@@ -43,59 +42,55 @@ export default {
     name: {
       type: String
     },
-    config: {
+    customOptions: {
       type: Object,
-      default: () => { return {} }
+      default: () => { return DEFAULT_OPTIONS }
     }
   },
   data () {
     return {
-      currentStep: -1,
-      minStep: -1,
-      isFinished: false,
-      defaultConfig: {
-        useKeyboardNavigation: true,
-        startTimeout: 0
-      }
+      currentStep: -1
     }
   },
   mounted () {
     this.$tours[this.name] = this
 
-    window.addEventListener('keypress', el => {
-      if (this.mergedConfig.useKeyboardNavigation) {
-        switch (el.keyCode) {
-          case KEY.RIGHT:
+    if (this.options.useKeyboardNavigation) {
+      window.addEventListener('keyup', e => {
+        // TODO: debug mode
+        // console.log('[Vue Tour] A keyup event occured:', e)
+        switch (e.keyCode) {
+          case KEYS.ARROW_RIGHT:
             this.nextStep()
             break
-          case KEY.LEFT:
+          case KEYS.ARROW_LEFT:
             this.previousStep()
             break
-          case KEY.ESC:
+          case KEYS.ESCAPE:
             this.stop()
             break
         }
-      }
-    })
+      })
+    }
   },
   beforeDestroy () {
-    // Remove keypress events before getting rid of the component.
-    // Might have side-effect if the user already defined a listener on this event.
-    window.removeEventListener('keypress')
+    // Remove the keyup listener if it has been defined
+    if (this.options.useKeyboardNavigation) {
+      window.removeEventListener('keyup')
+    }
   },
   computed: {
-    // Allow us to define a custom config and merge it with default options
-    // so that the user doesn't need to redefine the whole config object.
-    // You should only retrieve params from the returned object here and not use this.config
-    // Also since defaultConfig is defined in data, it is reactive so the config can be
-    // updated during runtime.
-    mergedConfig () {
-      return Object.assign({}, this.defaultConfig, this.config)
+    // Allow us to define custom options and merge them with the default options.
+    // Since options is a computed property, it is reactive and can be updated during runtime.
+    options () {
+      return {
+        ...DEFAULT_OPTIONS,
+        ...this.customOptions
+      }
     },
-    // Return true if the tour is active, which means that there's a VStep component currently
-    // on screen.
-    isActive () {
-      return this.currentStep > this.minStep && this.currentStep < this.maxStep
+    // Return true if the tour is active, which means that there's a VStep displayed
+    isRunning () {
+      return this.currentStep > -1 && this.currentStep < this.numberOfSteps
     },
     isFirst () {
       return this.currentStep === 0
@@ -103,7 +98,7 @@ export default {
     isLast () {
       return this.currentStep === this.steps.length - 1
     },
-    maxStep () {
+    numberOfSteps () {
       return this.steps.length
     }
   },
@@ -111,19 +106,17 @@ export default {
     start () {
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(() => {
-        this.isFinished = false
         this.currentStep = 0
-      }, this.mergedConfig.startTimeout)
+      }, this.options.startTimeout)
     },
     previousStep () {
-      if (this.currentStep > this.minStep + 1 && !this.isFinished) this.currentStep--
+      if (this.currentStep > 0) this.currentStep--
     },
     nextStep () {
-      if (this.currentStep < this.maxStep - 1 && !this.isFinished) this.currentStep++
+      if (this.currentStep < this.numberOfSteps - 1) this.currentStep++
     },
     stop () {
       this.currentStep = -1
-      this.isFinished = true
     }
   }
 }
