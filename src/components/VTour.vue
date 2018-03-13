@@ -56,28 +56,13 @@ export default {
     this.$tours[this.name] = this
 
     if (this.customOptions.useKeyboardNavigation) {
-      window.addEventListener('keyup', e => {
-        // TODO: debug mode
-        // console.log('[Vue Tour] A keyup event occured:', e)
-        switch (e.keyCode) {
-          case KEYS.ARROW_RIGHT:
-            this.nextStep()
-            break
-          case KEYS.ARROW_LEFT:
-            this.previousStep()
-            break
-          case KEYS.ESCAPE:
-            this.stop()
-            break
-        }
-      })
+      window.addEventListener('keyup', this.handleKeyup)
     }
   },
   beforeDestroy () {
-    // Remove the keyup listener if it has been defined.
-    // Might have side-effects if the user already defined a listener on keyup.
+    // Remove the keyup listener if it has been defined
     if (this.customOptions.useKeyboardNavigation) {
-      window.removeEventListener('keyup')
+      window.removeEventListener('keyup', this.handleKeyup)
     }
   },
   computed: {
@@ -118,6 +103,22 @@ export default {
     },
     stop () {
       this.currentStep = -1
+    },
+
+    handleKeyup (e) {
+      // TODO: debug mode
+      // console.log('[Vue Tour] A keyup event occured:', e)
+      switch (e.keyCode) {
+        case KEYS.ARROW_RIGHT:
+          this.nextStep()
+          break
+        case KEYS.ARROW_LEFT:
+          this.previousStep()
+          break
+        case KEYS.ESCAPE:
+          this.stop()
+          break
+      }
     }
   }
 }
