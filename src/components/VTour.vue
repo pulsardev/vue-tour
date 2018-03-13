@@ -42,7 +42,7 @@ export default {
     name: {
       type: String
     },
-    customOptions: {
+    options: {
       type: Object,
       default: () => { return DEFAULT_OPTIONS }
     }
@@ -55,7 +55,7 @@ export default {
   mounted () {
     this.$tours[this.name] = this
 
-    if (this.options.useKeyboardNavigation) {
+    if (this.customOptions.useKeyboardNavigation) {
       window.addEventListener('keyup', e => {
         // TODO: debug mode
         // console.log('[Vue Tour] A keyup event occured:', e)
@@ -74,18 +74,19 @@ export default {
     }
   },
   beforeDestroy () {
-    // Remove the keyup listener if it has been defined
-    if (this.options.useKeyboardNavigation) {
+    // Remove the keyup listener if it has been defined.
+    // Might have side-effects if the user already defined a listener on keyup.
+    if (this.customOptions.useKeyboardNavigation) {
       window.removeEventListener('keyup')
     }
   },
   computed: {
     // Allow us to define custom options and merge them with the default options.
     // Since options is a computed property, it is reactive and can be updated during runtime.
-    options () {
+    customOptions () {
       return {
         ...DEFAULT_OPTIONS,
-        ...this.customOptions
+        ...this.options
       }
     },
     // Return true if the tour is active, which means that there's a VStep displayed
@@ -107,13 +108,13 @@ export default {
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(() => {
         this.currentStep = 0
-      }, this.options.startTimeout)
+      }, this.customOptions.startTimeout)
     },
     previousStep () {
       if (this.currentStep > 0) this.currentStep--
     },
     nextStep () {
-      if (this.currentStep < this.numberOfSteps - 1) this.currentStep++
+      if (this.currentStep < this.numberOfSteps - 1 && this.currentStep !== -1) this.currentStep++
     },
     stop () {
       this.currentStep = -1
