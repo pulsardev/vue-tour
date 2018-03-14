@@ -4,7 +4,7 @@
     <button @click="nextStep" class="btn btn-lg">Next step</button>
     <button @click="showLastStep" class="btn btn-lg">Show last step</button>
 
-    <v-tour name="myTour" :steps="steps">
+    <v-tour name="myTour" :steps="steps" :on-next-step="myCustomNextStepCallback" :on-previous-step="myCustomPreviousStepCallback">
       <template slot-scope="tour">
         <transition name="fade">
           <v-step
@@ -70,6 +70,15 @@ export default {
     },
     showLastStep () {
       this.$tours['myTour'].currentStep = this.steps.length - 1
+    },
+    myCustomNextStepCallback () {
+      console.log('[Vue Tour] A custom callback called each time we go to the next step')
+      if (this.$tours['myTour'].currentStep === 2) {
+        console.log('[Vue Tour] A custom callback called from step 2 to step 3')
+      }
+    },
+    myCustomPreviousStepCallback () {
+      console.log('[Vue Tour] A custom callback called each time we go back on the previous step')
     }
   }
 }

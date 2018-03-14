@@ -8,6 +8,8 @@
       :stop="stop"
       :isFirst="isFirst"
       :isLast="isLast"
+      :onNextStep="onNextStep"
+      :onPreviousStep="onPreviousStep"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
@@ -45,7 +47,9 @@ export default {
     options: {
       type: Object,
       default: () => { return DEFAULT_OPTIONS }
-    }
+    },
+    onNextStep: Function,
+    onPreviousStep: Function,
   },
   data () {
     return {
@@ -96,10 +100,16 @@ export default {
       }, this.customOptions.startTimeout)
     },
     previousStep () {
-      if (this.currentStep > 0) this.currentStep--
+      if (this.currentStep > 0) {
+        this.currentStep--
+        this.onPreviousStep()
+      }
     },
     nextStep () {
-      if (this.currentStep < this.numberOfSteps - 1 && this.currentStep !== -1) this.currentStep++
+      if (this.currentStep < this.numberOfSteps - 1 && this.currentStep !== -1) {
+        this.currentStep++
+        this.onNextStep()
+      }
     },
     stop () {
       this.currentStep = -1
