@@ -48,8 +48,14 @@ export default {
       type: Object,
       default: () => { return DEFAULT_OPTIONS }
     },
-    onNextStep: Function,
-    onPreviousStep: Function,
+    onNextStep: {
+      type:Function,
+      default: () => {}
+    },
+    onPreviousStep: {
+      type:Function,
+      default: () => {}
+    }
   },
   data () {
     return {
