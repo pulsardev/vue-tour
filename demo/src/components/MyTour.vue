@@ -4,7 +4,7 @@
     <button @click="nextStep" class="btn btn-lg">Next step</button>
     <button @click="showLastStep" class="btn btn-lg">Show last step</button>
 
-    <v-tour name="myTour" :steps="steps" :on-next-step="myCustomNextStepCallback" :on-previous-step="myCustomPreviousStepCallback">
+    <v-tour name="myTour" :steps="steps" :callbacks="callbacks">
       <template slot-scope="tour">
         <transition name="fade">
           <v-step
@@ -58,7 +58,11 @@ export default {
             placement: 'left'
           }
         }
-      ]
+      ],
+      callbacks: {
+        onPreviousStep: this.myCustomPreviousStepCallback,
+        onNextStep: this.myCustomNextStepCallback
+      }
     }
   },
   mounted: function () {
@@ -71,14 +75,15 @@ export default {
     showLastStep () {
       this.$tours['myTour'].currentStep = this.steps.length - 1
     },
-    myCustomNextStepCallback () {
-      console.log('[Vue Tour] A custom callback called each time we go to the next step')
-      if (this.$tours['myTour'].currentStep === 2) {
-        console.log('[Vue Tour] A custom callback called from step 2 to step 3')
-      }
+    myCustomPreviousStepCallback (currentStep) {
+      console.log('[Vue Tour] A custom previousStep callback has been called on step ' + (currentStep + 1))
     },
-    myCustomPreviousStepCallback () {
-      console.log('[Vue Tour] A custom callback called each time we go back on the previous step')
+    myCustomNextStepCallback (currentStep) {
+      console.log('[Vue Tour] A custom nextStep callback has been called on step ' + (currentStep + 1))
+
+      if (currentStep === 1) {
+        console.log('[Vue Tour] A custom nextStep callback has been called from step 2 to step 3')
+      }
     }
   }
 }
@@ -89,7 +94,8 @@ export default {
     transition: opacity .5s;
   }
 
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+  {
     opacity: 0;
   }
 </style>

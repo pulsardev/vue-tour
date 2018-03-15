@@ -8,8 +8,6 @@
       :stop="stop"
       :isFirst="isFirst"
       :isLast="isLast"
-      :onNextStep="onNextStep"
-      :onPreviousStep="onPreviousStep"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
@@ -32,7 +30,7 @@
 </template>
 
 <script>
-import { DEFAULT_OPTIONS, KEYS } from '../shared/constants'
+import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS } from '../shared/constants'
 
 export default {
   name: 'v-tour',
@@ -48,13 +46,9 @@ export default {
       type: Object,
       default: () => { return DEFAULT_OPTIONS }
     },
-    onNextStep: {
-      type:Function,
-      default: () => {}
-    },
-    onPreviousStep: {
-      type:Function,
-      default: () => {}
+    callbacks: {
+      type: Object,
+      default: () => { return DEFAULT_CALLBACKS }
     }
   },
   data () {
@@ -84,6 +78,12 @@ export default {
         ...this.options
       }
     },
+    customCallbacks () {
+      return {
+        ...DEFAULT_CALLBACKS,
+        ...this.callbacks
+      }
+    },
     // Return true if the tour is active, which means that there's a VStep displayed
     isRunning () {
       return this.currentStep > -1 && this.currentStep < this.numberOfSteps
@@ -102,22 +102,24 @@ export default {
     start () {
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(() => {
+        this.customCallbacks.onStart()
         this.currentStep = 0
       }, this.customOptions.startTimeout)
     },
     previousStep () {
       if (this.currentStep > 0) {
+        this.customCallbacks.onPreviousStep(this.currentStep)
         this.currentStep--
-        this.onPreviousStep()
       }
     },
     nextStep () {
       if (this.currentStep < this.numberOfSteps - 1 && this.currentStep !== -1) {
+        this.customCallbacks.onNextStep(this.currentStep)
         this.currentStep++
-        this.onNextStep()
       }
     },
     stop () {
+      this.customCallbacks.onStop()
       this.currentStep = -1
     },
 
