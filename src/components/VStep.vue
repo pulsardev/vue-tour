@@ -75,7 +75,6 @@ export default {
         this.$refs['v-step-' + this.hash],
         this.params
       )
-      console.log(p.options.modifiers.offset)
     } else {
       console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
       this.stop()
