@@ -10,6 +10,10 @@ export const DEFAULT_OPTIONS = {
   startTimeout: 0
 }
 
+export const DEFAULT_STEP_OPTIONS = {
+  placement: 'bottom'
+}
+
 export const KEYS = {
   ARROW_RIGHT: 39,
   ARROW_LEFT: 37,

@@ -23,6 +23,7 @@
 <script>
 import Popper from 'popper.js'
 import sum from 'hash-sum'
+import { DEFAULT_STEP_OPTIONS } from '../shared/constants'
 
 export default {
   name: 'v-step',
@@ -51,8 +52,15 @@ export default {
       hash: sum(this.step.target)
     }
   },
+  computed: {
+    params () {
+      return {
+        ...DEFAULT_STEP_OPTIONS,
+        ...this.step.params
+      }
+    } 
+  },
   mounted () {
-    let params = this.step.params || {}
     let targetElement = document.querySelector(this.step.target)
 
     // TODO: debug mode
@@ -62,13 +70,12 @@ export default {
       targetElement.scrollIntoView({behavior: 'smooth'})
 
       /* eslint-disable no-new */
-      new Popper(
+      let p = new Popper(
         targetElement,
         this.$refs['v-step-' + this.hash],
-        {
-          placement: params.placement ? params.placement : 'bottom'
-        }
+        this.params
       )
+      console.log(p.options.modifiers.offset)
     } else {
       console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
       this.stop()
