@@ -43,6 +43,9 @@ export default {
         },
         {
           target: '#v-step-1',
+          header: {
+            title: 'Vue Tour'
+          },
           content: 'An awesome plugin made with Vue.js!'
         },
         {

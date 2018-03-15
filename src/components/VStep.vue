@@ -1,9 +1,15 @@
 <template>
   <div class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
+    <slot name="header">
+      <div v-if="step.header" class="v-step__header">
+        <div v-if="step.header.title" v-html="step.header.title"></div>
+      </div>
+    </slot>
+
     <slot name="content">
       <div class="v-step__content">
-        <span v-if="step.content" v-html="step.content"></span>
-        <span v-else>This is a demo step! The id of this step is {{ hash }} and it targets {{ step.target }}.</span>
+        <div v-if="step.content" v-html="step.content"></div>
+        <div v-else>This is a demo step! The id of this step is {{ hash }} and it targets {{ step.target }}.</div>
       </div>
     </slot>
 
@@ -16,7 +22,7 @@
       </div>
     </slot>
 
-    <div class="v-step__arrow"></div>
+    <div class="v-step__arrow" :class="{ 'v-step__arrow--dark': step.header && step.header.title }"></div>
   </div>
 </template>
 
@@ -58,7 +64,7 @@ export default {
         ...DEFAULT_STEP_OPTIONS,
         ...this.step.params
       }
-    } 
+    }
   },
   mounted () {
     let targetElement = document.querySelector(this.step.target)
@@ -104,6 +110,10 @@ export default {
 
   .v-step .v-step__arrow {
     border-color: #50596c; /* #ffc107, #35495e */
+
+    &--dark {
+      border-color: #454d5d;
+    }
   }
 
   .v-step[x-placement^="top"] {
@@ -167,6 +177,14 @@ export default {
   }
 
   /* Custom */
+
+  .v-step__header {
+    margin: -1rem -1rem 0.5rem;
+    padding: 0.5rem;
+    background-color: #454d5d;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
 
   .v-step__content {
     margin: 0 0 1rem 0;
