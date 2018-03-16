@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/pulsardev/vue-tour/compare/v1.0.0-beta.0...v1.0.0) (2018-03-16)
+
+
+### Bug Fixes
+
+* add default props to prevent error when the property is not passed ([3405237](https://github.com/pulsardev/vue-tour/commit/3405237))
+* prevent the tour of starting again when using arrow keys ([d7e8d42](https://github.com/pulsardev/vue-tour/commit/d7e8d42))
+* remove the side-effects by removing only our event listener ([3b9e389](https://github.com/pulsardev/vue-tour/commit/3b9e389))
+
+
+### Features
+
+* add a GitHub button on the demo and scroll back to the top ([94adbdd](https://github.com/pulsardev/vue-tour/commit/94adbdd))
+* add a header slot in VStep ([8cd3883](https://github.com/pulsardev/vue-tour/commit/8cd3883))
+* add custom callback management ([83481b1](https://github.com/pulsardev/vue-tour/commit/83481b1))
+* add support for Popper's parameters ([4328c37](https://github.com/pulsardev/vue-tour/commit/4328c37))
+* handle keyboard events + support a config prop + min and max props ([bba1ed6](https://github.com/pulsardev/vue-tour/commit/bba1ed6))
+* initial constant file ([623e962](https://github.com/pulsardev/vue-tour/commit/623e962))
+* prevent dismissing the tour using the keyboard ([bd73513](https://github.com/pulsardev/vue-tour/commit/bd73513))
+* prevent dismissing the tour when using previousStep on the first step ([fa93aac](https://github.com/pulsardev/vue-tour/commit/fa93aac))
+* use isFinished in previous/nextStep + reset isFinished when starting the tour ([b70c371](https://github.com/pulsardev/vue-tour/commit/b70c371))
+
+
+
 <a name="1.0.0-beta.0"></a>
 # 1.0.0-beta.0 (2018-02-22)
 
