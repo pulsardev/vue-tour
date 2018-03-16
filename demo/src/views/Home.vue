@@ -8,6 +8,7 @@
             <h2>VUE TOUR</h2>
           </a>
         </div>
+
         <h1>vue-tour</h1>
         <h2>a <u>Lightweight</u>, <u>Simple</u> and <u>Customizable</u> tour plugin for use with Vue.js</h2>
 
@@ -15,7 +16,12 @@
           <a href="https://pulsar.gitbooks.io/vue-tour/" class="btn btn-primary btn-lg">Docs</a>
           <a href="https://github.com/pulsardev/vue-tour" target="_blank" class="btn btn-primary btn-lg">GitHub</a>
         </p>
-        <p class="text-gray">Latest version: <span class="version">1.0.0</span></p>
+
+        <p>
+          <a class="github-button" href="https://github.com/pulsardev/vue-tour" data-size="large" data-show-count="true" aria-label="Star pulsardev/vue-tour on GitHub">Star</a>
+        </p>
+
+        <p class="text-gray">Latest version: <span class="version">{{ version }}</span></p>
         <div class="columns">
           <div class="column col-4 col-xs-12">
             <div class="card text-center">
@@ -106,7 +112,7 @@
 
     <footer class="section section-footer">
       <div id="copyright" class="grid-footer container grid-lg">
-        <p><a href="https://pulsar.gitbooks.io/vue-tour/" target="_blank">Documents</a> | <a href="https://github.com/pulsardev/vue-tour" target="_blank">GitHub</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CLK49A83DXCQ8" target="_blank">PayPal Donate</a> | Version <span class="version">1.0.0</span></p>
+        <p><a href="https://pulsar.gitbooks.io/vue-tour/" target="_blank">Documents</a> | <a href="https://github.com/pulsardev/vue-tour" target="_blank">GitHub</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CLK49A83DXCQ8" target="_blank">PayPal Donate</a> | Version <span class="version">{{ version }}</span></p>
         <p>Built with <span class="text-error">♥</span> by <a href="https://pulsar.surge.sh" target="_blank">Pulsar</a>. Licensed under the <a href="https://github.com/pulsardev/vue-tour/blob/master/LICENSE" target="_blank">MIT License</a>.</p>
       </div>
     </footer>
@@ -120,6 +126,11 @@ export default {
   name: 'home',
   components: {
     MyTour
+  },
+  data () {
+    return {
+      version: '1.0.0'
+    }
   }
 }
 </script>

@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS } from '../shared/constants'
+
 export default {
   name: 'v-tour',
   props: {
@@ -39,6 +41,14 @@ export default {
     },
     name: {
       type: String
+    },
+    options: {
+      type: Object,
+      default: () => { return DEFAULT_OPTIONS }
+    },
+    callbacks: {
+      type: Object,
+      default: () => { return DEFAULT_CALLBACKS }
     }
   },
   data () {
@@ -48,30 +58,85 @@ export default {
   },
   mounted () {
     this.$tours[this.name] = this
+
+    if (this.customOptions.useKeyboardNavigation) {
+      window.addEventListener('keyup', this.handleKeyup)
+    }
+  },
+  beforeDestroy () {
+    // Remove the keyup listener if it has been defined
+    if (this.customOptions.useKeyboardNavigation) {
+      window.removeEventListener('keyup', this.handleKeyup)
+    }
   },
   computed: {
+    // Allow us to define custom options and merge them with the default options.
+    // Since options is a computed property, it is reactive and can be updated during runtime.
+    customOptions () {
+      return {
+        ...DEFAULT_OPTIONS,
+        ...this.options
+      }
+    },
+    customCallbacks () {
+      return {
+        ...DEFAULT_CALLBACKS,
+        ...this.callbacks
+      }
+    },
+    // Return true if the tour is active, which means that there's a VStep displayed
+    isRunning () {
+      return this.currentStep > -1 && this.currentStep < this.numberOfSteps
+    },
     isFirst () {
       return this.currentStep === 0
     },
     isLast () {
       return this.currentStep === this.steps.length - 1
+    },
+    numberOfSteps () {
+      return this.steps.length
     }
   },
   methods: {
     start () {
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(() => {
+        this.customCallbacks.onStart()
         this.currentStep = 0
-      })
+      }, this.customOptions.startTimeout)
     },
     previousStep () {
-      this.currentStep--
+      if (this.currentStep > 0) {
+        this.customCallbacks.onPreviousStep(this.currentStep)
+        this.currentStep--
+      }
     },
     nextStep () {
-      this.currentStep++
+      if (this.currentStep < this.numberOfSteps - 1 && this.currentStep !== -1) {
+        this.customCallbacks.onNextStep(this.currentStep)
+        this.currentStep++
+      }
     },
     stop () {
+      this.customCallbacks.onStop()
       this.currentStep = -1
+    },
+
+    handleKeyup (e) {
+      // TODO: debug mode
+      // console.log('[Vue Tour] A keyup event occured:', e)
+      switch (e.keyCode) {
+        case KEYS.ARROW_RIGHT:
+          this.nextStep()
+          break
+        case KEYS.ARROW_LEFT:
+          this.previousStep()
+          break
+        case KEYS.ESCAPE:
+          this.stop()
+          break
+      }
     }
   }
 }
