@@ -64,7 +64,13 @@ export default {
       ],
       callbacks: {
         onPreviousStep: this.myCustomPreviousStepCallback,
-        onNextStep: this.myCustomNextStepCallback
+        onNextStep: this.myCustomNextStepCallback,
+        onStop: () => {
+          window.scroll({
+            top: 0,
+            behavior: 'smooth'
+          })
+        }
       }
     }
   },
