@@ -14,7 +14,7 @@
 
         <p>
           <a href="https://pulsar.gitbooks.io/vue-tour/" class="btn btn-primary btn-lg">Docs</a>
-          <a href="https://github.com/pulsardev/vue-tour" target="_blank" class="btn btn-primary btn-lg">GitHub</a>
+          <a href="https://github.com/pulsardev/vue-tour" target="_blank" rel="noopener" class="btn btn-primary btn-lg">GitHub</a>
         </p>
 
         <p>
