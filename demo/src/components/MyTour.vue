@@ -64,18 +64,17 @@ export default {
       ],
       callbacks: {
         onPreviousStep: this.myCustomPreviousStepCallback,
-        onNextStep: this.myCustomNextStepCallback,
-        onStop: () => {
-          window.scroll({
-            top: 0,
-            behavior: 'smooth'
-          })
-        }
+        onNextStep: this.myCustomNextStepCallback
       }
     }
   },
   mounted: function () {
     this.$tours['myTour'].start()
+
+    // A dynamically added onStop callback
+    this.callbacks.onStop = () => {
+      document.querySelector('#v-step-0').scrollIntoView({behavior: 'smooth'})
+    }
   },
   methods: {
     nextStep () {
