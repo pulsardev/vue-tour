@@ -27,9 +27,10 @@
 </template>
 
 <script>
-import Popper from 'popper.js'
-import sum from 'hash-sum'
-import { DEFAULT_STEP_OPTIONS } from '../shared/constants'
+import Popper from "popper.js";
+import jump from "jump.js";
+import sum from "hash-sum";
+import { DEFAULT_STEP_OPTIONS } from "../shared/constants";
 
 export default {
   name: 'v-step',
@@ -76,7 +77,15 @@ export default {
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
       if (targetElement) {
-        targetElement.scrollIntoView({behavior: 'smooth'})
+      let jumpOptions = {
+        duration: this.step.duration || 1000,
+        offset: this.step.offset || 0,
+        callback: undefined,
+        a11y: false
+      };
+
+      jump(targetElement, jumpOptions);
+      // targetElement.scrollIntoView({ behavior: "smooth" });
 
         /* eslint-disable no-new */
         this._data._popper = new Popper(
@@ -88,7 +97,7 @@ export default {
         console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
         this.$emit('targetNotFound', this.step)
       }
-    }
+          ' of .v-step[id="' +
   },
   mounted () {
     this.createStep()
