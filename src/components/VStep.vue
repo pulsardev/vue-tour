@@ -15,10 +15,10 @@
 
     <slot name="actions">
       <div class="v-step__buttons">
-        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">Skip tour</button>
-        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">Previous</button>
-        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">Next</button>
-        <button @click.prevent="stop" v-if="isLast" class="v-step__button">Finish</button>
+        <button @click.prevent="stop" v-if="!isLast" class="v-step__button" v-text="textSkip"></button>
+        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button" v-text="textPrevious"></button>
+        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button" v-text="textNext"></button>
+        <button @click.prevent="stop" v-if="isLast" class="v-step__button" v-text="textEnd"></button>
       </div>
     </slot>
 
@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import Popper from "popper.js";
-import jump from "jump.js";
-import sum from "hash-sum";
-import { DEFAULT_STEP_OPTIONS } from "../shared/constants";
+import Popper from 'popper.js'
+import jump from 'jump.js'
+import sum from 'hash-sum'
+import { DEFAULT_STEP_OPTIONS } from '../shared/constants'
 
 export default {
   name: 'v-step',
@@ -52,6 +52,18 @@ export default {
     },
     isLast: {
       type: Boolean
+    },
+    textSkip: {
+      type: String
+    },
+    textPrevious: {
+      type: String
+    },
+    textNext: {
+      type: String
+    },
+    textEnd: {
+      type: String
     }
   },
   data () {
@@ -82,7 +94,7 @@ export default {
         offset: this.step.offset || 0,
         callback: undefined,
         a11y: false
-      };
+      }
 
       jump(targetElement, jumpOptions);
       // targetElement.scrollIntoView({ behavior: "smooth" });
@@ -97,7 +109,6 @@ export default {
         console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
         this.$emit('targetNotFound', this.step)
       }
-          ' of .v-step[id="' +
   },
   mounted () {
     this.createStep()
