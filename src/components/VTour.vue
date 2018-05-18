@@ -99,11 +99,11 @@ export default {
     }
   },
   methods: {
-    start () {
+    start ({ startIdx }) {
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(() => {
         this.customCallbacks.onStart()
-        this.currentStep = 0
+        this.currentStep = typeof startIdx !== 'undefined' ? parseInt(startIdx, 10) : 0
       }, this.customOptions.startTimeout)
     },
     previousStep () {
