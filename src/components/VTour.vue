@@ -2,7 +2,6 @@
   <div class="v-tour">
     <slot
       :current-step="currentStep"
-      :steps="steps"
       :previous-step="previousStep"
       :next-step="nextStep"
       :stop="stop"
