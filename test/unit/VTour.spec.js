@@ -40,7 +40,7 @@ describe('VTour.vue', () => {
     expect(wrapper.vm.$tours).to.be.an('object').that.has.all.keys('myTestTour')
   })
 
-  it('stays within the boundaries of the number of steps', () => {
+  it('stays within the boundaries of the number of steps', done => {
     const wrapper = mount(VTour, {
       propsData: {
         name: 'myTestTour',
@@ -72,6 +72,100 @@ describe('VTour.vue', () => {
       wrapper.vm.stop()
 
       expect(wrapper.vm.currentStep).to.equal(-1)
+      done()
+    })
+  })
+
+  it('skips inactive steps', done => {
+    const stepsWithInactive = [
+      {
+        target: '#v-step-0',
+        content: `Discover <strong>Vue Tour</strong>!`
+      },
+      {
+        target: '#v-step-1',
+        content: 'inactive',
+        active: false
+      },
+      {
+        target: '#v-step-2',
+        content: 'An awesome plugin made with Vue.js!'
+      }
+    ]
+    const wrapper = mount(VTour, {
+      propsData: {
+        name: 'myTestTour',
+        steps: stepsWithInactive
+      }
+    })
+
+    expect(wrapper.vm.currentStep).to.equal(-1)
+
+    wrapper.vm.start()
+
+    setTimeout(() => {
+      expect(wrapper.vm.currentStep).to.equal(0)
+
+      wrapper.vm.nextStep()
+
+      expect(wrapper.vm.currentStep).to.equal(2)
+
+      wrapper.vm.previousStep()
+
+      expect(wrapper.vm.currentStep).to.equal(0)
+
+      wrapper.vm.stop()
+
+      expect(wrapper.vm.currentStep).to.equal(-1)
+      done()
+    })
+  })
+
+  it('pass steps on tour.start', done => {
+    const customSteps = [
+      {
+        target: '#v-step-0',
+        content: `Discover <strong>Vue Tour</strong>!`
+      },
+      {
+        target: '#v-step-1',
+        content: 'Woohooo'
+      },
+      {
+        target: '#v-step-2',
+        content: 'An awesome plugin made with Vue.js!'
+      }
+    ]
+    const wrapper = mount(VTour, {
+      propsData: {
+        name: 'myTestTour',
+        steps: []
+      }
+    })
+
+    expect(wrapper.vm.currentStep).to.equal(-1)
+
+    wrapper.vm.start(customSteps)
+
+    setTimeout(() => {
+      expect(wrapper.vm.currentStep).to.equal(0)
+
+      wrapper.vm.nextStep()
+
+      expect(wrapper.vm.currentStep).to.equal(2)
+
+      wrapper.vm.previousStep()
+
+      expect(wrapper.vm.currentStep).to.equal(1)
+
+      wrapper.vm.previousStep()
+
+      expect(wrapper.vm.currentStep).to.equal(0)
+
+      wrapper.vm.stop()
+
+      expect(wrapper.vm.currentStep).to.equal(-1)
+      done()
     })
   })
 })

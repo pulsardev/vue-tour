@@ -46,6 +46,7 @@ The `target` property of each step can target a DOM element in any component of 
     <div id="v-step-0">A DOM element on your page. The first step will pop on this element because its ID is 'v-step-0'.</div>
     <div class="v-step-1">A DOM element on your page. The second step will pop on this element because its ID is 'v-step-1'.</div>
     <div data-v-step="2">A DOM element on your page. The third and final step will pop on this element because its ID is 'v-step-2'.</div>
+    <div data-v-step="3">A DOM element on your page. This step will be skipped, because in the step it is defined as inactive.</div>
 
     <v-tour name="myTour" :steps="steps"></v-tour>
   </div>
@@ -71,6 +72,11 @@ The `target` property of each step can target a DOM element in any component of 
             params: {
               placement: 'top'
             }
+          },
+          {
+            target: '[data-v-step="3"]',
+            content: 'You can also skip inactive tests!',
+            active: false
           }
         ]
       }

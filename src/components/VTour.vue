@@ -2,7 +2,6 @@
   <div class="v-tour">
     <slot
       :current-step="currentStep"
-      :steps="steps"
       :previous-step="previousStep"
       :next-step="nextStep"
       :stop="stop"
@@ -99,23 +98,35 @@ export default {
     }
   },
   methods: {
-    start () {
+    start (steps) {
+      if (steps) {
+        this.steps = steps
+      }
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(() => {
         this.customCallbacks.onStart()
         this.currentStep = 0
       }, this.customOptions.startTimeout)
     },
+    previousActiveStepBeforeIndex (index) {
+      return this.steps.slice(0, index).reduce((stepIndex, {active = true}, index) => active ? index : stepIndex, undefined)
+    },
     previousStep () {
       if (this.currentStep > 0) {
+        const previousStepIndex = this.previousActiveStepBeforeIndex(this.currentStep)
         this.customCallbacks.onPreviousStep(this.currentStep)
-        this.currentStep--
+        this.currentStep = previousStepIndex
       }
     },
+    nextActiveStepAfterIndex (index) {
+      return this.steps.slice(index).reduce((stepIndex, {active = true}, index) => active ? index : stepIndex, undefined)
+    },
     nextStep () {
-      if (this.currentStep < this.numberOfSteps - 1 && this.currentStep !== -1) {
+      if (this.currentStep >= this.numberOfSteps) return
+      const nextStepIndex = this.nextActiveStepAfterIndex(this.currentStep)
+      if (nextStepIndex) {
         this.customCallbacks.onNextStep(this.currentStep)
-        this.currentStep++
+        this.currentStep = nextStepIndex
       }
     },
     stop () {

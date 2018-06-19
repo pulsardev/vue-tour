@@ -4,27 +4,13 @@
 <link rel="stylesheet" href="./vue-tour.css">
 
 <div id="app">
-  <div id="v-step-0">Hello World!</div>
-  <div id="v-step-1">This is a small demo file for Vue Tour.</div>
-  <button @click="$tours['myTour'].start()">Start tour</button>
-  <v-tour name="myTour" :steps="steps"></v-tour>
+  <demo></demo>
 </div>
 
 <script>
 new Vue({
-  data () {
-    return {
-      steps: [
-        {
-          target: '#v-step-0',
-          content: `Discover <strong>Vue Tour</strong>!`
-        },
-        {
-          target: '#v-step-1',
-          content: 'An awesome plugin made with Vue.js!'
-        }
-      ]
-    }
+  components: {
+    demo: vue-tour
   }
 }).$mount('#app')
 </script>
