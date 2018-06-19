@@ -120,4 +120,52 @@ describe('VTour.vue', () => {
       done()
     })
   })
+
+  it('pass steps on tour.start', done => {
+    const customSteps = [
+      {
+        target: '#v-step-0',
+        content: `Discover <strong>Vue Tour</strong>!`
+      },
+      {
+        target: '#v-step-1',
+        content: 'Woohooo'
+      },
+      {
+        target: '#v-step-2',
+        content: 'An awesome plugin made with Vue.js!'
+      }
+    ]
+    const wrapper = mount(VTour, {
+      propsData: {
+        name: 'myTestTour',
+        steps: []
+      }
+    })
+
+    expect(wrapper.vm.currentStep).to.equal(-1)
+
+    wrapper.vm.start(customSteps)
+
+    setTimeout(() => {
+      expect(wrapper.vm.currentStep).to.equal(0)
+
+      wrapper.vm.nextStep()
+
+      expect(wrapper.vm.currentStep).to.equal(2)
+
+      wrapper.vm.previousStep()
+
+      expect(wrapper.vm.currentStep).to.equal(1)
+
+      wrapper.vm.previousStep()
+
+      expect(wrapper.vm.currentStep).to.equal(0)
+
+      wrapper.vm.stop()
+
+      expect(wrapper.vm.currentStep).to.equal(-1)
+      done()
+    })
+  })
 })

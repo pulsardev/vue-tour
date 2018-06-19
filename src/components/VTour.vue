@@ -99,7 +99,10 @@ export default {
     }
   },
   methods: {
-    start () {
+    start (steps) {
+      if (steps) {
+        this.steps = steps
+      }
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(() => {
         this.customCallbacks.onStart()
