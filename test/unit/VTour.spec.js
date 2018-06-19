@@ -40,7 +40,7 @@ describe('VTour.vue', () => {
     expect(wrapper.vm.$tours).to.be.an('object').that.has.all.keys('myTestTour')
   })
 
-  it('stays within the boundaries of the number of steps', () => {
+  it('stays within the boundaries of the number of steps', done => {
     const wrapper = mount(VTour, {
       propsData: {
         name: 'myTestTour',
@@ -72,6 +72,7 @@ describe('VTour.vue', () => {
       wrapper.vm.stop()
 
       expect(wrapper.vm.currentStep).to.equal(-1)
+      done()
     })
   })
 })
