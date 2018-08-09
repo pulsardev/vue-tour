@@ -55,7 +55,8 @@ export default {
   },
   data () {
     return {
-      hash: sum(this.step.target)
+      hash: sum(this.step.target),
+      _popper: null,
     }
   },
   computed: {
@@ -76,7 +77,7 @@ export default {
       targetElement.scrollIntoView({behavior: 'smooth'})
 
       /* eslint-disable no-new */
-      new Popper(
+      this._popper = new Popper(
         targetElement,
         this.$refs['v-step-' + this.hash],
         this.params
