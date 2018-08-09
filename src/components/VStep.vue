@@ -78,7 +78,7 @@ export default {
       targetElement.scrollIntoView({behavior: 'smooth'})
 
       /* eslint-disable no-new */
-      this._popper = new Popper(
+      this._data._popper = new Popper(
         targetElement,
         this.$refs['v-step-' + this.hash],
         this.params
