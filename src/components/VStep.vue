@@ -56,7 +56,7 @@ export default {
   data () {
     return {
       hash: sum(this.step.target),
-      _popper: null,
+      _popper: null
     }
   },
   computed: {
