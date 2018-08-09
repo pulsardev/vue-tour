@@ -56,6 +56,7 @@ export default {
   data () {
     return {
       hash: sum(this.step.target),
+      /* eslint-disable-next-line vue/no-reserved-keys */
       _popper: null
     }
   },
