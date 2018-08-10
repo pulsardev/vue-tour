@@ -87,7 +87,6 @@ export default {
       } else {
         console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
         this.$emit('targetNotFound', this.step)
-        this.stop()
       }
     }
   },
