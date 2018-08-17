@@ -7,7 +7,8 @@ export const DEFAULT_CALLBACKS = {
 
 export const DEFAULT_OPTIONS = {
   useKeyboardNavigation: true,
-  startTimeout: 0
+  startTimeout: 0,
+  stopOnTargetNotFound: true
 }
 
 export const DEFAULT_STEP_OPTIONS = {

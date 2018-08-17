@@ -20,6 +20,8 @@
         :stop="stop"
         :isFirst="isFirst"
         :isLast="isLast"
+        :stop-on-fail="customOptions.stopOnTargetNotFound"
+        @targetNotFound="$emit('targetNotFound', $event)"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
