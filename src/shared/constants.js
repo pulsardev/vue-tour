@@ -11,7 +11,12 @@ export const DEFAULT_OPTIONS = {
 }
 
 export const DEFAULT_STEP_OPTIONS = {
-  placement: 'bottom'
+  placement: 'bottom',
+  modifiers: {
+    arrow: {
+      element: '.v-step__arrow'
+    }
+  }
 }
 
 export const KEYS = {
