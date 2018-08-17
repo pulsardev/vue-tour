@@ -55,7 +55,9 @@ export default {
   },
   data () {
     return {
-      hash: sum(this.step.target)
+      hash: sum(this.step.target),
+      /* eslint-disable vue/no-reserved-keys */
+      _popper: null
     }
   },
   computed: {
@@ -66,25 +68,30 @@ export default {
       }
     }
   },
-  mounted () {
-    let targetElement = document.querySelector(this.step.target)
+  methods: {
+    createStep () {
+      let targetElement = document.querySelector(this.step.target)
 
-    // TODO: debug mode
-    // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
+      // TODO: debug mode
+      // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
-    if (targetElement) {
-      targetElement.scrollIntoView({behavior: 'smooth'})
+      if (targetElement) {
+        targetElement.scrollIntoView({behavior: 'smooth'})
 
-      /* eslint-disable no-new */
-      new Popper(
-        targetElement,
-        this.$refs['v-step-' + this.hash],
-        this.params
-      )
-    } else {
-      console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
-      this.stop()
+        /* eslint-disable no-new */
+        this._data._popper = new Popper(
+          targetElement,
+          this.$refs['v-step-' + this.hash],
+          this.params
+        )
+      } else {
+        console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
+        this.$emit('targetNotFound', this.step)
+      }
     }
+  },
+  mounted () {
+    this.createStep()
   }
 }
 </script>
