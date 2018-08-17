@@ -42,6 +42,10 @@ export default {
           content: `Discover <strong>Vue Tour</strong>!`
         },
         {
+          target: '#v-step-0-1',
+          content: `Created by <a href="https://github.com/pulsardev" target="_blank"/>Pulsar</a> and its <a href="https://github.com/pulsardev/vue-tour/graphs/contributors" target="_blank">contributors</a>.`
+        },
+        {
           target: '#v-step-1',
           header: {
             title: 'Vue Tour'
