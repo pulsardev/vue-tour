@@ -23,7 +23,10 @@ export const HIGHLIGHT = {
     TARGET_HIGHLIGHTED: 'v-tour__target--highlighted',
     TARGET_RELATIVE: 'v-tour__target--relative'
   },
-  TRANSITION: 'box-shadow 0s ease-in-out 0s'
+  TRANSITION: 'box-shadow 0s ease-in-out 0s',
+  useKeyboardNavigation: true,
+  startTimeout: 0,
+  stopOnTargetNotFound: true
 }
 
 export const DEFAULT_STEP_OPTIONS = {
