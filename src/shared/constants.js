@@ -12,6 +12,7 @@ export const DEFAULT_OPTIONS = {
 
 export const DEFAULT_STEP_OPTIONS = {
   placement: 'bottom',
+  scroll: true,
   modifiers: {
     arrow: {
       element: '.v-step__arrow'
