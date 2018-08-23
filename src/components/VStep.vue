@@ -89,15 +89,15 @@ export default {
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
       if (targetElement) {
-      let jumpOptions = {
-        duration: this.step.duration || 1000,
-        offset: this.step.offset || 0,
-        callback: undefined,
-        a11y: false
-      }
+        let jumpOptions = {
+          duration: this.step.duration || 1000,
+          offset: this.step.offset || 0,
+          callback: undefined,
+          a11y: false
+        }
 
-      jump(targetElement, jumpOptions);
-      // targetElement.scrollIntoView({ behavior: "smooth" });
+        jump(targetElement, jumpOptions)
+        // targetElement.scrollIntoView({ behavior: "smooth" })
 
         /* eslint-disable no-new */
         this._data._popper = new Popper(
@@ -109,6 +109,7 @@ export default {
         console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
         this.$emit('targetNotFound', this.step)
       }
+    }
   },
   mounted () {
     this.createStep()
