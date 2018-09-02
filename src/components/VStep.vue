@@ -15,10 +15,10 @@
 
     <slot name="actions">
       <div class="v-step__buttons">
-        <button @click.prevent="stop" v-if="!isLast" class="v-step__button" v-text="textSkip"></button>
-        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button" v-text="textPrevious"></button>
-        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button" v-text="textNext"></button>
-        <button @click.prevent="stop" v-if="isLast" class="v-step__button" v-text="textEnd"></button>
+        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">{{ labels.buttonSkip }}</button>
+        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">{{ labels.buttonPrevious }}</button>
+        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">{{ labels.buttonNext }}</button>
+        <button @click.prevent="stop" v-if="isLast" class="v-step__button">{{ labels.buttonStop }}</button>
       </div>
     </slot>
 
@@ -52,13 +52,14 @@ export default {
     },
     isLast: {
       type: Boolean
+    },
+    labels: {
+      type: Object
     }
   },
   data () {
     return {
-      hash: sum(this.step.target),
-      /* eslint-disable vue/no-reserved-keys */
-      _popper: null
+      hash: sum(this.step.target)
     }
   },
   computed: {
@@ -77,7 +78,7 @@ export default {
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
       if (targetElement) {
-        if (this.params.scroll) {
+        if (this.params.enableScrolling) {
           let jumpOptions = {
             duration: this.step.duration || 1000,
             offset: this.step.offset || 0,
@@ -89,7 +90,7 @@ export default {
         }
 
         /* eslint-disable no-new */
-        this._data._popper = new Popper(
+        new Popper(
           targetElement,
           this.$refs['v-step-' + this.hash],
           this.params

@@ -8,6 +8,7 @@
       :stop="stop"
       :is-first="isFirst"
       :is-last="isLast"
+      :labels="customOptions.labels"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
@@ -20,10 +21,7 @@
         :stop="stop"
         :is-first="isFirst"
         :is-last="isLast"
-        :text-skip="customOptions.text.skip"
-        :text-previous="customOptions.text.previous"
-        :text-next="customOptions.text.next"
-        :text-end="customOptions.text.end"
+        :labels="customOptions.labels"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>

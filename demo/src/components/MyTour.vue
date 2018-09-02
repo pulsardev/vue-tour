@@ -17,6 +17,7 @@
             :stop="tour.stop"
             :is-first="tour.isFirst"
             :is-last="tour.isLast"
+            :labels="tour.labels"
           >
             <template v-if="tour.currentStep === 2">
               <div slot="actions">
@@ -77,7 +78,7 @@ export default {
 
     // A dynamically added onStop callback
     this.callbacks.onStop = () => {
-      document.querySelector('#v-step-0').scrollIntoView({behavior: 'smooth'})
+      document.querySelector('#v-step-0').scrollIntoView({ behavior: 'smooth' })
     }
   },
   methods: {

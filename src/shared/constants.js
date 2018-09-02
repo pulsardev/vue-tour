@@ -8,17 +8,17 @@ export const DEFAULT_CALLBACKS = {
 export const DEFAULT_OPTIONS = {
   useKeyboardNavigation: true,
   startTimeout: 0,
-  text: {
-    skip: 'Skip tour',
-    previous: 'Previous',
-    next: 'Next',
-    end: 'Finish'
+  labels: {
+    buttonSkip: 'Skip tour',
+    buttonPrevious: 'Previous',
+    buttonNext: 'Next',
+    buttonStop: 'Finish'
   }
 }
 
 export const DEFAULT_STEP_OPTIONS = {
   placement: 'bottom',
-  scroll: true,
+  enableScrolling: true,
   modifiers: {
     arrow: {
       element: '.v-step__arrow'
