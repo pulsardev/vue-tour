@@ -77,15 +77,16 @@ export default {
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
       if (targetElement) {
-        let jumpOptions = {
-          duration: this.step.duration || 1000,
-          offset: this.step.offset || 0,
-          callback: undefined,
-          a11y: false
-        }
+        if (this.params.scroll) {
+          let jumpOptions = {
+            duration: this.step.duration || 1000,
+            offset: this.step.offset || 0,
+            callback: undefined,
+            a11y: false
+          }
 
-        jump(targetElement, jumpOptions)
-        // targetElement.scrollIntoView({ behavior: "smooth" })
+          jump(targetElement, jumpOptions)
+        }
 
         /* eslint-disable no-new */
         this._data._popper = new Popper(
