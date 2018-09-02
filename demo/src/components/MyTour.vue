@@ -15,8 +15,8 @@
             :previous-step="tour.previousStep"
             :next-step="tour.nextStep"
             :stop="tour.stop"
-            :isFirst="tour.isFirst"
-            :isLast="tour.isLast"
+            :is-first="tour.isFirst"
+            :is-last="tour.isLast"
           >
             <template v-if="tour.currentStep === 2">
               <div slot="actions">
