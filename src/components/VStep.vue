@@ -76,7 +76,7 @@ export default {
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
       if (targetElement) {
-        targetElement.scrollIntoView({behavior: 'smooth'})
+        targetElement.scrollIntoView({ behavior: 'smooth' })
 
         /* eslint-disable no-new */
         this._data._popper = new Popper(
@@ -208,6 +208,7 @@ export default {
     height: 1.8rem;
     line-height: 1rem;
     outline: none;
+    margin: 0 0.2rem;
     padding: .35rem .4rem;
     text-align: center;
     text-decoration: none;

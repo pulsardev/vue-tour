@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button @click="$tours['myTour'].start()" class="btn btn-lg">Start the tour</button>
-    <button @click="nextStep" class="btn btn-lg">Next step</button>
+    <button @click="$tours['myTour'].start()" class="btn btn-lg mr-2">Start the tour</button>
+    <button @click="nextStep" class="btn btn-lg mr-2">Next step</button>
     <button @click="showLastStep" class="btn btn-lg">Show last step</button>
 
     <v-tour name="myTour" :steps="steps" :callbacks="callbacks">
@@ -20,7 +20,7 @@
           >
             <template v-if="tour.currentStep === 2">
               <div slot="actions">
-                <button @click="tour.previousStep" class="btn btn-primary">Previous step</button>
+                <button @click="tour.previousStep" class="btn btn-primary mr-2">Previous step</button>
                 <button @click="tour.nextStep" class="btn btn-primary">Next step</button>
               </div>
             </template>
@@ -43,7 +43,7 @@ export default {
         },
         {
           target: '#v-step-0-1',
-          content: `Created by <a href="https://github.com/pulsardev" target="_blank"/>Pulsar</a> and its <a href="https://github.com/pulsardev/vue-tour/graphs/contributors" target="_blank">contributors</a>.`
+          content: `Created by <a href="https://github.com/pulsardev" target="_blank" rel="noopener">Pulsar</a> and its <a href="https://github.com/pulsardev/vue-tour/graphs/contributors" target="_blank" rel="noopener">contributors</a>.`
         },
         {
           target: '#v-step-1',

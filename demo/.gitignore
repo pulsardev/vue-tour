@@ -2,8 +2,8 @@
 node_modules
 /dist
 
-/test/e2e/videos/
-/test/e2e/screenshots/
+/tests/e2e/videos/
+/tests/e2e/screenshots/
 
 # local env files
 .env.local
@@ -21,3 +21,4 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+*.sw*
