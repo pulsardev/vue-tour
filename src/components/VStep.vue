@@ -15,10 +15,10 @@
 
     <slot name="actions">
       <div class="v-step__buttons">
-        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">Skip tour</button>
-        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">Previous</button>
-        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">Next</button>
-        <button @click.prevent="stop" v-if="isLast" class="v-step__button">Finish</button>
+        <button @click.prevent="stop" v-if="!isLast" class="v-step__button" v-text="textSkip"></button>
+        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button" v-text="textPrevious"></button>
+        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button" v-text="textNext"></button>
+        <button @click.prevent="stop" v-if="isLast" class="v-step__button" v-text="textEnd"></button>
       </div>
     </slot>
 
@@ -28,6 +28,7 @@
 
 <script>
 import Popper from 'popper.js'
+import jump from 'jump.js'
 import sum from 'hash-sum'
 import { DEFAULT_STEP_OPTIONS } from '../shared/constants'
 
@@ -76,7 +77,15 @@ export default {
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
       if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' })
+        let jumpOptions = {
+          duration: this.step.duration || 1000,
+          offset: this.step.offset || 0,
+          callback: undefined,
+          a11y: false
+        }
+
+        jump(targetElement, jumpOptions)
+        // targetElement.scrollIntoView({ behavior: "smooth" })
 
         /* eslint-disable no-new */
         this._data._popper = new Popper(
