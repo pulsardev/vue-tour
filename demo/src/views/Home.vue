@@ -9,11 +9,17 @@
           </a>
         </div>
 
+        <div class="docs-brand docs-brand--pulsar">
+          <a href="https://pulsar.surge.sh/" target="_blank" class="docs-logo docs-logo-pulsar" id="v-step-0-1">
+            <h2>PULSAR</h2>
+          </a>
+        </div>
+
         <h1>vue-tour</h1>
         <h2>a <u>Lightweight</u>, <u>Simple</u> and <u>Customizable</u> tour plugin for use with Vue.js</h2>
 
         <p>
-          <a href="https://pulsar.gitbooks.io/vue-tour/" class="btn btn-primary btn-lg">Docs</a>
+          <a href="https://pulsar.gitbooks.io/vue-tour/" class="btn btn-primary btn-lg mr-2">Docs</a>
           <a href="https://github.com/pulsardev/vue-tour" target="_blank" rel="noopener" class="btn btn-primary btn-lg">GitHub</a>
         </p>
 

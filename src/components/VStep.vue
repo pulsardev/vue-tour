@@ -15,10 +15,10 @@
 
     <slot name="actions">
       <div class="v-step__buttons">
-        <button @click="stop" v-if="!isLast" class="v-step__button">Skip tour</button>
-        <button @click="previousStep" v-if="!isFirst" class="v-step__button">Previous</button>
-        <button @click="nextStep" v-if="!isLast" class="v-step__button">Next</button>
-        <button @click="stop" v-if="isLast" class="v-step__button">Finish</button>
+        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">{{ labels.buttonSkip }}</button>
+        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">{{ labels.buttonPrevious }}</button>
+        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">{{ labels.buttonNext }}</button>
+        <button @click.prevent="stop" v-if="isLast" class="v-step__button">{{ labels.buttonStop }}</button>
       </div>
     </slot>
 
@@ -28,6 +28,7 @@
 
 <script>
 import Popper from 'popper.js'
+import jump from 'jump.js'
 import sum from 'hash-sum'
 import { DEFAULT_STEP_OPTIONS } from '../shared/constants'
 
@@ -51,6 +52,9 @@ export default {
     },
     isLast: {
       type: Boolean
+    },
+    labels: {
+      type: Object
     }
   },
   data () {
@@ -66,25 +70,44 @@ export default {
       }
     }
   },
-  mounted () {
-    let targetElement = document.querySelector(this.step.target)
+  methods: {
+    createStep () {
+      let targetElement = document.querySelector(this.step.target)
 
-    // TODO: debug mode
-    // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
+      // TODO: debug mode
+      // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
-    if (targetElement) {
-      targetElement.scrollIntoView({behavior: 'smooth'})
+      if (targetElement) {
+        if (this.params.enableScrolling) {
+          if (this.step.duration || this.step.offset) {
+            let jumpOptions = {
+              duration: this.step.duration || 1000,
+              offset: this.step.offset || 0,
+              callback: undefined,
+              a11y: false
+            }
 
-      /* eslint-disable no-new */
-      new Popper(
-        targetElement,
-        this.$refs['v-step-' + this.hash],
-        this.params
-      )
-    } else {
-      console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
-      this.stop()
+            jump(targetElement, jumpOptions)
+          } else {
+            // Use the native scroll by default if no scroll options has been defined
+            targetElement.scrollIntoView({ behavior: 'smooth' })
+          }
+        }
+
+        /* eslint-disable no-new */
+        new Popper(
+          targetElement,
+          this.$refs['v-step-' + this.hash],
+          this.params
+        )
+      } else {
+        console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
+        this.$emit('targetNotFound', this.step)
+      }
     }
+  },
+  mounted () {
+    this.createStep()
   }
 }
 </script>
@@ -201,6 +224,7 @@ export default {
     height: 1.8rem;
     line-height: 1rem;
     outline: none;
+    margin: 0 0.2rem;
     padding: .35rem .4rem;
     text-align: center;
     text-decoration: none;

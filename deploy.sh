@@ -14,7 +14,7 @@ rm -rf ./docs/
 cd ./demo/
 
 npm install
-npm run e2e
+npm run test:e2e
 npm run build
 
 mv ./dist/ ../docs/

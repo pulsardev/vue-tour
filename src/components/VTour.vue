@@ -6,8 +6,9 @@
       :previous-step="previousStep"
       :next-step="nextStep"
       :stop="stop"
-      :isFirst="isFirst"
-      :isLast="isLast"
+      :is-first="isFirst"
+      :is-last="isLast"
+      :labels="customOptions.labels"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
@@ -18,8 +19,9 @@
         :previous-step="previousStep"
         :next-step="nextStep"
         :stop="stop"
-        :isFirst="isFirst"
-        :isLast="isLast"
+        :is-first="isFirst"
+        :is-last="isLast"
+        :labels="customOptions.labels"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
@@ -99,11 +101,11 @@ export default {
     }
   },
   methods: {
-    start () {
+    start (startStep) {
       // Wait for the DOM to be loaded, then start the tour
       setTimeout(() => {
         this.customCallbacks.onStart()
-        this.currentStep = 0
+        this.currentStep = typeof startStep !== 'undefined' ? parseInt(startStep, 10) : 0
       }, this.customOptions.startTimeout)
     },
     previousStep () {

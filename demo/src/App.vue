@@ -11,4 +11,5 @@
 <style>
 @import "./assets/css/spectre.css";
 @import "./assets/css/docs.css";
+@import "./assets/css/custom.css";
 </style>
