@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/pulsardev/vue-tour/compare/v1.0.1...v1.1.0) (2018-10-16)
+
+
+### Bug Fixes
+
+* bump the circleci node version to allow the tests to run ([aeeb2f3](https://github.com/pulsardev/vue-tour/commit/aeeb2f3))
+* Changed [@click](https://github.com/click) on Steps to [@click](https://github.com/click).prevent ([d2b7a11](https://github.com/pulsardev/vue-tour/commit/d2b7a11))
+* destructuration doesn't work, the parameter(s) has to be passed directly ([bccf4ee](https://github.com/pulsardev/vue-tour/commit/bccf4ee))
+* resolve vulnerabilities reported by npm ([38cb274](https://github.com/pulsardev/vue-tour/commit/38cb274))
+
+
+### Features
+
+* add a new step to show off the target handling in corners ([16fd73f](https://github.com/pulsardev/vue-tour/commit/16fd73f))
+* add optional starting step to VTour ([13d6996](https://github.com/pulsardev/vue-tour/commit/13d6996))
+* add options to change navigation buttons text ([f1a4302](https://github.com/pulsardev/vue-tour/commit/f1a4302))
+* use jump.js for more options per step ([64eb8d1](https://github.com/pulsardev/vue-tour/commit/64eb8d1))
+* **scroll:** use jump.js to scroll only when scroll options are defined ([97667bd](https://github.com/pulsardev/vue-tour/commit/97667bd))
+* **steps:** add the possibility to change the text of the buttons through the tour options ([2ead09e](https://github.com/pulsardev/vue-tour/commit/2ead09e))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/pulsardev/vue-tour/compare/v1.0.0...v1.0.1) (2018-03-16)
 
