@@ -79,14 +79,19 @@ export default {
 
       if (targetElement) {
         if (this.params.enableScrolling) {
-          let jumpOptions = {
-            duration: this.step.duration || 1000,
-            offset: this.step.offset || 0,
-            callback: undefined,
-            a11y: false
-          }
+          if (this.step.duration || this.step.offset) {
+            let jumpOptions = {
+              duration: this.step.duration || 1000,
+              offset: this.step.offset || 0,
+              callback: undefined,
+              a11y: false
+            }
 
-          jump(targetElement, jumpOptions)
+            jump(targetElement, jumpOptions)
+          } else {
+            // Use the native scroll by default if no scroll options has been defined
+            targetElement.scrollIntoView({behavior: 'smooth'})
+          }
         }
 
         /* eslint-disable no-new */
