@@ -60,7 +60,7 @@ jobs:
       - run: sleep 5
 
       # run tests!
-      - run: cd ./demo/ && npm run test:e2e
+      - run: cd ./demo/ && npm run test:e2e -- --headless
       - run: cd ./demo/ && npm run build
 
       - run: rm -rf ./docs/
