@@ -11,14 +11,14 @@
   "dependencies": {
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
-    "vue-tour": "^1.0.1"
+    "vue-tour": "^1.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0",
-    "@vue/cli-plugin-e2e-cypress": "^3.0.0",
-    "@vue/cli-plugin-eslint": "^3.0.0",
-    "@vue/cli-service": "^3.0.0",
-    "@vue/eslint-config-standard": "^3.0.1",
+    "@vue/cli-plugin-babel": "^3.0.5",
+    "@vue/cli-plugin-e2e-cypress": "^3.0.5",
+    "@vue/cli-plugin-eslint": "^3.0.5",
+    "@vue/cli-service": "^3.0.5",
+    "@vue/eslint-config-standard": "^3.0.5",
     "vue-template-compiler": "^2.5.17"
   },
   "browserslist": [
