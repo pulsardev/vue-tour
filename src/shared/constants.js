@@ -27,6 +27,10 @@ export const DEFAULT_STEP_OPTIONS = {
   }
 }
 
+export const STICKY = {
+  ID: 'v-tour-sticky'
+}
+
 export const HIGHLIGHT = {
   ACTIVE_STEP: 'v-tour-highlight',
   ACTIVE_TOUR: 'v-tour-active',
