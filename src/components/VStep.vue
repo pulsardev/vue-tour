@@ -142,12 +142,12 @@ export default {
         this.targetElement.classList.remove(HIGHLIGHT.ACTIVE_STEP)
         this.targetElement.classList.remove(HIGHLIGHT.POSITION_CLASS)
 
-        setTimeout(() => {
-          // Remove our transition when step is finished.
-          if (currTransition.includes(HIGHLIGHT.TRANSITION)) {
+        // Remove our transition when step is finished.
+        if (currTransition.includes(HIGHLIGHT.TRANSITION)) {
+          setTimeout(() => {
             target.style.transition = currTransition.replace(HIGHLIGHT.TRANSITION, '')
-          }
-        }, 0)
+          }, 0)
+        }
       }
     }
   },
