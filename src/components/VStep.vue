@@ -1,5 +1,5 @@
 <template>
-  <div class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
+  <div v-bind:class="{ 'v-step-sticky': isSticky }" class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
     <slot name="header">
       <div v-if="step.header" class="v-step__header">
         <div v-if="step.header.title" v-html="step.header.title"></div>
@@ -15,10 +15,10 @@
 
     <slot name="actions">
       <div class="v-step__buttons">
-        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">{{ labels.buttonSkip }}</button>
-        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">{{ labels.buttonPrevious }}</button>
-        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">{{ labels.buttonNext }}</button>
-        <button @click.prevent="stop" v-if="isLast" class="v-step__button">{{ labels.buttonStop }}</button>
+        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">{{ stepLabels.buttonSkip }}</button>
+        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">{{ stepLabels.buttonPrevious }}</button>
+        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">{{ stepLabels.buttonNext }}</button>
+        <button @click.prevent="stop" v-if="isLast" class="v-step__button">{{ stepLabels.buttonStop }}</button>
       </div>
     </slot>
 
@@ -30,7 +30,7 @@
 import Popper from 'popper.js'
 import jump from 'jump.js'
 import sum from 'hash-sum'
-import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../shared/constants'
+import { DEFAULT_STEP_OPTIONS, HIGHLIGHT, STICKY } from '../shared/constants'
 
 export default {
   name: 'v-step',
@@ -73,12 +73,32 @@ export default {
         ...DEFAULT_STEP_OPTIONS,
         ...this.step.params
       }
+    },
+    isSticky () {
+      return (this.params.type === 'sticky')
+    },
+    stepLabels () {
+      return {
+        ...this.labels,
+        ...this.params.labels
+      }
     }
   },
   methods: {
     createStep () {
       // TODO: debug mode
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
+
+      if (this.isSticky) {
+        this.targetElement = document.getElementById(STICKY.ID)
+
+        if (!this.targetElement) {
+          const newDiv = document.createElement('div')
+          newDiv.id = STICKY.ID
+
+          this.targetElement = document.body.appendChild(newDiv)
+        }
+      }
 
       if (this.targetElement) {
         if (this.params.enableScrolling) {
@@ -170,6 +190,19 @@ export default {
     padding: 1rem;
     text-align: center;
     z-index: 99999;
+
+    &.v-step-sticky {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 50vw;
+      max-width: 90vw;
+
+      & .v-step__arrow {
+        opacity: 0;
+        display: none;
+      }
+    }
   }
 
   .v-step .v-step__arrow {
