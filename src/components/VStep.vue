@@ -30,7 +30,7 @@
 import Popper from 'popper.js'
 import jump from 'jump.js'
 import sum from 'hash-sum'
-import { DEFAULT_STEP_OPTIONS } from '../shared/constants'
+import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../shared/constants'
 
 export default {
   name: 'v-step',
@@ -55,16 +55,21 @@ export default {
     },
     labels: {
       type: Object
+    },
+    highlight: {
+      type: Boolean
     }
   },
   data () {
     return {
-      hash: sum(this.step.target)
+      hash: sum(this.step.target),
+      targetElement: document.querySelector(this.step.target)
     }
   },
   computed: {
     params () {
       return {
+        highlight: this.highlight,
         ...DEFAULT_STEP_OPTIONS,
         ...this.step.params
       }
@@ -72,12 +77,10 @@ export default {
   },
   methods: {
     createStep () {
-      let targetElement = document.querySelector(this.step.target)
-
       // TODO: debug mode
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
-      if (targetElement) {
+      if (this.targetElement) {
         if (this.params.enableScrolling) {
           if (this.step.duration || this.step.offset) {
             let jumpOptions = {
@@ -87,16 +90,18 @@ export default {
               a11y: false
             }
 
-            jump(targetElement, jumpOptions)
+            jump(this.targetElement, jumpOptions)
           } else {
             // Use the native scroll by default if no scroll options has been defined
-            targetElement.scrollIntoView({ behavior: 'smooth' })
+            this.targetElement.scrollIntoView({ behavior: 'smooth' })
           }
         }
 
+        this.createHighlight()
+
         /* eslint-disable no-new */
         new Popper(
-          targetElement,
+          this.targetElement,
           this.$refs['v-step-' + this.hash],
           this.params
         )
@@ -104,10 +109,50 @@ export default {
         console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
         this.$emit('targetNotFound', this.step)
       }
+    },
+    checkHightlight () {
+      return ((this.highlight && this.params.highlight) || this.params.highlight)
+    },
+    createHighlight () {
+      if (this.checkHightlight()) {
+        document.body.classList.add(HIGHLIGHT.ACTIVE_TOUR)
+
+        const transitionValue = window.getComputedStyle(this.targetElement).getPropertyValue('transition')
+
+        // Make sure our background doesn't flick on transitions.
+        if (transitionValue !== 'all 0s ease 0s') {
+          this.targetElement.style.transition = `${transitionValue}${HIGHLIGHT.TRANSITION}`
+        }
+
+        this.targetElement.classList.add(HIGHLIGHT.ACTIVE_STEP)
+
+        // The element must have a position, if it doesn't have, add relative position class.
+        if (!HIGHLIGHT.POSITIONS.includes(this.targetElement.style.position)) {
+          this.targetElement.classList.add(HIGHLIGHT.POSITION_CLASS)
+        }
+      } else {
+        document.body.classList.remove(HIGHLIGHT.ACTIVE_TOUR)
+      }
+    },
+    removeHighlight () {
+      if (this.checkHightlight()) {
+        const currTransition = this.targetElement.style.transition
+
+        // Remove our transition when done.
+        if (currTransition.includes(HIGHLIGHT.TRANSITION)) {
+          this.targetElement.style.transition = currTransition.replace(HIGHLIGHT.TRANSITION, '')
+        }
+
+        this.targetElement.classList.remove(HIGHLIGHT.ACTIVE_STEP)
+        this.targetElement.classList.remove(HIGHLIGHT.POSITION_CLASS)
+      }
     }
   },
   mounted () {
     this.createStep()
+  },
+  destroyed () {
+    this.removeHighlight()
   }
 }
 </script>
@@ -121,6 +166,7 @@ export default {
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
     padding: 1rem;
     text-align: center;
+    z-index: 99999;
   }
 
   .v-step .v-step__arrow {
