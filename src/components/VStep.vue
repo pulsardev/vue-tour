@@ -136,15 +136,18 @@ export default {
     },
     removeHighlight () {
       if (this.checkHightlight()) {
+        const target = this.targetElement
         const currTransition = this.targetElement.style.transition
-
-        // Remove our transition when done.
-        if (currTransition.includes(HIGHLIGHT.TRANSITION)) {
-          this.targetElement.style.transition = currTransition.replace(HIGHLIGHT.TRANSITION, '')
-        }
 
         this.targetElement.classList.remove(HIGHLIGHT.ACTIVE_STEP)
         this.targetElement.classList.remove(HIGHLIGHT.POSITION_CLASS)
+
+        setTimeout(() => {
+          // Remove our transition when step is finished.
+          if (currTransition.includes(HIGHLIGHT.TRANSITION)) {
+            target.style.transition = currTransition.replace(HIGHLIGHT.TRANSITION, '')
+          }
+        }, 0)
       }
     }
   },
