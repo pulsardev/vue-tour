@@ -9,6 +9,7 @@
       :is-first="isFirst"
       :is-last="isLast"
       :labels="customOptions.labels"
+      :highlight="customOptions.highlight"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
@@ -22,6 +23,7 @@
         :is-first="isFirst"
         :is-last="isLast"
         :labels="customOptions.labels"
+        :highlight="customOptions.highlight"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
@@ -32,7 +34,7 @@
 </template>
 
 <script>
-import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS } from '../shared/constants'
+import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS, HIGHLIGHT } from '../shared/constants'
 
 export default {
   name: 'v-tour',
@@ -122,9 +124,9 @@ export default {
     },
     stop () {
       this.customCallbacks.onStop()
+      document.body.classList.remove(HIGHLIGHT.ACTIVE_TOUR)
       this.currentStep = -1
     },
-
     handleKeyup (e) {
       // TODO: debug mode
       // console.log('[Vue Tour] A keyup event occured:', e)
@@ -143,3 +145,34 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  body.v-tour-active {
+    pointer-events: none;
+  }
+
+  .v-tour {
+    pointer-events: auto;
+  }
+
+  .v-tour-highlight {
+    pointer-events: auto;
+    z-index: 9999;
+
+    @media screen and (min-width: 2000px) {
+      box-shadow: 0 0 0 5000px rgba(0, 0, 0, .6) !important;
+    }
+
+    @media screen and (max-width: 2000px) {
+      box-shadow: 0 0 0 2000px rgba(0, 0, 0, .6) !important;
+    }
+
+    @media screen and (max-width: 1000px) {
+      box-shadow: 0 0 0 1000px rgba(0, 0, 0, .6) !important;
+    }
+  }
+
+  .v-tour-position {
+    position: relative;
+  }
+</style>

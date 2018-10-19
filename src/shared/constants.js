@@ -8,6 +8,7 @@ export const DEFAULT_CALLBACKS = {
 export const DEFAULT_OPTIONS = {
   useKeyboardNavigation: true,
   startTimeout: 0,
+  highlight: false,
   labels: {
     buttonSkip: 'Skip tour',
     buttonPrevious: 'Previous',
@@ -24,6 +25,14 @@ export const DEFAULT_STEP_OPTIONS = {
       element: '.v-step__arrow'
     }
   }
+}
+
+export const HIGHLIGHT = {
+  ACTIVE_STEP: 'v-tour-highlight',
+  ACTIVE_TOUR: 'v-tour-active',
+  POSITION_CLASS: 'v-tour-position',
+  TRANSITION: ', box-shadow 0s ease-in-out 0s',
+  POSITIONS: ['absolute', 'relative', 'fixed', 'sticky']
 }
 
 export const KEYS = {
