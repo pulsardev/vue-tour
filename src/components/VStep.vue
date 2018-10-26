@@ -1,5 +1,5 @@
 <template>
-  <div class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
+  <div v-bind:class="{ 'v-step-sticky': isSticky }" class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
     <slot name="header">
       <div v-if="step.header" class="v-step__header">
         <div v-if="step.header.title" v-html="step.header.title"></div>
@@ -30,7 +30,7 @@
 import Popper from 'popper.js'
 import jump from 'jump.js'
 import sum from 'hash-sum'
-import { DEFAULT_STEP_OPTIONS } from '../shared/constants'
+import { DEFAULT_STEP_OPTIONS, STICKY } from '../shared/constants'
 
 export default {
   name: 'v-step',
@@ -59,7 +59,8 @@ export default {
   },
   data () {
     return {
-      hash: sum(this.step.target)
+      hash: sum(this.step.target),
+      targetElement: document.querySelector(this.step.target)
     }
   },
   computed: {
@@ -68,16 +69,32 @@ export default {
         ...DEFAULT_STEP_OPTIONS,
         ...this.step.params
       }
+    },
+    isSticky () {
+      return (this.params.type === 'sticky')
     }
   },
   methods: {
     createStep () {
-      let targetElement = document.querySelector(this.step.target)
-
       // TODO: debug mode
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
-      if (targetElement) {
+      if (this.isSticky) {
+        this.targetElement = document.getElementById(STICKY.ID)
+
+        if (!this.targetElement) {
+          const newDiv = document.createElement('div')
+          newDiv.id = STICKY.ID
+
+          this.targetElement = document.body.appendChild(newDiv)
+        } else {
+          this.targetElement.style.display = 'block'
+        }
+      } else {
+        document.getElementById(STICKY.ID).style.display = 'none'
+      }
+
+      if (this.targetElement) {
         if (this.params.enableScrolling) {
           if (this.step.duration || this.step.offset) {
             let jumpOptions = {
@@ -87,16 +104,16 @@ export default {
               a11y: false
             }
 
-            jump(targetElement, jumpOptions)
+            jump(this.targetElement, jumpOptions)
           } else {
             // Use the native scroll by default if no scroll options has been defined
-            targetElement.scrollIntoView({ behavior: 'smooth' })
+            this.targetElement.scrollIntoView({ behavior: 'smooth' })
           }
         }
 
         /* eslint-disable no-new */
         new Popper(
-          targetElement,
+          this.targetElement,
           this.$refs['v-step-' + this.hash],
           this.params
         )
@@ -121,6 +138,20 @@ export default {
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
     padding: 1rem;
     text-align: center;
+
+    &.v-step-sticky {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 50vw;
+      max-width: 90vw;
+      z-index: 99999;
+
+      & .v-step__arrow {
+        opacity: 0;
+        display: none;
+      }
+    }
   }
 
   .v-step .v-step__arrow {

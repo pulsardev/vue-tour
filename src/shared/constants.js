@@ -5,6 +5,10 @@ export const DEFAULT_CALLBACKS = {
   onStop: () => {}
 }
 
+export const STICKY = {
+  ID: 'v-tour-sticky'
+}
+
 export const DEFAULT_OPTIONS = {
   useKeyboardNavigation: true,
   startTimeout: 0,

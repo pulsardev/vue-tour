@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS } from '../shared/constants'
+import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS, STICKY } from '../shared/constants'
 
 export default {
   name: 'v-tour',
@@ -122,6 +122,7 @@ export default {
     },
     stop () {
       this.customCallbacks.onStop()
+      document.getElementById(STICKY.ID).remove()
       this.currentStep = -1
     },
 
@@ -143,3 +144,24 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  #v-tour-sticky {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    top: 5vh;
+    z-index: 9999;
+
+    &:after {
+      content: "";
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      left: 0;
+      top: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+</style>
