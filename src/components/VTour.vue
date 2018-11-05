@@ -9,6 +9,7 @@
       :is-first="isFirst"
       :is-last="isLast"
       :labels="customOptions.labels"
+      :highlight="customOptions.highlight"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
@@ -22,6 +23,7 @@
         :is-first="isFirst"
         :is-last="isLast"
         :labels="customOptions.labels"
+        :highlight="customOptions.highlight"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
@@ -32,7 +34,7 @@
 </template>
 
 <script>
-import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS } from '../shared/constants'
+import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS, HIGHLIGHT } from '../shared/constants'
 
 export default {
   name: 'v-tour',
@@ -122,6 +124,7 @@ export default {
     },
     stop () {
       this.customCallbacks.onStop()
+      document.body.classList.remove(HIGHLIGHT.ACTIVE_TOUR)
       this.currentStep = -1
     },
 
@@ -143,3 +146,33 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  body.v-tour-active {
+    pointer-events: none;
+  }
+
+  .v-tour {
+    pointer-events: auto;
+  }
+
+  .v-tour-highlight {
+    pointer-events: auto;
+    z-index: 9999;
+  }
+
+  .v-tour-highlight:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    box-shadow: 0 0 50px 25px rgba(0, 0, 0, 0.5);
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    left: -5px;
+    top: -5px;
+  }
+
+  .v-tour-position {
+    position: relative;
+  }
+</style>
