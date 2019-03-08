@@ -2,7 +2,9 @@ export const DEFAULT_CALLBACKS = {
   onStart: () => {},
   onPreviousStep: (currentStep) => {},
   onNextStep: (currentStep) => {},
-  onStop: () => {}
+  onStop: () => {},
+  onSkip: () => {},
+  onFinish: () => {}
 }
 
 export const DEFAULT_OPTIONS = {

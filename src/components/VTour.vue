@@ -6,6 +6,8 @@
       :previous-step="previousStep"
       :next-step="nextStep"
       :stop="stop"
+      :skip="skip"
+      :finish="finish"
       :is-first="isFirst"
       :is-last="isLast"
       :labels="customOptions.labels"
@@ -20,6 +22,8 @@
         :previous-step="previousStep"
         :next-step="nextStep"
         :stop="stop"
+        :skip="skip"
+        :finish="finish"
         :is-first="isFirst"
         :is-last="isLast"
         :labels="customOptions.labels"
@@ -126,6 +130,14 @@ export default {
       this.customCallbacks.onStop()
       document.body.classList.remove(HIGHLIGHT.ACTIVE_TOUR)
       this.currentStep = -1
+    },
+    skip () {
+      this.customCallbacks.onSkip()
+      this.stop()
+    },
+    finish () {
+      this.customCallbacks.onFinish()
+      this.stop()
     },
 
     handleKeyup (e) {

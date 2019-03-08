@@ -15,10 +15,10 @@
 
     <slot name="actions">
       <div class="v-step__buttons">
-        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">{{ labels.buttonSkip }}</button>
+        <button @click.prevent="skip" v-if="!isLast" class="v-step__button">{{ labels.buttonSkip }}</button>
         <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">{{ labels.buttonPrevious }}</button>
         <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">{{ labels.buttonNext }}</button>
-        <button @click.prevent="stop" v-if="isLast" class="v-step__button">{{ labels.buttonStop }}</button>
+        <button @click.prevent="finish" v-if="isLast" class="v-step__button">{{ labels.buttonStop }}</button>
       </div>
     </slot>
 
@@ -46,6 +46,18 @@ export default {
     },
     stop: {
       type: Function
+    },
+    skip: {
+      type: Function,
+      default: function () {
+        this.stop()
+      }
+    },
+    finish: {
+      type: Function,
+      default: function () {
+        this.stop()
+      }
     },
     isFirst: {
       type: Boolean
