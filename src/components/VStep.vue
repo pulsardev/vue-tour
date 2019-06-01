@@ -8,7 +8,10 @@
 
     <slot name="content">
       <div class="v-step__content">
-        <div v-if="step.content" v-html="step.content"></div>
+        <template v-if="step.content">
+          <div v-if="typeof step.content === 'string'" v-html="step.content"></div>
+          <v-component v-else :is="step.content"></v-component>
+        </template>
         <div v-else>This is a demo step! The id of this step is {{ hash }} and it targets {{ step.target }}.</div>
       </div>
     </slot>
