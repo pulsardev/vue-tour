@@ -1,6 +1,7 @@
 import { expect } from 'chai'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import VStep from '@/components/VStep.vue'
+import { DEFAULT_OPTIONS } from '@/shared/constants'
 
 describe('VStep.vue', () => {
   it('renders props.step.content', () => {
@@ -9,10 +10,11 @@ describe('VStep.vue', () => {
       content: 'This is a demo step!'
     }
 
-    const wrapper = shallow(VStep, {
+    const wrapper = shallowMount(VStep, {
       propsData: {
         step,
-        stop: () => {}
+        stop: () => {},
+        labels: DEFAULT_OPTIONS.labels
       }
     })
 
