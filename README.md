@@ -91,6 +91,28 @@ this.$tours['myTour'].start()
 
 For a more detailed documentation, checkout the [docs for vue-tour](https://pulsar.gitbooks.io/vue-tour/).
 
+## `before()` UI step functions
+
+If you need to do UI setup work before a step, there's a `before` function you may include in any/each of 
+your steps. This function will get invoked before the next step is rendered. The function must return a resolved
+promise. The function is invoked when `start`, `nextStep`, and `previousStep` are triggered.
+
+It's used when you need to change what's shown on the screen between steps. For example, you may want to hide
+one set of menus and open a screen. This is especially useful in single-page applications.
+
+```javascript
+steps: [
+  {
+    target: '#v-step-0',  // We're using document.querySelector() under the hood
+    content: `Discover <strong>Vue Tour</strong>!`,
+    before: () => {
+      // time-consuming UI setup here
+      return Promise.resolve();
+    }
+  },
+]
+```
+
 ## Something Missing?
 
 If you have a feature request or found a bug, [let us know](https://github.com/pulsardev/vue-tour/issues) by submitting an issue.
