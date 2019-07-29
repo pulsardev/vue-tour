@@ -7203,12 +7203,12 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("7f7f");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"694acd48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VTour.vue?vue&type=template&id=c8da335e&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"694acd48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VTour.vue?vue&type=template&id=64c78096&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"v-tour"},[_vm._t("default",_vm._l((_vm.steps),function(step,index){return (_vm.currentStep === index)?_c('v-step',{key:index,attrs:{"step":step,"previous-step":_vm.previousStep,"next-step":_vm.nextStep,"stop":_vm.stop,"is-first":_vm.isFirst,"is-last":_vm.isLast,"labels":_vm.customOptions.labels}}):_vm._e()}),{"currentStep":_vm.currentStep,"steps":_vm.steps,"previousStep":_vm.previousStep,"nextStep":_vm.nextStep,"stop":_vm.stop,"isFirst":_vm.isFirst,"isLast":_vm.isLast,"labels":_vm.customOptions.labels})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VTour.vue?vue&type=template&id=c8da335e&
+// CONCATENATED MODULE: ./src/components/VTour.vue?vue&type=template&id=64c78096&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
@@ -7467,26 +7467,36 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
                 };
 
                 if (!(typeof step.before !== 'undefined')) {
-                  _context.next = 6;
+                  _context.next = 12;
                   break;
                 }
 
-                _context.next = 6;
+                _context.prev = 4;
+                _context.next = 7;
                 return step.before('start');
 
-              case 6:
-                _context.next = 8;
-                return process();
-
-              case 8:
-                return _context.abrupt("return", Promise.resolve());
+              case 7:
+                _context.next = 12;
+                break;
 
               case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](4);
+                return _context.abrupt("return", Promise.reject(_context.t0));
+
+              case 12:
+                _context.next = 14;
+                return process();
+
+              case 14:
+                return _context.abrupt("return", Promise.resolve());
+
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this);
+        }, _callee, this, [[4, 9]]);
       }));
 
       function start(_x) {
@@ -7518,33 +7528,43 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
                 };
 
                 if (!(futureStep > -1)) {
-                  _context2.next = 9;
+                  _context2.next = 15;
                   break;
                 }
 
                 step = this.steps[futureStep];
 
                 if (!(typeof step.before !== 'undefined')) {
-                  _context2.next = 7;
+                  _context2.next = 13;
                   break;
                 }
 
-                _context2.next = 7;
+                _context2.prev = 5;
+                _context2.next = 8;
                 return step.before('previous');
 
-              case 7:
-                _context2.next = 9;
-                return process();
-
-              case 9:
-                return _context2.abrupt("return", Promise.resolve());
+              case 8:
+                _context2.next = 13;
+                break;
 
               case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](5);
+                return _context2.abrupt("return", Promise.reject(_context2.t0));
+
+              case 13:
+                _context2.next = 15;
+                return process();
+
+              case 15:
+                return _context2.abrupt("return", Promise.resolve());
+
+              case 16:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee2, this, [[5, 10]]);
       }));
 
       function previousStep() {
@@ -7576,33 +7596,43 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
                 };
 
                 if (!(futureStep < this.numberOfSteps && this.currentStep !== -1)) {
-                  _context3.next = 9;
+                  _context3.next = 15;
                   break;
                 }
 
                 step = this.steps[futureStep];
 
                 if (!(typeof step.before !== 'undefined')) {
-                  _context3.next = 7;
+                  _context3.next = 13;
                   break;
                 }
 
-                _context3.next = 7;
+                _context3.prev = 5;
+                _context3.next = 8;
                 return step.before('next');
 
-              case 7:
-                _context3.next = 9;
-                return process();
-
-              case 9:
-                return _context3.abrupt("return", Promise.resolve());
+              case 8:
+                _context3.next = 13;
+                break;
 
               case 10:
+                _context3.prev = 10;
+                _context3.t0 = _context3["catch"](5);
+                return _context3.abrupt("return", Promise.reject(_context3.t0));
+
+              case 13:
+                _context3.next = 15;
+                return process();
+
+              case 15:
+                return _context3.abrupt("return", Promise.resolve());
+
+              case 16:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee3, this, [[5, 10]]);
       }));
 
       function nextStep() {
