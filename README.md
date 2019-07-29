@@ -94,20 +94,19 @@ For a more detailed documentation, checkout the [docs for vue-tour](https://puls
 ## `before()` UI step functions
 
 If you need to do UI setup work before a step, there's a `before` function you may include in any/each of 
-your steps. This function will get invoked before the next step is rendered. The function must return a resolved
-promise. The function is invoked when `start`, `nextStep`, and `previousStep` are triggered.
+your steps. This function will get invoked before the start/next/previous step is rendered. The function must return a promise. The function is invoked when `start`, `nextStep`, and `previousStep` are triggered. When the promise is rejected, it will not move to the next or previous step. If the promise is resolved then it will move in the direction specified.
 
 It's used when you need to change what's shown on the screen between steps. For example, you may want to hide
-one set of menus and open a screen. This is especially useful in single-page applications.
+one set of menus and open a screen or you want to perform an async operation. This is especially useful in single-page applications.
 
 ```javascript
 steps: [
   {
     target: '#v-step-0',  // We're using document.querySelector() under the hood
     content: `Discover <strong>Vue Tour</strong>!`,
-    before: () => {
-      // time-consuming UI setup here
-      return Promise.resolve();
+    before: type => new Promise(accept) {
+      // time-consuming UI/async operation here
+      return accept();
     }
   },
 ]
