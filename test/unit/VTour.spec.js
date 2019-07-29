@@ -94,7 +94,17 @@ describe('VTour.vue', () => {
       },
       {
         target: '#v-step-2',
-        content: 'An awesome plugin made with Vue.js!'
+        content: 'An awesome plugin made with Vue.js!',
+        before: () => {
+          return Promise.reject(new Error('testing'))
+        }
+      },
+      {
+        target: '#v-step-3',
+        content: 'An awesome plugin made with Vue.js!',
+        before: () => {
+          return Promise.resolve()
+        }
       }
     ]
 
@@ -131,6 +141,61 @@ describe('VTour.vue', () => {
 
       step0 = false
       step1 = false
+    })
+
+    it('handles before() promise rejection on start', async () => {
+      const wrapper = mount(VTour, {
+        propsData: {
+          name: 'myTestTour',
+          steps: beforeSteps
+        }
+      })
+
+      try {
+        await wrapper.vm.start(2)
+        expect(true).to.equal(false) // dead code
+      } catch (e) {
+        expect(e.message).to.equal('testing')
+        expect(wrapper.vm.currentStep).to.equal(-1)
+      }
+    })
+
+    it('handles before() promise rejection on nextStep()', async () => {
+      const wrapper = mount(VTour, {
+        propsData: {
+          name: 'myTestTour',
+          steps: beforeSteps
+        }
+      })
+
+      await wrapper.vm.start(1)
+
+      try {
+        await wrapper.vm.nextStep()
+        expect(true).to.equal(false) // dead code
+      } catch (e) {
+        expect(e.message).to.equal('testing')
+        expect(wrapper.vm.currentStep).to.equal(1)
+      }
+    })
+
+    it('handles before() promise rejection on previousStep()', async () => {
+      const wrapper = mount(VTour, {
+        propsData: {
+          name: 'myTestTour',
+          steps: beforeSteps
+        }
+      })
+
+      await wrapper.vm.start(3)
+
+      try {
+        await wrapper.vm.previousStep()
+        expect(true).to.equal(false) // dead code
+      } catch (e) {
+        expect(e.message).to.equal('testing')
+        expect(wrapper.vm.currentStep).to.equal(3)
+      }
     })
   })
 })
