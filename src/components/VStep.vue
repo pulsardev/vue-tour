@@ -15,10 +15,10 @@
 
     <slot name="actions">
       <div class="v-step__buttons">
-        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">{{ labels.buttonSkip }}</button>
-        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">{{ labels.buttonPrevious }}</button>
-        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">{{ labels.buttonNext }}</button>
-        <button @click.prevent="stop" v-if="isLast" class="v-step__button">{{ labels.buttonStop }}</button>
+        <button @click.prevent="stop" v-if="!isLast" class="v-step__button v-step__button-skip">{{ labels.buttonSkip }}</button>
+        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button v-step__button-previous">{{ labels.buttonPrevious }}</button>
+        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button v-step__button-next">{{ labels.buttonNext }}</button>
+        <button @click.prevent="stop" v-if="isLast" class="v-step__button v-step__button-stop">{{ labels.buttonStop }}</button>
       </div>
     </slot>
 
