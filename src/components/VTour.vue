@@ -22,6 +22,7 @@
         :is-first="isFirst"
         :is-last="isLast"
         :labels="customOptions.labels"
+        @targetNotFound="handleTargetNotFound"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
@@ -51,6 +52,10 @@ export default {
     callbacks: {
       type: Object,
       default: () => { return DEFAULT_CALLBACKS }
+    },
+    skipMissingTargets: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -193,6 +198,11 @@ export default {
           this.stop()
           break
       }
+    },
+
+    handleTargetNotFound (step) {
+      this.$emit('targetNotFound', step)
+      if (this.skipMissingTargets) this.nextStep()
     }
   }
 }

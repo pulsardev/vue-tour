@@ -74,9 +74,6 @@ export default {
     createStep () {
       let targetElement = document.querySelector(this.step.target)
 
-      // TODO: debug mode
-      // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
-
       if (targetElement) {
         if (this.params.enableScrolling) {
           if (this.step.duration || this.step.offset) {
