@@ -13,6 +13,12 @@ export const DEFAULT_OPTIONS = {
     buttonPrevious: 'Previous',
     buttonNext: 'Next',
     buttonStop: 'Finish'
+  },
+  enabledButtons: {
+    buttonSkip: true,
+    buttonPrevious: true,
+    buttonNext: true,
+    buttonStop: true
   }
 }
 

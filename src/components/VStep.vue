@@ -15,10 +15,10 @@
 
     <slot name="actions">
       <div class="v-step__buttons">
-        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">{{ labels.buttonSkip }}</button>
-        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">{{ labels.buttonPrevious }}</button>
-        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">{{ labels.buttonNext }}</button>
-        <button @click.prevent="stop" v-if="isLast" class="v-step__button">{{ labels.buttonStop }}</button>
+        <button @click.prevent="stop" v-if="!isLast && checkEnabledButtons('buttonSkip')" class="v-step__button">{{ labels.buttonSkip }}</button>
+        <button @click.prevent="previousStep" v-if="!isFirst && checkEnabledButtons('buttonPrevious')" class="v-step__button">{{ labels.buttonPrevious }}</button>
+        <button @click.prevent="nextStep" v-if="!isLast && checkEnabledButtons('buttonNext')" class="v-step__button">{{ labels.buttonNext }}</button>
+        <button @click.prevent="stop" v-if="isLast && checkEnabledButtons('buttonStop')" class="v-step__button">{{ labels.buttonStop }}</button>
       </div>
     </slot>
 
@@ -54,6 +54,9 @@ export default {
       type: Boolean
     },
     labels: {
+      type: Object
+    },
+    enabledButtons: {
       type: Object
     }
   },
@@ -104,6 +107,9 @@ export default {
         console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
         this.$emit('targetNotFound', this.step)
       }
+    },
+    checkEnabledButtons (name) {
+      return this.enabledButtons.hasOwnProperty(name) ? this.enabledButtons[name] : true
     }
   },
   mounted () {
