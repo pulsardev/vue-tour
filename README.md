@@ -89,7 +89,7 @@ Once this is done and your steps correctly target some DOM elements of your appl
 this.$tours['myTour'].start()
 ```
 
-For a more detailed documentation, checkout the [docs for vue-tour](https://pulsar.gitbooks.io/vue-tour/).
+For a more detailed documentation, checkout the [docs for vue-tour](https://github.com/pulsardev/vue-tour/wiki).
 
 ## Something Missing?
 

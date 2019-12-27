@@ -13,10 +13,9 @@
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
-        v-if="currentStep === index"
-        v-for="(step, index) of steps"
-        :key="index"
-        :step="step"
+        v-if="steps[currentStep]"
+        :step="steps[currentStep]"
+        :key="currentStep"
         :previous-step="previousStep"
         :next-step="nextStep"
         :stop="stop"
@@ -34,7 +33,7 @@
 </template>
 
 <script>
-import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS, HIGHLIGHT } from '../shared/constants'
+import { DEFAULT_CALLBACKS, DEFAULT_OPTIONS, KEYS } from '../shared/constants'
 
 export default {
   name: 'v-tour',
@@ -124,7 +123,7 @@ export default {
     },
     stop () {
       this.customCallbacks.onStop()
-      document.body.classList.remove(HIGHLIGHT.ACTIVE_TOUR)
+      document.body.classList.remove('v-tour--active')
       this.currentStep = -1
     },
 
@@ -148,7 +147,7 @@ export default {
 </script>
 
 <style lang="scss">
-  body.v-tour-active {
+  body.v-tour--active {
     pointer-events: none;
   }
 
@@ -156,23 +155,13 @@ export default {
     pointer-events: auto;
   }
 
-  .v-tour-highlight {
+  .v-tour__target--highlighted {
+    box-shadow: 0 0 0 4px rgba(0,0,0,.4);
     pointer-events: auto;
     z-index: 9999;
   }
 
-  .v-tour-highlight:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    box-shadow: 0 0 50px 25px rgba(0, 0, 0, 0.5);
-    width: calc(100% + 10px);
-    height: calc(100% + 10px);
-    left: -5px;
-    top: -5px;
-  }
-
-  .v-tour-position {
+  .v-tour__target--relative {
     position: relative;
   }
 </style>
