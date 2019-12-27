@@ -18,6 +18,11 @@ export const DEFAULT_OPTIONS = {
 }
 
 export const HIGHLIGHT = {
+  CLASSES: {
+    ACTIVE: 'v-tour--active',
+    TARGET_HIGHLIGHTED: 'v-tour__target--highlighted',
+    TARGET_RELATIVE: 'v-tour__target--relative'
+  },
   TRANSITION: 'box-shadow 0s ease-in-out 0s'
 }
 
