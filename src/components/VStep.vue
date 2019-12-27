@@ -69,9 +69,9 @@ export default {
   computed: {
     params () {
       return {
-        highlight: this.highlight,
         ...DEFAULT_STEP_OPTIONS,
-        ...this.step.params
+        ...{ highlight: this.highlight }, // Use global tour highlight setting first
+        ...this.step.params // Then use local step parameters if defined
       }
     }
   },
@@ -81,22 +81,7 @@ export default {
       // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
 
       if (this.targetElement) {
-        if (this.params.enableScrolling) {
-          if (this.step.duration || this.step.offset) {
-            let jumpOptions = {
-              duration: this.step.duration || 1000,
-              offset: this.step.offset || 0,
-              callback: undefined,
-              a11y: false
-            }
-
-            jump(this.targetElement, jumpOptions)
-          } else {
-            // Use the native scroll by default if no scroll options has been defined
-            this.targetElement.scrollIntoView({ behavior: 'smooth' })
-          }
-        }
-
+        this.enableScrolling()
         this.createHighlight()
 
         /* eslint-disable no-new */
@@ -110,38 +95,56 @@ export default {
         this.$emit('targetNotFound', this.step)
       }
     },
-    checkHightlight () {
-      return ((this.highlight && this.params.highlight) || this.params.highlight)
+    enableScrolling () {
+      if (this.params.enableScrolling) {
+        if (this.step.duration || this.step.offset) {
+          let jumpOptions = {
+            duration: this.step.duration || 1000,
+            offset: this.step.offset || 0,
+            callback: undefined,
+            a11y: false
+          }
+
+          jump(this.targetElement, jumpOptions)
+        } else {
+          // Use the native scroll by default if no scroll options has been defined
+          this.targetElement.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+    },
+    isHighlightEnabled () {
+      console.log(`[Vue Tour] Highlight is ${this.params.highlight ? 'enabled' : 'disabled'} for .v-step[id="${this.hash}"]`)
+      return this.params.highlight
     },
     createHighlight () {
-      if (this.checkHightlight()) {
-        document.body.classList.add(HIGHLIGHT.ACTIVE_TOUR)
+      if (this.isHighlightEnabled()) {
+        document.body.classList.add('v-tour--active')
         const transitionValue = window.getComputedStyle(this.targetElement).getPropertyValue('transition')
 
-        // Make sure our background doesn't flick on transitions.
+        // Make sure our background doesn't flick on transitions
         if (transitionValue !== 'all 0s ease 0s') {
-          this.targetElement.style.transition = `${transitionValue}${HIGHLIGHT.TRANSITION}`
+          this.targetElement.style.transition = `${transitionValue}, ${HIGHLIGHT.TRANSITION}`
         }
 
-        this.targetElement.classList.add(HIGHLIGHT.ACTIVE_STEP)
-        // The element must have a position, if it doesn't have, add relative position class.
-        if (!HIGHLIGHT.POSITIONS.includes(this.targetElement.style.position)) {
-          this.targetElement.classList.add(HIGHLIGHT.POSITION_CLASS)
+        this.targetElement.classList.add('v-tour__target--highlighted')
+        // The element must have a position, if it doesn't have one, add a relative position class
+        if (!this.targetElement.style.position) {
+          this.targetElement.classList.add('v-tour__target--relative')
         }
       } else {
-        document.body.classList.remove(HIGHLIGHT.ACTIVE_TOUR)
+        document.body.classList.remove('v-tour--active')
       }
     },
     removeHighlight () {
-      if (this.checkHightlight()) {
+      if (this.isHighlightEnabled()) {
         const target = this.targetElement
-        const currTransition = this.targetElement.style.transition
-        this.targetElement.classList.remove(HIGHLIGHT.ACTIVE_STEP)
-        this.targetElement.classList.remove(HIGHLIGHT.POSITION_CLASS)
+        const currentTransition = this.targetElement.style.transition
+        this.targetElement.classList.remove('v-tour__target--highlighted')
+        this.targetElement.classList.remove('v-tour__target--relative')
         // Remove our transition when step is finished.
-        if (currTransition.includes(HIGHLIGHT.TRANSITION)) {
+        if (currentTransition.includes(HIGHLIGHT.TRANSITION)) {
           setTimeout(() => {
-            target.style.transition = currTransition.replace(HIGHLIGHT.TRANSITION, '')
+            target.style.transition = currentTransition.replace(`, ${HIGHLIGHT.TRANSITION}`, '')
           }, 0)
         }
       }
@@ -165,6 +168,7 @@ export default {
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
     padding: 1rem;
     text-align: center;
+    z-index: 10000;
   }
 
   .v-step .v-step__arrow {

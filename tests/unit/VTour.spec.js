@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { mount } from '@vue/test-utils'
 import Vue from 'vue'
 import VueTour from '@/main'
@@ -26,7 +25,7 @@ describe('VTour.vue', () => {
       }
     })
 
-    expect(wrapper.vm.steps).to.have.lengthOf(2)
+    expect(wrapper.vm.steps.length).toEqual(2)
   })
 
   it('registers itself in the global Vue instance', () => {
@@ -37,7 +36,8 @@ describe('VTour.vue', () => {
       }
     })
 
-    expect(wrapper.vm.$tours).to.be.an('object').that.has.all.keys('myTestTour')
+    expect(typeof wrapper.vm.$tours).toBe('object')
+    expect(wrapper.vm.$tours).toHaveProperty('myTestTour')
   })
 
   it('stays within the boundaries of the number of steps', () => {
@@ -48,30 +48,30 @@ describe('VTour.vue', () => {
       }
     })
 
-    expect(wrapper.vm.currentStep).to.equal(-1)
+    expect(wrapper.vm.currentStep).toEqual(-1)
 
     wrapper.vm.start()
 
     setTimeout(() => {
-      expect(wrapper.vm.currentStep).to.equal(0)
+      expect(wrapper.vm.currentStep).toEqual(0)
 
       // We call nextStep one more time than needed
       for (let i = 0; i < steps.length; i++) {
         wrapper.vm.nextStep()
       }
 
-      expect(wrapper.vm.currentStep).to.equal(1)
+      expect(wrapper.vm.currentStep).toEqual(1)
 
       // We call previousStep one more time than needed
       for (let i = 0; i < steps.length; i++) {
         wrapper.vm.previousStep()
       }
 
-      expect(wrapper.vm.currentStep).to.equal(0)
+      expect(wrapper.vm.currentStep).toEqual(0)
 
       wrapper.vm.stop()
 
-      expect(wrapper.vm.currentStep).to.equal(-1)
+      expect(wrapper.vm.currentStep).toEqual(-1)
     })
   })
 })

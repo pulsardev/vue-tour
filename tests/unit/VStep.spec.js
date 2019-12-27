@@ -1,5 +1,4 @@
-import { expect } from 'chai'
-import { shallow } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import VStep from '@/components/VStep.vue'
 
 describe('VStep.vue', () => {
@@ -9,13 +8,14 @@ describe('VStep.vue', () => {
       content: 'This is a demo step!'
     }
 
-    const wrapper = shallow(VStep, {
+    const wrapper = shallowMount(VStep, {
       propsData: {
         step,
-        stop: () => {}
+        stop: () => {},
+        labels: {}
       }
     })
 
-    expect(wrapper.text()).to.include(step.content)
+    expect(wrapper.text()).toContain(step.content)
   })
 })
