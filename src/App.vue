@@ -10,8 +10,8 @@
         </div>
 
         <div class="docs-brand docs-brand--pulsar">
-          <a href="https://pulsar.surge.sh/" target="_blank" class="docs-logo docs-logo-pulsar" id="v-step-0-1">
-            <h2>PULSAR</h2>
+          <a href="https://pulsar.surge.sh/" target="_blank" class="docs-logo bg-dark" id="v-step-0-1">
+            <h2 class="text-light">PULSAR</h2>
           </a>
         </div>
 
@@ -19,7 +19,7 @@
         <h2>a <u>Lightweight</u>, <u>Simple</u> and <u>Customizable</u> tour plugin for use with Vue.js</h2>
 
         <p>
-          <a href="https://pulsar.gitbooks.io/vue-tour/" class="btn btn-primary btn-lg mr-2">Docs</a>
+          <a href="https://github.com/pulsardev/vue-tour/wiki" class="btn btn-primary btn-lg mr-2">Docs</a>
           <a href="https://github.com/pulsardev/vue-tour" target="_blank" rel="noopener" class="btn btn-primary btn-lg">GitHub</a>
         </p>
 
@@ -28,6 +28,7 @@
         </p>
 
         <p class="text-gray">Latest version: <span class="version">{{ version }}</span></p>
+
         <div class="columns">
           <div class="column col-4 col-xs-12">
             <div class="card text-center">
@@ -108,7 +109,7 @@
                 Go to our documentation if you want to use Vue Tour in a more advanced way.
               </div>
               <div class="card-footer">
-                <a href="https://pulsar.gitbooks.io/vue-tour/" class="btn btn-primary">Explore</a>
+                <a href="https://github.com/pulsardev/vue-tour/wiki" class="btn btn-primary">Explore</a>
               </div>
             </div>
           </div>
@@ -119,7 +120,7 @@
     <footer class="section section-footer">
       <div id="copyright" class="grid-footer container grid-lg">
         <p>
-          <a href="https://pulsar.gitbooks.io/vue-tour/" target="_blank">Documents</a> |
+          <a href="https://github.com/pulsardev/vue-tour/wiki" target="_blank">Documents</a> |
           <a href="https://github.com/pulsardev/vue-tour" target="_blank">GitHub</a> |
           <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CLK49A83DXCQ8" target="_blank">PayPal Donate</a> |
           Version <span class="version">{{ version }}</span>
@@ -153,7 +154,6 @@ export default {
 
 <style lang="scss">
 $primary-color: #4fc08d;
-$dark-color: #4fc08d;
 
 @import "./assets/scss/spectre/spectre";
 @import "./assets/css/docs.css";
