@@ -118,7 +118,7 @@ export default {
     },
     createHighlight () {
       if (this.isHighlightEnabled()) {
-        document.body.classList.add('v-tour--active')
+        document.body.classList.add(HIGHLIGHT.CLASSES.ACTIVE)
         const transitionValue = window.getComputedStyle(this.targetElement).getPropertyValue('transition')
 
         // Make sure our background doesn't flick on transitions
@@ -126,21 +126,21 @@ export default {
           this.targetElement.style.transition = `${transitionValue}, ${HIGHLIGHT.TRANSITION}`
         }
 
-        this.targetElement.classList.add('v-tour__target--highlighted')
+        this.targetElement.classList.add(HIGHLIGHT.CLASSES.TARGET_HIGHLIGHTED)
         // The element must have a position, if it doesn't have one, add a relative position class
         if (!this.targetElement.style.position) {
-          this.targetElement.classList.add('v-tour__target--relative')
+          this.targetElement.classList.add(HIGHLIGHT.CLASSES.TARGET_RELATIVE)
         }
       } else {
-        document.body.classList.remove('v-tour--active')
+        document.body.classList.remove(HIGHLIGHT.CLASSES.ACTIVE)
       }
     },
     removeHighlight () {
       if (this.isHighlightEnabled()) {
         const target = this.targetElement
         const currentTransition = this.targetElement.style.transition
-        this.targetElement.classList.remove('v-tour__target--highlighted')
-        this.targetElement.classList.remove('v-tour__target--relative')
+        this.targetElement.classList.remove(HIGHLIGHT.CLASSES.TARGET_HIGHLIGHTED)
+        this.targetElement.classList.remove(HIGHLIGHT.CLASSES.TARGET_RELATIVE)
         // Remove our transition when step is finished.
         if (currentTransition.includes(HIGHLIGHT.TRANSITION)) {
           setTimeout(() => {
