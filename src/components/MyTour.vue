@@ -4,7 +4,7 @@
     <button @click="nextStep" class="btn btn-lg mr-2">Next step</button>
     <button @click="showLastStep" class="btn btn-lg">Show last step</button>
 
-    <v-tour name="myTour" :steps="steps" :callbacks="callbacks">
+    <v-tour name="myTour" :steps="steps" :callbacks="callbacks" :options="{ highlight: true }">
       <template slot-scope="tour">
         <transition name="fade">
           <v-step
@@ -18,6 +18,7 @@
             :is-first="tour.isFirst"
             :is-last="tour.isLast"
             :labels="tour.labels"
+            :highlight="tour.highlight"
           >
             <template v-if="tour.currentStep === 2">
               <div slot="actions">
@@ -40,7 +41,10 @@ export default {
       steps: [
         {
           target: '#v-step-0',
-          content: `Discover <strong>Vue Tour</strong>!`
+          content: `Discover <strong>Vue Tour</strong>!`,
+          params: {
+            highlight: false
+          }
         },
         {
           target: '#v-step-0-1',
