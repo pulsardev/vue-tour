@@ -137,6 +137,8 @@
 <script>
 import MyTour from './components/MyTour.vue'
 
+const { version } = require('../../vue-tour/package.json');
+
 export default {
   name: 'app',
 
@@ -146,7 +148,7 @@ export default {
 
   data () {
     return {
-      version: '1.1.0'
+      version: version
     }
   }
 }
