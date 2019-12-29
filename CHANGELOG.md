@@ -1,6 +1,14 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.2.0](https://github.com/pulsardev/vue-tour/compare/v1.1.0...v1.2.0) (2019-12-29)
+
+
+### Features
+
+* **highlight:** add the possibility to highlight elements during the tour ([317ff35](https://github.com/pulsardev/vue-tour/commit/317ff359ff2be18a2f8d8ffe3a3c5be93e458175))
+* add highlight ([5363d42](https://github.com/pulsardev/vue-tour/commit/5363d42fc6c1b7eca23b8c6e4c33d3108184924f))
 
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/pulsardev/vue-tour/compare/v1.0.1...v1.1.0) (2018-10-16)
