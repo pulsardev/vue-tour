@@ -2,8 +2,37 @@
 
 ## Table of Contents
 
+- [Developing Vue Tour](#developing-vue-tour)
 - [Generating a Changelog](#generating-a-changelog)
 - [Git Commit Guidelines](#git-commit-guidelines)
+
+## Developing Vue Tour
+
+Vue Tour is a library which means that in order to be tested it has to be used in a project.
+For this you have two options:
+- Use `public/index.html` but then you're limited to a built version
+- Use the `landing` branch as a git worktree:
+```
+git worktree add ../vue-tour-landing landing
+```
+
+To make a new release we:
+- Generate a changelog and a tagged commit by running:
+```
+standard-version
+```
+- We publish the package to npm if the CI doesn't do it for us already:
+```
+npm publish
+```
+
+The best practice would be to push all the changes for a new release to a `staging` branch to ensure everything is fine.
+Then, when the new version is ready:
+- Generate the changelog
+- Merge to `master`
+- Eventually run `npm publish` if not done by the CI
+
+The landing page is built by the CI using the last sources.
 
 ## Generating a Changelog
 
