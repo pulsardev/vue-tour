@@ -77,6 +77,7 @@ export default {
       return {
         ...DEFAULT_STEP_OPTIONS,
         ...{ highlight: this.highlight }, // Use global tour highlight setting first
+        ...{ enabledButtons: this.enabledButtons },
         ...this.step.params // Then use local step parameters if defined
       }
     }
@@ -159,7 +160,7 @@ export default {
       }
     },
     isButtonEnabled (name) {
-      return this.enabledButtons.hasOwnProperty(name) ? this.enabledButtons[name] : true
+      return this.params.enabledButtons.hasOwnProperty(name) ? this.params.enabledButtons[name] : true
     }
   },
   mounted () {
