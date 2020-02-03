@@ -10,6 +10,7 @@
       :is-last="isLast"
       :labels="customOptions.labels"
       :highlight="customOptions.highlight"
+      :debug="customOptions.debug"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
@@ -23,6 +24,7 @@
         :is-last="isLast"
         :labels="customOptions.labels"
         :highlight="customOptions.highlight"
+        :debug="customOptions.debug"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
@@ -128,8 +130,9 @@ export default {
     },
 
     handleKeyup (e) {
-      // TODO: debug mode
-      // console.log('[Vue Tour] A keyup event occured:', e)
+      if (this.customOptions.debug) {
+        console.log('[Vue Tour] A keyup event occured:', e)
+      }
       switch (e.keyCode) {
         case KEYS.ARROW_RIGHT:
           this.nextStep()

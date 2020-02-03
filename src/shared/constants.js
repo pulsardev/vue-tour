@@ -14,7 +14,8 @@ export const DEFAULT_OPTIONS = {
     buttonStop: 'Finish'
   },
   startTimeout: 0,
-  useKeyboardNavigation: true
+  useKeyboardNavigation: true,
+  debug: false
 }
 
 export const HIGHLIGHT = {

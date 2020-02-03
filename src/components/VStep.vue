@@ -58,6 +58,9 @@ export default {
     },
     highlight: {
       type: Boolean
+    },
+    debug: {
+      type: Boolean
     }
   },
   data () {
@@ -77,8 +80,9 @@ export default {
   },
   methods: {
     createStep () {
-      // TODO: debug mode
-      // console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', targetElement)
+      if (this.debug) {
+        console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', this.targetElement)
+      }
 
       if (this.targetElement) {
         this.enableScrolling()
@@ -91,7 +95,9 @@ export default {
           this.params
         )
       } else {
-        console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
+        if (this.debug) {
+          console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
+        }
         this.$emit('targetNotFound', this.step)
       }
     },
@@ -113,7 +119,9 @@ export default {
       }
     },
     isHighlightEnabled () {
-      console.log(`[Vue Tour] Highlight is ${this.params.highlight ? 'enabled' : 'disabled'} for .v-step[id="${this.hash}"]`)
+      if (this.debug) {
+        console.log(`[Vue Tour] Highlight is ${this.params.highlight ? 'enabled' : 'disabled'} for .v-step[id="${this.hash}"]`)
+      }
       return this.params.highlight
     },
     createHighlight () {
