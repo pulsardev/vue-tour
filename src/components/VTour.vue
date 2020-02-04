@@ -9,19 +9,24 @@
       :is-first="isFirst"
       :is-last="isLast"
       :labels="customOptions.labels"
+      :enabled-buttons="customOptions.enabledButtons"
+      :highlight="customOptions.highlight"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
-        v-if="currentStep === index"
-        v-for="(step, index) of steps"
-        :key="index"
-        :step="step"
+        v-if="steps[currentStep]"
+        :step="steps[currentStep]"
+        :key="currentStep"
         :previous-step="previousStep"
         :next-step="nextStep"
         :stop="stop"
         :is-first="isFirst"
         :is-last="isLast"
         :labels="customOptions.labels"
+        :enabled-buttons="customOptions.enabledButtons"
+        :highlight="customOptions.highlight"
+        :stop-on-fail="customOptions.stopOnTargetNotFound"
+        @targetNotFound="$emit('targetNotFound', $event)"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
@@ -122,6 +127,7 @@ export default {
     },
     stop () {
       this.customCallbacks.onStop()
+      document.body.classList.remove('v-tour--active')
       this.currentStep = -1
     },
 
@@ -143,3 +149,23 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  body.v-tour--active {
+    pointer-events: none;
+  }
+
+  .v-tour {
+    pointer-events: auto;
+  }
+
+  .v-tour__target--highlighted {
+    box-shadow: 0 0 0 4px rgba(0,0,0,.4);
+    pointer-events: auto;
+    z-index: 9999;
+  }
+
+  .v-tour__target--relative {
+    position: relative;
+  }
+</style>

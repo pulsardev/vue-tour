@@ -6,24 +6,45 @@ export const DEFAULT_CALLBACKS = {
 }
 
 export const DEFAULT_OPTIONS = {
-  useKeyboardNavigation: true,
-  startTimeout: 0,
+  highlight: false,
   labels: {
     buttonSkip: 'Skip tour',
     buttonPrevious: 'Previous',
     buttonNext: 'Next',
     buttonStop: 'Finish'
-  }
+  },
+  enabledButtons: {
+    buttonSkip: true,
+    buttonPrevious: true,
+    buttonNext: true,
+    buttonStop: true
+  },
+  startTimeout: 0,
+  useKeyboardNavigation: true
+}
+
+export const HIGHLIGHT = {
+  CLASSES: {
+    ACTIVE: 'v-tour--active',
+    TARGET_HIGHLIGHTED: 'v-tour__target--highlighted',
+    TARGET_RELATIVE: 'v-tour__target--relative'
+  },
+  TRANSITION: 'box-shadow 0s ease-in-out 0s',
+  useKeyboardNavigation: true,
+  startTimeout: 0,
+  stopOnTargetNotFound: true
 }
 
 export const DEFAULT_STEP_OPTIONS = {
-  placement: 'bottom',
   enableScrolling: true,
+  highlight: DEFAULT_OPTIONS.highlight, // By default use the global tour setting
+  enabledButtons: DEFAULT_OPTIONS.enabledButtons,
   modifiers: {
     arrow: {
       element: '.v-step__arrow'
     }
-  }
+  },
+  placement: 'bottom'
 }
 
 export const KEYS = {
