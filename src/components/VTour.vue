@@ -11,6 +11,7 @@
       :is-first="isFirst"
       :is-last="isLast"
       :labels="customOptions.labels"
+      :enabled-buttons="customOptions.enabledButtons"
       :highlight="customOptions.highlight"
     >
       <!--Default slot {{ currentStep }}-->
@@ -26,6 +27,7 @@
         :is-first="isFirst"
         :is-last="isLast"
         :labels="customOptions.labels"
+        :enabled-buttons="customOptions.enabledButtons"
         :highlight="customOptions.highlight"
         :stop-on-fail="customOptions.stopOnTargetNotFound"
         @targetNotFound="$emit('targetNotFound', $event)"
