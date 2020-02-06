@@ -34,6 +34,14 @@ Then, when the new version is ready:
 
 The landing page is built by the CI using the last sources.
 
+### Merging PRs
+
+If a PR has a lot of conflicts and you want to make sure it's working or you want to cherry-pick some commits, you can checkout the PR branch locally:
+```
+git fetch origin pull/:ID/head:pr/:ID
+```
+Where `:ID` is the ID of the PR. The previous command will create a new branch `pr/:ID` containing the changes and commits of the PR.
+
 ## Generating a Changelog
 
 By using "standard" guidelines we are able to automatically generate a changelog from our git commit messages.
