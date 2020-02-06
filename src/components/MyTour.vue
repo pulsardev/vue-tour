@@ -15,6 +15,8 @@
             :previous-step="tour.previousStep"
             :next-step="tour.nextStep"
             :stop="tour.stop"
+            :skip="tour.skip"
+            :finish="tour.finish"
             :is-first="tour.isFirst"
             :is-last="tour.isLast"
             :labels="tour.labels"
@@ -74,7 +76,9 @@ export default {
       ],
       callbacks: {
         onPreviousStep: this.myCustomPreviousStepCallback,
-        onNextStep: this.myCustomNextStepCallback
+        onNextStep: this.myCustomNextStepCallback,
+        onFinish: this.myCustomOnFinishCallback,
+        onSkip: this.myCustomOnSkipCallback
       }
     }
   },
@@ -102,6 +106,16 @@ export default {
       if (currentStep === 1) {
         console.log('[Vue Tour] A custom nextStep callback has been called from step 2 to step 3')
       }
+    },
+    myCustomOnSkipCallback() {
+      console.log(
+        "[Vue Tour] Tour has been skipped"
+      );
+    },
+    myCustomOnFinishCallback() {
+      console.log(
+        "[Vue Tour] Tour has been finished"
+      );
     }
   }
 }
