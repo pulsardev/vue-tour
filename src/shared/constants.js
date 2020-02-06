@@ -2,7 +2,9 @@ export const DEFAULT_CALLBACKS = {
   onStart: () => {},
   onPreviousStep: (currentStep) => {},
   onNextStep: (currentStep) => {},
-  onStop: () => {}
+  onStop: () => {},
+  onSkip: () => {},
+  onFinish: () => {}
 }
 
 export const DEFAULT_OPTIONS = {
@@ -13,8 +15,15 @@ export const DEFAULT_OPTIONS = {
     buttonNext: 'Next',
     buttonStop: 'Finish'
   },
+  enabledButtons: {
+    buttonSkip: true,
+    buttonPrevious: true,
+    buttonNext: true,
+    buttonStop: true
+  },
   startTimeout: 0,
-  useKeyboardNavigation: true
+  useKeyboardNavigation: true,
+  debug: false
 }
 
 export const HIGHLIGHT = {
@@ -23,12 +32,16 @@ export const HIGHLIGHT = {
     TARGET_HIGHLIGHTED: 'v-tour__target--highlighted',
     TARGET_RELATIVE: 'v-tour__target--relative'
   },
-  TRANSITION: 'box-shadow 0s ease-in-out 0s'
+  TRANSITION: 'box-shadow 0s ease-in-out 0s',
+  useKeyboardNavigation: true,
+  startTimeout: 0,
+  stopOnTargetNotFound: true
 }
 
 export const DEFAULT_STEP_OPTIONS = {
   enableScrolling: true,
   highlight: DEFAULT_OPTIONS.highlight, // By default use the global tour setting
+  enabledButtons: DEFAULT_OPTIONS.enabledButtons,
   modifiers: {
     arrow: {
       element: '.v-step__arrow'
