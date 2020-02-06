@@ -25,7 +25,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: npm install
+      - run: npm ci
 
       - save_cache:
           paths:
@@ -39,21 +39,21 @@ jobs:
       - run: git worktree add ../vue-tour-landing origin/landing
 
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "../vue-tour-landing/package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+      # - restore_cache:
+      #     keys:
+      #       - v1-dependencies-{{ checksum "../vue-tour-landing/package.json" }}
+      #       # fallback to using the latest cache if no exact match is found
+      #       - v1-dependencies-
 
       - run:
-          command: npm install
+          command: npm ci
           working_directory: ~/vue-tour-landing
 
-      - save_cache:
-          paths:
-            - ../vue-tour-landing/node_modules
-            - /home/circleci/.cache/Cypress
-          key: v1-dependencies-{{ checksum "../vue-tour-landing/package.json" }}
+      # - save_cache:
+      #     paths:
+      #       - ../vue-tour-landing/node_modules
+      #       - /home/circleci/.cache/Cypress
+      #     key: v1-dependencies-{{ checksum "../vue-tour-landing/package.json" }}
 
       # run e2e tests!
       - run:
