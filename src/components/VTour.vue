@@ -9,6 +9,7 @@
       :is-first="isFirst"
       :is-last="isLast"
       :labels="customOptions.labels"
+      :enabled-buttons="customOptions.enabledButtons"
       :highlight="customOptions.highlight"
       :debug="customOptions.debug"
     >
@@ -23,8 +24,11 @@
         :is-first="isFirst"
         :is-last="isLast"
         :labels="customOptions.labels"
+        :enabled-buttons="customOptions.enabledButtons"
         :highlight="customOptions.highlight"
+        :stop-on-fail="customOptions.stopOnTargetNotFound"
         :debug="customOptions.debug"
+        @targetNotFound="$emit('targetNotFound', $event)"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>

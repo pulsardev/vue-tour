@@ -15,10 +15,10 @@
 
     <slot name="actions">
       <div class="v-step__buttons">
-        <button @click.prevent="stop" v-if="!isLast" class="v-step__button">{{ labels.buttonSkip }}</button>
-        <button @click.prevent="previousStep" v-if="!isFirst" class="v-step__button">{{ labels.buttonPrevious }}</button>
-        <button @click.prevent="nextStep" v-if="!isLast" class="v-step__button">{{ labels.buttonNext }}</button>
-        <button @click.prevent="stop" v-if="isLast" class="v-step__button">{{ labels.buttonStop }}</button>
+        <button @click.prevent="stop" v-if="!isLast && isButtonEnabled('buttonSkip')" class="v-step__button v-step__button-skip">{{ labels.buttonSkip }}</button>
+        <button @click.prevent="previousStep" v-if="!isFirst && isButtonEnabled('buttonPrevious')" class="v-step__button v-step__button-previous">{{ labels.buttonPrevious }}</button>
+        <button @click.prevent="nextStep" v-if="!isLast && isButtonEnabled('buttonNext')" class="v-step__button v-step__button-next">{{ labels.buttonNext }}</button>
+        <button @click.prevent="stop" v-if="isLast && isButtonEnabled('buttonStop')" class="v-step__button v-step__button-stop">{{ labels.buttonStop }}</button>
       </div>
     </slot>
 
@@ -56,7 +56,13 @@ export default {
     labels: {
       type: Object
     },
+    enabledButtons: {
+      type: Object
+    },
     highlight: {
+      type: Boolean
+    },
+    stopOnFail: {
       type: Boolean
     },
     debug: {
@@ -74,6 +80,7 @@ export default {
       return {
         ...DEFAULT_STEP_OPTIONS,
         ...{ highlight: this.highlight }, // Use global tour highlight setting first
+        ...{ enabledButtons: this.enabledButtons },
         ...this.step.params // Then use local step parameters if defined
       }
     }
@@ -99,6 +106,9 @@ export default {
           console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
         }
         this.$emit('targetNotFound', this.step)
+        if (this.stopOnFail) {
+          this.stop()
+        }
       }
     },
     enableScrolling () {
@@ -156,6 +166,9 @@ export default {
           }, 0)
         }
       }
+    },
+    isButtonEnabled (name) {
+      return this.params.enabledButtons.hasOwnProperty(name) ? this.params.enabledButtons[name] : true
     }
   },
   mounted () {
