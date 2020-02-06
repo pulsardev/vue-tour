@@ -89,7 +89,7 @@ export default {
       return {
         ...DEFAULT_STEP_OPTIONS,
         ...{ highlight: this.highlight }, // Use global tour highlight setting first
-        ...{ enabledButtons: this.enabledButtons },
+        ...{ enabledButtons: Object.assign({}, this.enabledButtons) },
         ...this.step.params // Then use local step parameters if defined
       }
     }
