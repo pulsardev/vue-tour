@@ -108,14 +108,10 @@ export default {
       }
     },
     myCustomOnSkipCallback() {
-      console.log(
-        "[Vue Tour] Tour has been skipped"
-      );
+      console.log('[Vue Tour] Tour has been skipped')
     },
     myCustomOnFinishCallback() {
-      console.log(
-        "[Vue Tour] Tour has been finished"
-      );
+      console.log('[Vue Tour] Tour has been finished')
     }
   }
 }
