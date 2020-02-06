@@ -44,7 +44,7 @@ jobs:
             - v1-dependencies-{{ checksum "../vue-tour-landing/package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-            -
+
       - run:
           command: npm install
           working_directory: ~/vue-tour-landing
@@ -52,6 +52,7 @@ jobs:
       - save_cache:
           paths:
             - ../vue-tour-landing/node_modules
+            - /home/circleci/.cache/Cypress
           key: v1-dependencies-{{ checksum "../vue-tour-landing/package.json" }}
 
       # run e2e tests!
