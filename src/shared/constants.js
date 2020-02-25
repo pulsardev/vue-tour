@@ -47,7 +47,8 @@ export const DEFAULT_STEP_OPTIONS = {
       element: '.v-step__arrow'
     }
   },
-  placement: 'bottom'
+  placement: 'bottom',
+  isSticky: false
 }
 
 export const KEYS = {

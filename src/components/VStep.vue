@@ -1,5 +1,5 @@
 <template>
-  <div class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
+  <div class="v-step" :class="{ 'v-step--sticky': params.isSticky }" :id="'v-step-' + hash" :ref="'v-step-' + hash">
     <slot name="header">
       <div v-if="step.header" class="v-step__header">
         <div v-if="step.header.title" v-html="step.header.title"></div>
@@ -22,7 +22,8 @@
       </div>
     </slot>
 
-    <div class="v-step__arrow" :class="{ 'v-step__arrow--dark': step.header && step.header.title }"></div>
+    <div class="v-step__arrow" :class="{ 'v-step__arrow--dark': step.header && step.header.title }" v-if="!params.isSticky"></div>
+    <!-- <div class="v-step__backdrop" v-if="params.isSticky"></div> -->
   </div>
 </template>
 
@@ -103,7 +104,7 @@ export default {
         console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', this.targetElement)
       }
 
-      if (this.targetElement) {
+      if (this.targetElement && !this.params.isSticky) {
         this.enableScrolling()
         this.createHighlight()
 
@@ -113,6 +114,8 @@ export default {
           this.$refs['v-step-' + this.hash],
           this.params
         )
+      } else if (this.targetElement && this.params.isSticky) {
+        document.body.appendChild(this.$refs['v-step-' + this.hash])
       } else {
         if (this.debug) {
           console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
@@ -202,6 +205,25 @@ export default {
     padding: 1rem;
     text-align: center;
     z-index: 10000;
+
+    &--sticky {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      right: 0;
+      max-width: 50vw;
+      margin: 0 auto;
+    }
+  }
+
+  .v-step__backdrop {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .v-step .v-step__arrow {
