@@ -59,6 +59,9 @@ The `target` property of each step can target a DOM element in any component of 
         steps: [
           {
             target: '#v-step-0',  // We're using document.querySelector() under the hood
+            header: {
+              title: 'Get Started',
+            },
             content: `Discover <strong>Vue Tour</strong>!`
           },
           {
@@ -69,7 +72,7 @@ The `target` property of each step can target a DOM element in any component of 
             target: '[data-v-step="2"]',
             content: 'Try it, you\'ll love it!<br>You can put HTML in the steps and completely customize the DOM to suit your needs.',
             params: {
-              placement: 'top'
+              placement: 'top' // Any valid Popper.js placement. See https://popper.js.org/popper-documentation.html#Popper.placements
             }
           }
         ]
@@ -89,7 +92,7 @@ Once this is done and your steps correctly target some DOM elements of your appl
 this.$tours['myTour'].start()
 ```
 
-For a more detailed documentation, checkout the [docs for vue-tour](https://pulsar.gitbooks.io/vue-tour/).
+For a more detailed documentation, checkout the [docs for vue-tour](https://github.com/pulsardev/vue-tour/wiki).
 
 ## Something Missing?
 

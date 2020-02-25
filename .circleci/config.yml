@@ -3,68 +3,131 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:10.16.3
+  working_directory: ~/vue-tour
+
 jobs:
   build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8.11.2
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/vue-tour
-
-    branches:
-      only:
-        - master
-
+    <<: *defaults
     steps:
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
 
       # install Cypress dependencies
       - run: sudo apt-get update && sudo apt-get install -y libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 xvfb
 
-      - run: npm install
-      - run: npm rebuild node-sass
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: npm ci
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: npm run test
+      # run unit tests!
+      - run: npm run test:unit
       - run: npm run build
 
-      - run: cd ./demo/ && npm install
+      - run: git worktree add ../vue-tour-landing origin/landing
 
-      - save_cache:
-          paths:
-            - demo/node_modules
-          key: v1-dependencies-{{ checksum "demo/package.json" }}
+      # Download and cache dependencies
+      # - restore_cache:
+      #     keys:
+      #       - v1-dependencies-{{ checksum "../vue-tour-landing/package.json" }}
+      #       # fallback to using the latest cache if no exact match is found
+      #       - v1-dependencies-
 
       - run:
-          command: cd ./demo/ && npm run serve
-          background: true
+          command: npm ci
+          working_directory: ~/vue-tour-landing
 
-      # wait for the webserver to be started in a little hacky way
-      - run: sleep 5
+      # - save_cache:
+      #     paths:
+      #       - ../vue-tour-landing/node_modules
+      #       - /home/circleci/.cache/Cypress
+      #     key: v1-dependencies-{{ checksum "../vue-tour-landing/package.json" }}
 
-      # run tests!
-      - run: cd ./demo/ && npm run test:e2e -- --headless
-      - run: cd ./demo/ && npm run build
+      # run e2e tests!
+      - run:
+          command: npm run test:e2e -- --headless
+          working_directory: ~/vue-tour-landing
 
-      - run: rm -rf ./docs/
-      - run: mv ./demo/dist/ ./docs/
-      - run: cp ./public/demo.html ./dist
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - vue-tour
+            - vue-tour-landing
 
-      - run: git status
+  publish:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      - add_ssh_keys:
+          fingerprints:
+            - "eb:09:ae:75:b5:8e:66:63:27:9a:c0:cb:64:6e:79:d5"
+
+      # generate a new landing build and commit it to the gh-pages branch
+      - run:
+          command: npm run build
+          working_directory: ~/vue-tour-landing
+
+      - run:
+          command: cp -R ./dist ../
+          working_directory: ~/vue-tour-landing
+
+      - run:
+          command: |
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            git checkout --track origin/gh-pages
+            rm -rf *
+            cp -R ../dist/. ./
+            git config user.email "mathieumorainville@hotmail.com"
+            git config user.name "Mathieu Morainville"
+            git status
+            git add .
+            git commit -m "chore(ci): generate a new build"
+            git push origin gh-pages
+          working_directory: ~/vue-tour-landing
+
+      # we could use standard-version here to generating a changelog, bump the version with a tag and commit it
+
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+          when: always
+
+      - run:
+          name: Publish package
+          command: cat .npmrc
+          # command: npm publish
+
+# use workflows to publish only on tagged commits (see: https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)
+workflows:
+  version: 2
+  build-publish:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - staging
+      - publish:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only:
+                - master

@@ -1,6 +1,32 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.3.0](https://github.com/pulsardev/vue-tour/compare/v1.2.0...v1.3.0) (2020-02-06)
+
+
+### Features
+
+* add example step title and link to placement options ([4cd8ccc](https://github.com/pulsardev/vue-tour/commit/4cd8ccc0794f739cee2ef3d8141ad291ee92faa2))
+* add options.debug flag for console output ([effbd1d](https://github.com/pulsardev/vue-tour/commit/effbd1dd18708a610670765bdad2416af9e18d7d)), closes [#101](https://github.com/pulsardev/vue-tour/issues/101)
+* **buttons:** support global and per step button configuration ([86fd9b8](https://github.com/pulsardev/vue-tour/commit/86fd9b813fa6416f2c99b45a3f781384361eb162))
+* add BEM compliant class names to step buttons ([34b9625](https://github.com/pulsardev/vue-tour/commit/34b96254c501ac0f243d243fd837b4e9eadb261a))
+* add highlight ([e6a2a2d](https://github.com/pulsardev/vue-tour/commit/e6a2a2d4da7d146340e22e750efb811a214b8d33))
+* **highlight:** add the possibility to highlight elements during the tour ([f828b12](https://github.com/pulsardev/vue-tour/commit/f828b1210257aaf6a39b0151022701c0b1332cac))
+* add enabledButtons new props (all true by default) which can ([1354557](https://github.com/pulsardev/vue-tour/commit/13545575e78327e40e20af9fab7fc9889e8061c6))
+
+
+### Bug Fixes
+
+* pass a copy of the enabledButtons configuration object ([9fb0ec9](https://github.com/pulsardev/vue-tour/commit/9fb0ec92f1176905edf7cca36f18eda0894ffb70))
+
+## [1.2.0](https://github.com/pulsardev/vue-tour/compare/v1.1.0...v1.2.0) (2019-12-29)
+
+
+### Features
+
+* **highlight:** add the possibility to highlight elements during the tour ([317ff35](https://github.com/pulsardev/vue-tour/commit/317ff359ff2be18a2f8d8ffe3a3c5be93e458175))
+* add highlight ([5363d42](https://github.com/pulsardev/vue-tour/commit/5363d42fc6c1b7eca23b8c6e4c33d3108184924f))
 
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/pulsardev/vue-tour/compare/v1.0.1...v1.1.0) (2018-10-16)

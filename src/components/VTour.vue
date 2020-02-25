@@ -6,22 +6,33 @@
       :previous-step="previousStep"
       :next-step="nextStep"
       :stop="stop"
+      :skip="skip"
+      :finish="finish"
       :is-first="isFirst"
       :is-last="isLast"
       :labels="customOptions.labels"
+      :enabled-buttons="customOptions.enabledButtons"
+      :highlight="customOptions.highlight"
+      :debug="customOptions.debug"
     >
       <!--Default slot {{ currentStep }}-->
       <v-step
-        v-if="currentStep === index"
-        v-for="(step, index) of steps"
-        :key="index"
-        :step="step"
+        v-if="steps[currentStep]"
+        :step="steps[currentStep]"
+        :key="currentStep"
         :previous-step="previousStep"
         :next-step="nextStep"
         :stop="stop"
+        :skip="skip"
+        :finish="finish"
         :is-first="isFirst"
         :is-last="isLast"
         :labels="customOptions.labels"
+        :enabled-buttons="customOptions.enabledButtons"
+        :highlight="customOptions.highlight"
+        :stop-on-fail="customOptions.stopOnTargetNotFound"
+        :debug="customOptions.debug"
+        @targetNotFound="$emit('targetNotFound', $event)"
       >
         <!--<div v-if="index === 2" slot="actions">
           <a @click="nextStep">Next step</a>
@@ -122,13 +133,23 @@ export default {
     },
     stop () {
       this.customCallbacks.onStop()
+      document.body.classList.remove('v-tour--active')
       document.getElementById(STICKY.ID).remove()
       this.currentStep = -1
     },
+    skip () {
+      this.customCallbacks.onSkip()
+      this.stop()
+    },
+    finish () {
+      this.customCallbacks.onFinish()
+      this.stop()
+    },
 
     handleKeyup (e) {
-      // TODO: debug mode
-      // console.log('[Vue Tour] A keyup event occured:', e)
+      if (this.customOptions.debug) {
+        console.log('[Vue Tour] A keyup event occured:', e)
+      }
       switch (e.keyCode) {
         case KEYS.ARROW_RIGHT:
           this.nextStep()
@@ -146,6 +167,24 @@ export default {
 </script>
 
 <style lang="scss">
+  body.v-tour--active {
+    pointer-events: none;
+  }
+
+  .v-tour {
+    pointer-events: auto;
+  }
+
+  .v-tour__target--highlighted {
+    box-shadow: 0 0 0 4px rgba(0,0,0,.4);
+    pointer-events: auto;
+    z-index: 9999;
+  }
+
+  .v-tour__target--relative {
+    position: relative;
+  }
+
   #v-tour-sticky {
     position: absolute;
     width: 0;
