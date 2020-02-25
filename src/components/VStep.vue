@@ -101,11 +101,12 @@ export default {
     }
   },
   methods: {
-    createStep () {      if (this.debug) {
+    createStep () {
+      if (this.debug) {
         console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', this.targetElement)
       }
 
-	  if (this.isSticky) {
+      if (this.isSticky) {
         this.targetElement = document.getElementById(STICKY.ID)
 
         if (!this.targetElement) {
