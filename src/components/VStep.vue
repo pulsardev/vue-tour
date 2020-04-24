@@ -84,7 +84,8 @@ export default {
   data () {
     return {
       hash: sum(this.step.target),
-      targetElement: document.querySelector(this.step.target)
+      targetElement: document.querySelector(this.step.target),
+      stepInterval: undefined
     }
   },
   computed: {
@@ -97,12 +98,29 @@ export default {
       }
     }
   },
+  watch: {
+    targetElement () {
+      clearInterval(this.stepInterval)
+      this.stepInterval = undefined
+      this.renderStep()
+    }
+  },
   methods: {
     createStep () {
       if (this.debug) {
         console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', this.targetElement)
       }
 
+      const $this = this
+      if (this.targetElement === null) {
+        this.stepInterval = setInterval(() => {
+          $this.targetElement = document.querySelector($this.step.target)
+        }, 500)
+      } else {
+        this.renderStep()
+      }
+    },
+    renderStep () {
       if (this.targetElement) {
         this.enableScrolling()
         this.createHighlight()

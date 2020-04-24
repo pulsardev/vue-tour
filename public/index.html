@@ -24,7 +24,7 @@
             </a>
           </div>
 
-          <div class="docs-brand docs-brand--pulsar">
+          <div class="docs-brand docs-brand--pulsar" v-if="isVisible">
             <a href="https://pulsar.surge.sh/" target="_blank" class="docs-logo bg-dark" id="v-step-0-1">
               <h2 class="text-light">PULSAR</h2>
             </a>
@@ -188,7 +188,7 @@
     data () {
       return {
         version: '1.1.0',
-
+        isVisible: false,
         steps: [
           {
             target: '#v-step-0',
@@ -254,7 +254,12 @@
 
       myCustomNextStepCallback (currentStep) {
         console.log('[Vue Tour] A custom nextStep callback has been called on step ' + (currentStep + 1))
-
+        if (document.querySelector('#v-step-0-1') == null) {
+          setTimeout(() => {
+            this.isVisible = true
+          }, 3000)
+        }
+        this.$
         if (currentStep === 1) {
           console.log('[Vue Tour] A custom nextStep callback has been called from step 2 to step 3')
         }
