@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/pulsardev/vue-tour/compare/v1.3.0...v1.3.1) (2020-05-08)
+
+
+### Features
+
+* provide types for typescript ([eee7fef](https://github.com/pulsardev/vue-tour/commit/eee7fef6d7ae549b28a7b640bafdda621814f147))
+
 ## [1.3.0](https://github.com/pulsardev/vue-tour/compare/v1.2.0...v1.3.0) (2020-02-06)
 
 
