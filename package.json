@@ -10,6 +10,7 @@
     "type": "git",
     "url": "https://github.com/pulsardev/vue-tour.git"
   },
+  "typings": "types/index.d.ts",
   "keywords": [
     "vue",
     "tour"
