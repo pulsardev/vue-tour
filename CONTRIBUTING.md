@@ -16,23 +16,10 @@ For this you have two options:
 git worktree add ../vue-tour-landing landing
 ```
 
-To make a new release we:
-- Generate a changelog and a tagged commit by running:
-```
-standard-version
-```
-- We publish the package to npm if the CI doesn't do it for us already:
-```
-npm publish
-```
+### Pull Requests
 
-The best practice would be to push all the changes for a new release to a `staging` branch to ensure everything is fine.
-Then, when the new version is ready:
-- Generate the changelog
-- Merge to `master`
-- Eventually run `npm publish` if not done by the CI
+All pull request must target `staging`.
 
-The landing page is built by the CI using the last sources.
 
 ### Merging PRs
 
@@ -41,6 +28,47 @@ If a PR has a lot of conflicts and you want to make sure it's working or you wan
 git fetch origin pull/:ID/head:pr/:ID
 ```
 Where `:ID` is the ID of the PR. The previous command will create a new branch `pr/:ID` containing the changes and commits of the PR.
+
+### New release
+
+Go on `staging` branch.
+
+```
+git checkout staging
+```
+
+Check result of Standard Version.
+
+```
+standard-version --dry-run
+```
+
+For a better control of the version number, use `--release-as`. <level> corresponds to semver levels: major, minor or patch.
+
+```
+standard-version --release-as <level> --dry-run
+```
+
+If result is ok, run command without `--dry-run` flag.
+
+```
+standard-version --release-as <level>
+```
+
+Push version on `staging`.
+
+```
+git push --follow-tags origin staging
+```
+
+Do a Pull Request from `staging` to `master`.
+
+Once merged, publish on NPM from `master`.
+
+```
+git checkout master
+npm publish
+```
 
 ## Generating a Changelog
 
