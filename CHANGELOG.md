@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/pulsardev/vue-tour/compare/v1.3.1...v1.4.0) (2020-05-30)
+
+
+### Features
+
+* enable specific navigation keys ([89ff650](https://github.com/pulsardev/vue-tour/commit/89ff650ffbde5c4a87614bcb31f774231f336a2e))
+
 ### [1.3.1](https://github.com/pulsardev/vue-tour/compare/v1.3.0...v1.3.1) (2020-05-08)
 
 
