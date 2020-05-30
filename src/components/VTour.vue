@@ -151,15 +151,19 @@ export default {
       }
       switch (e.keyCode) {
         case KEYS.ARROW_RIGHT:
-          this.nextStep()
+          this.isKeyEnabled('ARROW_RIGHT') && this.nextStep()
           break
         case KEYS.ARROW_LEFT:
-          this.previousStep()
+          this.isKeyEnabled('ARROW_LEFT') && this.previousStep()
           break
         case KEYS.ESCAPE:
-          this.stop()
+          this.isKeyEnabled('ESCAPE') && this.stop()
           break
       }
+    },
+    isKeyEnabled (key) {
+      const { enabledNavigationKeys } = this.customOptions
+      return enabledNavigationKeys.hasOwnProperty(key) ? enabledNavigationKeys[key] : true
     }
   }
 }
