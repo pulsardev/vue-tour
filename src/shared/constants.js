@@ -23,6 +23,11 @@ export const DEFAULT_OPTIONS = {
   },
   startTimeout: 0,
   useKeyboardNavigation: true,
+  enabledNavigationKeys: {
+    ESCAPE: true,
+    ARROW_RIGHT: true,
+    ARROW_LEFT: true
+  },
   debug: false
 }
 
