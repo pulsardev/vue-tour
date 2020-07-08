@@ -107,11 +107,11 @@ steps: [
   {
     target: '#v-step-0',  // We're using document.querySelector() under the hood
     content: `Discover <strong>Vue Tour</strong>!`,
-    before: type => new Promise(accept) {
-      // time-consuming UI/async operation here
-      return accept();
-    }
-  },
+    before: type => new Promise((resolve, reject) => {
+      // Time-consuming UI/async operation here
+      resolve('foo')
+    })
+  }
 ]
 ```
 
