@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { mount } from '@vue/test-utils'
 import Vue from 'vue'
 import VueTour from '@/main'
@@ -26,7 +25,7 @@ describe('VTour.vue', () => {
       }
     })
 
-    expect(wrapper.vm.steps).to.have.lengthOf(2)
+    expect(wrapper.vm.steps.length).toEqual(2)
   })
 
   it('registers itself in the global Vue instance', () => {
@@ -37,7 +36,8 @@ describe('VTour.vue', () => {
       }
     })
 
-    expect(wrapper.vm.$tours).to.be.an('object').that.has.all.keys('myTestTour')
+    expect(typeof wrapper.vm.$tours).toBe('object')
+    expect(wrapper.vm.$tours).toHaveProperty('myTestTour')
   })
 
   it('stays within the boundaries of the number of steps', async () => {
@@ -51,25 +51,25 @@ describe('VTour.vue', () => {
     expect(wrapper.vm.currentStep).toEqual(-1)
 
     await wrapper.vm.start()
-    expect(wrapper.vm.currentStep).to.equal(0)
+    expect(wrapper.vm.currentStep).toEqual(0)
 
     // We call nextStep one more time than needed
     for (let i = 0; i < steps.length; i++) {
       await wrapper.vm.nextStep()
     }
 
-    expect(wrapper.vm.currentStep).to.equal(1)
+    expect(wrapper.vm.currentStep).toEqual(1)
 
     // We call previousStep one more time than needed
     for (let i = 0; i < steps.length; i++) {
       await wrapper.vm.previousStep()
     }
 
-    expect(wrapper.vm.currentStep).to.equal(0)
+    expect(wrapper.vm.currentStep).toEqual(0)
 
     wrapper.vm.stop()
 
-    expect(wrapper.vm.currentStep).to.equal(-1)
+    expect(wrapper.vm.currentStep).toEqual(-1)
   })
 
   describe('#before', () => {
@@ -117,8 +117,8 @@ describe('VTour.vue', () => {
       })
 
       await wrapper.vm.start()
-      expect(wrapper.vm.currentStep).to.equal(0)
-      expect(step0).to.equal(true)
+      expect(wrapper.vm.currentStep).toEqual(0)
+      expect(step0).toEqual(true)
 
       step0 = false
       step1 = false
@@ -133,11 +133,11 @@ describe('VTour.vue', () => {
       })
 
       await wrapper.vm.start()
-      expect(wrapper.vm.currentStep).to.equal(0)
+      expect(wrapper.vm.currentStep).toEqual(0)
 
       await wrapper.vm.nextStep()
-      expect(wrapper.vm.currentStep).to.equal(1)
-      expect(step1).to.equal(true)
+      expect(wrapper.vm.currentStep).toEqual(1)
+      expect(step1).toEqual(true)
 
       step0 = false
       step1 = false
@@ -153,10 +153,10 @@ describe('VTour.vue', () => {
 
       try {
         await wrapper.vm.start(2)
-        expect(true).to.equal(false) // dead code
+        expect(true).toEqual(false) // dead code
       } catch (e) {
-        expect(e.message).to.equal('testing')
-        expect(wrapper.vm.currentStep).to.equal(-1)
+        expect(e.message).toEqual('testing')
+        expect(wrapper.vm.currentStep).toEqual(-1)
       }
     })
 
@@ -172,10 +172,10 @@ describe('VTour.vue', () => {
 
       try {
         await wrapper.vm.nextStep()
-        expect(true).to.equal(false) // dead code
+        expect(true).toEqual(false) // dead code
       } catch (e) {
-        expect(e.message).to.equal('testing')
-        expect(wrapper.vm.currentStep).to.equal(1)
+        expect(e.message).toEqual('testing')
+        expect(wrapper.vm.currentStep).toEqual(1)
       }
     })
 
@@ -191,10 +191,10 @@ describe('VTour.vue', () => {
 
       try {
         await wrapper.vm.previousStep()
-        expect(true).to.equal(false) // dead code
+        expect(true).toEqual(false) // dead code
       } catch (e) {
-        expect(e.message).to.equal('testing')
-        expect(wrapper.vm.currentStep).to.equal(3)
+        expect(e.message).toEqual('testing')
+        expect(wrapper.vm.currentStep).toEqual(3)
       }
     })
   })

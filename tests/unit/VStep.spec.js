@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { shallowMount } from '@vue/test-utils'
 import VStep from '@/components/VStep.vue'
 import { DEFAULT_OPTIONS } from '@/shared/constants'
@@ -18,6 +17,6 @@ describe('VStep.vue', () => {
       }
     })
 
-    expect(wrapper.text()).to.include(step.content)
+    expect(wrapper.text()).toContain(step.content)
   })
 })
