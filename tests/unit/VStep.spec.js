@@ -1,7 +1,7 @@
+import { expect } from 'chai'
 import { shallowMount } from '@vue/test-utils'
 import VStep from '@/components/VStep.vue'
-
-const labels = {}
+import { DEFAULT_OPTIONS } from '@/shared/constants'
 
 describe('VStep.vue', () => {
   it('renders props.step.content', () => {
@@ -14,10 +14,10 @@ describe('VStep.vue', () => {
       propsData: {
         step,
         stop: () => {},
-        labels
+        labels: DEFAULT_OPTIONS.labels
       }
     })
 
-    expect(wrapper.text()).toContain(step.content)
+    expect(wrapper.text()).to.include(step.content)
   })
 })

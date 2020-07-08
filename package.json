@@ -19,7 +19,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib src/main.js",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "vue-cli-service test:unit test/unit/**/*.spec.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
