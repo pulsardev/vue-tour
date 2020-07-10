@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/pulsardev/vue-tour/compare/v1.4.0...v1.5.0) (2020-07-10)
+
+
+### Features
+
+* **before:** adds support for rejecting promises from the before method along with supporting unit tests ([bfee650](https://github.com/pulsardev/vue-tour/commit/bfee65028af3bb7af38257af2196272d00237df1))
+* **tour:** added promises for start, next, and prev so that users of the component may do async operations to get the UI in a good state ([3af3496](https://github.com/pulsardev/vue-tour/commit/3af3496c8c32ebc27461df62ada62b0263670db3))
+
 ## [1.4.0](https://github.com/pulsardev/vue-tour/compare/v1.3.1...v1.4.0) (2020-05-30)
 
 
