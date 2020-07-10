@@ -109,27 +109,81 @@ export default {
     },
     numberOfSteps () {
       return this.steps.length
+    },
+    step () {
+      return this.steps[this.currentStep]
     }
   },
   methods: {
-    start (startStep) {
+    async start (startStep) {
       // Wait for the DOM to be loaded, then start the tour
-      setTimeout(() => {
-        this.customCallbacks.onStart()
-        this.currentStep = typeof startStep !== 'undefined' ? parseInt(startStep, 10) : 0
-      }, this.customOptions.startTimeout)
+      startStep = typeof startStep !== 'undefined' ? parseInt(startStep, 10) : 0
+      let step = this.steps[startStep]
+
+      let process = () => new Promise((resolve, reject) => {
+        setTimeout(() => {
+          this.customCallbacks.onStart()
+          this.currentStep = startStep
+          resolve()
+        }, this.customOptions.startTimeout)
+      })
+
+      if (typeof step.before !== 'undefined') {
+        try {
+          await step.before('start')
+        } catch (e) {
+          return Promise.reject(e)
+        }
+      }
+      await process()
+
+      return Promise.resolve()
     },
-    previousStep () {
-      if (this.currentStep > 0) {
+    async previousStep () {
+      let futureStep = this.currentStep - 1
+
+      let process = () => new Promise((resolve, reject) => {
         this.customCallbacks.onPreviousStep(this.currentStep)
-        this.currentStep--
+        this.currentStep = futureStep
+        resolve()
+      })
+
+      if (futureStep > -1) {
+        let step = this.steps[futureStep]
+        if (typeof step.before !== 'undefined') {
+          try {
+            await step.before('previous')
+          } catch (e) {
+            return Promise.reject(e)
+          }
+        }
+        await process()
       }
+
+      return Promise.resolve()
     },
-    nextStep () {
-      if (this.currentStep < this.numberOfSteps - 1 && this.currentStep !== -1) {
+    async nextStep () {
+      let futureStep = this.currentStep + 1
+
+      let process = () => new Promise((resolve, reject) => {
         this.customCallbacks.onNextStep(this.currentStep)
-        this.currentStep++
+        this.currentStep = futureStep
+        resolve()
+      })
+
+      if (futureStep < this.numberOfSteps && this.currentStep !== -1) {
+        let step = this.steps[futureStep]
+        if (typeof step.before !== 'undefined') {
+          try {
+            await step.before('next')
+          } catch (e) {
+            return Promise.reject(e)
+          }
+        }
+        await process()
       }
+
+      return Promise.resolve()
     },
     stop () {
       this.customCallbacks.onStop()
