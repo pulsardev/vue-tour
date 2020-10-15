@@ -1,5 +1,6 @@
 <template>
   <div class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
+    <div class="v-step__arrow" data-popper-arrow></div>
     <slot name="header">
       <div v-if="step.header" class="v-step__header">
         <div v-if="step.header.title" v-html="step.header.title"></div>
@@ -21,13 +22,11 @@
         <button @click.prevent="finish" v-if="isLast && isButtonEnabled('buttonStop')" class="v-step__button v-step__button-stop">{{ labels.buttonStop }}</button>
       </div>
     </slot>
-
-    <div class="v-step__arrow" :class="{ 'v-step__arrow--dark': step.header && step.header.title }"></div>
   </div>
 </template>
 
 <script>
-import Popper from 'popper.js'
+import { createPopper } from '@popperjs/core'
 import jump from 'jump.js'
 import sum from 'hash-sum'
 import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../shared/constants'
@@ -107,8 +106,9 @@ export default {
         this.enableScrolling()
         this.createHighlight()
 
-        /* eslint-disable no-new */
-        new Popper(
+        console.log(this.params)
+
+        createPopper(
           this.targetElement,
           this.$refs['v-step-' + this.hash],
           this.params
@@ -193,129 +193,100 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .v-step {
-    background: #50596c; /* #ffc107, #35495e */
-    color: white;
-    max-width: 320px;
-    border-radius: 3px;
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
-    padding: 1rem;
-    text-align: center;
-    z-index: 10000;
+.v-step {
+  background: #50596c; /* #ffc107, #35495e */
+  color: white;
+  max-width: 320px;
+  border-radius: 3px;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+  padding: 1rem;
+  text-align: center;
+  z-index: 10000;
+}
+
+.v-step .v-step__arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+}
+
+.v-step .v-step__arrow {
+  border-color: #50596c; /* #ffc107, #35495e */
+
+  &--dark {
+    border-color: #454d5d;
   }
+}
 
-  .v-step .v-step__arrow {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    position: absolute;
-    margin: 0.5rem;
+.v-step[data-popper-placement^="top"] .v-step__arrow {
+  border-width: 0.5rem 0.5rem 0 0.5rem;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  left: calc(50% - 1rem);
+}
+
+.v-step[data-popper-placement^="bottom"] .v-step__arrow {
+  border-width: 0 0.5rem 0.5rem 0.5rem;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  top: -0.5rem;
+  left: calc(50% - 1rem);
+}
+.v-step[data-popper-placement^="right"] .v-step__arrow {
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  left: -0.5rem;
+  top: calc(50% - 1rem);
+}
+.v-step[data-popper-placement^="left"] .v-step__arrow {
+  border-width: 0.5rem 0 0.5rem 0.5rem;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  right: -0.5rem;
+  top: calc(50% - 1rem);
+}
+
+/* Custom */
+
+.v-step__header {
+  padding: 0.5rem;
+  background-color: #454d5d;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.v-step__content {
+  margin: 0 0 0.4rem 0;
+}
+
+.v-step__button {
+  background: transparent;
+  border: .05rem solid white;
+  border-radius: .1rem;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: .8rem;
+  height: 1.8rem;
+  line-height: 1rem;
+  outline: none;
+  margin: 0 0.2rem;
+  padding: .35rem .4rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all .2s ease;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: rgba(white, 0.95);
+    color: #50596c;
   }
-
-  .v-step .v-step__arrow {
-    border-color: #50596c; /* #ffc107, #35495e */
-
-    &--dark {
-      border-color: #454d5d;
-    }
-  }
-
-  .v-step[x-placement^="top"] {
-    margin-bottom: 0.5rem;
-  }
-
-  .v-step[x-placement^="top"] .v-step__arrow {
-    border-width: 0.5rem 0.5rem 0 0.5rem;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-    bottom: -0.5rem;
-    left: calc(50% - 1rem);
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  .v-step[x-placement^="bottom"] {
-    margin-top: 0.5rem;
-  }
-
-  .v-step[x-placement^="bottom"] .v-step__arrow {
-    border-width: 0 0.5rem 0.5rem 0.5rem;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    border-top-color: transparent;
-    top: -0.5rem;
-    left: calc(50% - 1rem);
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  .v-step[x-placement^="right"] {
-    margin-left: 0.5rem;
-  }
-
-  .v-step[x-placement^="right"] .v-step__arrow {
-    border-width: 0.5rem 0.5rem 0.5rem 0;
-    border-left-color: transparent;
-    border-top-color: transparent;
-    border-bottom-color: transparent;
-    left: -0.5rem;
-    top: calc(50% - 1rem);
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .v-step[x-placement^="left"] {
-    margin-right: 0.5rem;
-  }
-
-  .v-step[x-placement^="left"] .v-step__arrow {
-    border-width: 0.5rem 0 0.5rem 0.5rem;
-    border-top-color: transparent;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-    right: -0.5rem;
-    top: calc(50% - 1rem);
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  /* Custom */
-
-  .v-step__header {
-    margin: -1rem -1rem 0.5rem;
-    padding: 0.5rem;
-    background-color: #454d5d;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-  }
-
-  .v-step__content {
-    margin: 0 0 1rem 0;
-  }
-
-  .v-step__button {
-    background: transparent;
-    border: .05rem solid white;
-    border-radius: .1rem;
-    color: white;
-    cursor: pointer;
-    display: inline-block;
-    font-size: .8rem;
-    height: 1.8rem;
-    line-height: 1rem;
-    outline: none;
-    margin: 0 0.2rem;
-    padding: .35rem .4rem;
-    text-align: center;
-    text-decoration: none;
-    transition: all .2s ease;
-    vertical-align: middle;
-    white-space: nowrap;
-
-    &:hover {
-      background-color: rgba(white, 0.95);
-      color: #50596c;
-    }
-  }
+}
 </style>
