@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
     <div class="v-step__arrow" data-popper-arrow></div>
     <slot name="header">
@@ -105,8 +105,6 @@ export default {
       if (this.targetElement) {
         this.enableScrolling()
         this.createHighlight()
-
-        console.log(this.params)
 
         createPopper(
           this.targetElement,
