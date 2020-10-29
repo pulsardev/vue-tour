@@ -71,10 +71,6 @@ export default {
   },
   mounted () {
     this.$tours[this.name] = this
-
-    if (this.customOptions.useKeyboardNavigation) {
-      window.addEventListener('keyup', this.handleKeyup)
-    }
   },
   beforeDestroy () {
     // Remove the keyup listener if it has been defined
@@ -119,6 +115,10 @@ export default {
       // Wait for the DOM to be loaded, then start the tour
       startStep = typeof startStep !== 'undefined' ? parseInt(startStep, 10) : 0
       let step = this.steps[startStep]
+
+      if (this.customOptions.useKeyboardNavigation) {
+        window.addEventListener('keyup', this.handleKeyup)
+      }
 
       let process = () => new Promise((resolve, reject) => {
         setTimeout(() => {
