@@ -118,9 +118,6 @@ export default {
 
       let process = () => new Promise((resolve, reject) => {
         setTimeout(() => {
-          if (this.customOptions.useKeyboardNavigation) {
-            window.addEventListener('keyup', this.handleKeyup)
-          }
           this.customCallbacks.onStart()
           this.currentStep = startStep
           resolve()
@@ -137,6 +134,10 @@ export default {
       await process()
 
       return Promise.resolve()
+
+      if (this.customOptions.useKeyboardNavigation) {
+        window.addEventListener('keyup', this.handleKeyup)
+      }
     },
     async previousStep () {
       let futureStep = this.currentStep - 1
