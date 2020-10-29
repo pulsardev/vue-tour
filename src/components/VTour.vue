@@ -113,15 +113,14 @@ export default {
   methods: {
     async start (startStep) {
       // Wait for the DOM to be loaded, then start the tour
-      if (this.customOptions.useKeyboardNavigation) {
-        window.addEventListener('keyup', this.handleKeyup)
-      }
-
       startStep = typeof startStep !== 'undefined' ? parseInt(startStep, 10) : 0
       let step = this.steps[startStep]
 
       let process = () => new Promise((resolve, reject) => {
         setTimeout(() => {
+          if (this.customOptions.useKeyboardNavigation) {
+            window.addEventListener('keyup', this.handleKeyup)
+          }
           this.customCallbacks.onStart()
           this.currentStep = startStep
           resolve()
