@@ -1,5 +1,5 @@
 <template>
-  <div class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
+  <div :class="['v-step', stepSize]" :id="'v-step-' + hash" :ref="'v-step-' + hash">
     <slot name="header">
       <div v-if="step.header" class="v-step__header">
         <div v-if="step.header.title" v-html="step.header.title"></div>
@@ -30,7 +30,7 @@
 import Popper from 'popper.js'
 import jump from 'jump.js'
 import sum from 'hash-sum'
-import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../shared/constants'
+import { DEFAULT_STEP_OPTIONS, HIGHLIGHT, STEP_SIZE } from '../shared/constants'
 
 export default {
   name: 'v-step',
@@ -79,12 +79,16 @@ export default {
     },
     debug: {
       type: Boolean
+    },
+    size: {
+      type: String
     }
   },
   data () {
     return {
       hash: sum(this.step.target),
-      targetElement: document.querySelector(this.step.target)
+      targetElement: document.querySelector(this.step.target),
+      stepSize: null
     }
   },
   computed: {
@@ -106,6 +110,7 @@ export default {
       if (this.targetElement) {
         this.enableScrolling()
         this.createHighlight()
+        this.setSize()
 
         /* eslint-disable no-new */
         new Popper(
@@ -181,6 +186,25 @@ export default {
     },
     isButtonEnabled (name) {
       return this.params.enabledButtons.hasOwnProperty(name) ? this.params.enabledButtons[name] : true
+    },
+    setSize () {
+      if (this.params.size) {
+        switch (this.params.size) {
+          case 'small':
+            this.stepSize = STEP_SIZE.CLASSES.SMALL
+            break
+          case 'medium':
+            this.stepSize = STEP_SIZE.CLASSES.MEDIUM
+            break
+          case 'large':
+            this.stepSize = STEP_SIZE.CLASSES.LARGE
+            break
+          default:
+            this.stepSize = ''
+        }
+      } else {
+        this.stepSize = ''
+      }
     }
   },
   mounted () {
@@ -196,12 +220,25 @@ export default {
   .v-step {
     background: #50596c; /* #ffc107, #35495e */
     color: white;
+    width: calc(100vw - 10px);
     max-width: 320px;
     border-radius: 3px;
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
     padding: 1rem;
     text-align: center;
     z-index: 10000;
+  }
+
+  .v-step--small {
+    max-width: 260px;
+  }
+
+  .v-step--medium {
+    max-width: 400px;
+  }
+
+  .v-step--large {
+    max-width: 580px;
   }
 
   .v-step .v-step__arrow {

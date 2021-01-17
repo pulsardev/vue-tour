@@ -55,6 +55,14 @@ export const DEFAULT_STEP_OPTIONS = {
   placement: 'bottom'
 }
 
+export const STEP_SIZE = {
+  CLASSES: {
+    SMALL: 'v-step--small',
+    MEDIUM: 'v-step--medium',
+    LARGE: 'v-step--large'
+  }
+}
+
 export const KEYS = {
   ARROW_RIGHT: 39,
   ARROW_LEFT: 37,
