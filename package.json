@@ -23,9 +23,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@popperjs/core": "^2.0.6",
     "hash-sum": "^2.0.0",
     "jump.js": "^1.0.2",
-    "popper.js": "^1.16.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {
