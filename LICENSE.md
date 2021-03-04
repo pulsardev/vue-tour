@@ -1,7 +1,7 @@
-Copyright for portions of project Foo are held by Pulsar, 2018 as part of project Bar.
-All other copyright for project Foo are held by Timur Girgin, 2021.
-
 MIT License
+
+Copyright for portions of vue-tour2 are held by Pulsar, 2018 as part of project Bar.
+All other copyright for vue-tour2 are held by Timur Girgin, 2021.
 
 Copyright (c) 2021 Timur Girgin
 
