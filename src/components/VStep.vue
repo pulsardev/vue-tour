@@ -29,8 +29,8 @@
 <script>
 import { createPopper } from '@popperjs/core'
 import jump from 'jump.js'
-import sum from 'hash-sum'
-import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../shared/constants'
+import { customAlphabet } from 'nanoid'
+import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '@/shared/constants'
 
 export default {
   name: 'v-step',
@@ -83,7 +83,7 @@ export default {
   },
   data () {
     return {
-      hash: sum(this.step.target),
+      hash: customAlphabet('1234567890abcdef', 8)(),
       targetElement: document.querySelector(this.step.target)
     }
   },
