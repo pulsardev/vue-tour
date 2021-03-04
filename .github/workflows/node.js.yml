@@ -28,4 +28,4 @@ jobs:
     - run: npm ci
     - run: npm run lint
     - run: npm run build --if-present
-    - run: npm test:unit
+    - run: npm run test:unit
