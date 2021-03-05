@@ -2,26 +2,16 @@
   "name": "vue-tour",
   "version": "1.5.0",
   "description": "Vue Tour is a lightweight, simple and customizable tour plugin for use with Vue.js. It provides a quick and easy way to guide your users through your application.",
-  "author": "Pulsar <pulsar.dev.team@gmail.com>",
-  "license": "MIT",
-  "main": "dist/vue-tour.common.js",
-  "module": "dist/vue-tour.umd.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pulsardev/vue-tour.git"
-  },
-  "typings": "types/index.d.ts",
-  "keywords": [
-    "vue",
-    "tour"
-  ],
-  "homepage": "https://pulsardev.github.io/vue-tour",
+  "author": "Timur Girgin",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib src/main.js",
     "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
+  "main": "dist/vue-tour.common.js",
+  "module": "dist/vue-tour.umd.js",
   "dependencies": {
     "@popperjs/core": "^2.9.0",
     "jump.js": "^1.0.2",
@@ -30,6 +20,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-e2e-cypress": "^4.5.11",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-plugin-unit-jest": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
@@ -37,10 +28,22 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-eslint": "^10.0.3",
     "core-js": "^3.4.3",
+    "cypress": "^6.6.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.23.7",
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10"
-  }
+  },
+  "homepage": "https://pulsardev.github.io/vue-tour",
+  "keywords": [
+    "vue",
+    "tour"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tgirgin23/vue-tour2.git"
+  },
+  "typings": "types/index.d.ts"
 }
