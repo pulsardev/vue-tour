@@ -198,7 +198,7 @@ export default {
     color: white;
     max-width: 320px;
     border-radius: 3px;
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     padding: 1rem;
     text-align: center;
     z-index: 10000;
