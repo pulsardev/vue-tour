@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import Popper from 'popper.js'
+import { createPopper } from '@popperjs/core'
 import jump from 'jump.js'
 import sum from 'hash-sum'
 import { DEFAULT_STEP_OPTIONS, HIGHLIGHT } from '../shared/constants'
@@ -108,7 +108,7 @@ export default {
         this.createHighlight()
 
         /* eslint-disable no-new */
-        new Popper(
+        createPopper(
           this.targetElement,
           this.$refs['v-step-' + this.hash],
           this.params
