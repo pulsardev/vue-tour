@@ -4965,6 +4965,11 @@ var DEFAULT_STEP_OPTIONS = {
     options: {
       element: '.v-step__arrow'
     }
+  }, {
+    name: 'preventOverflow',
+    options: {
+      rootBoundary: 'window'
+    }
   }],
   placement: 'bottom'
 };
