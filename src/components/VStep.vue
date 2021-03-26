@@ -1,5 +1,5 @@
 <template>
-  <div class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
+  <div v-bind:class="{ 'v-step-sticky': isSticky }" class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
     <slot name="header">
       <div v-if="step.header" class="v-step__header">
         <div v-if="step.header.title" v-html="step.header.title"></div>
@@ -95,12 +95,30 @@ export default {
         ...{ enabledButtons: Object.assign({}, this.enabledButtons) },
         ...this.step.params // Then use local step parameters if defined
       }
+    },
+    isSticky () {
+      return (this.params.type === 'sticky')
     }
   },
   methods: {
     createStep () {
       if (this.debug) {
         console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', this.targetElement)
+      }
+
+      if (this.isSticky) {
+        this.targetElement = document.getElementById(STICKY.ID)
+
+        if (!this.targetElement) {
+          const newDiv = document.createElement('div')
+          newDiv.id = STICKY.ID
+
+          this.targetElement = document.body.appendChild(newDiv)
+        } else {
+          this.targetElement.style.display = 'block'
+        }
+      } else {
+        document.getElementById(STICKY.ID).style.display = 'none'
       }
 
       if (this.targetElement) {
@@ -202,6 +220,18 @@ export default {
     padding: 1rem;
     text-align: center;
     z-index: 10000;
+
+    &--sticky {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 50vw;
+      max-width: 100vw;
+
+      & .v-step__arrow {
+        display: none;
+      }
+    }
   }
 
   .v-step .v-step__arrow {
