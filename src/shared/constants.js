@@ -59,6 +59,12 @@ export const DEFAULT_STEP_OPTIONS = {
       options: {
         rootBoundary: 'window'
       }
+    },
+    {
+      name: 'offset',
+      options: {
+        offset: [0, 15]
+      }
     }
   ],
   placement: 'bottom'
