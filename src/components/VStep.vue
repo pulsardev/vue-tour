@@ -22,7 +22,7 @@
       </div>
     </slot>
 
-    <div class="v-step__arrow" :class="{ 'v-step__arrow--dark': step.header && step.header.title }"></div>
+    <div class="v-step__arrow" :class="{ 'v-step__arrow--dark': step.header && step.header.title }" data-popper-arrow></div>
   </div>
 </template>
 
@@ -207,80 +207,45 @@ export default {
     z-index: 10000;
   }
 
-  .v-step .v-step__arrow {
-    width: 0;
-    height: 0;
-    border-style: solid;
+  .v-step__arrow,
+  .v-step__arrow::before {
     position: absolute;
-    margin: 0.5rem;
+    width: 10px;
+    height: 10px;
+    background: inherit;
   }
 
-  .v-step .v-step__arrow {
-    border-color: #50596c; /* #ffc107, #35495e */
+  .v-step__arrow {
+    visibility: hidden;
 
     &--dark {
-      border-color: #454d5d;
+      &:before {
+        background: #454d5d;
+      }
     }
   }
 
-  .v-step[data-popper-placement^="top"] {
-    margin-bottom: 0.5rem;
+  .v-step__arrow::before {
+    visibility: visible;
+    content: '';
+    transform: rotate(45deg);
+    margin-left: -5px;
   }
 
-  .v-step[data-popper-placement^="top"] .v-step__arrow {
-    border-width: 0.5rem 0.5rem 0 0.5rem;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-    bottom: -0.5rem;
-    left: calc(50% - 1rem);
-    margin-top: 0;
-    margin-bottom: 0;
+  .v-step[data-popper-placement^="top"] > .v-step__arrow {
+    bottom: -5px;
   }
 
-  .v-step[data-popper-placement^="bottom"] {
-    margin-top: 0.5rem;
+  .v-step[data-popper-placement^="bottom"] > .v-step__arrow {
+    top: -5px;
   }
 
-  .v-step[data-popper-placement^="bottom"] .v-step__arrow {
-    border-width: 0 0.5rem 0.5rem 0.5rem;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    border-top-color: transparent;
-    top: -0.5rem;
-    left: calc(50% - 1rem);
-    margin-top: 0;
-    margin-bottom: 0;
+  .v-step[data-popper-placement^="right"] > .v-step__arrow {
+    left: -5px;
   }
 
-  .v-step[data-popper-placement^="right"] {
-    margin-left: 0.5rem;
-  }
-
-  .v-step[data-popper-placement^="right"] .v-step__arrow {
-    border-width: 0.5rem 0.5rem 0.5rem 0;
-    border-left-color: transparent;
-    border-top-color: transparent;
-    border-bottom-color: transparent;
-    left: -0.5rem;
-    top: calc(50% - 1rem);
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .v-step[data-popper-placement^="left"] {
-    margin-right: 0.5rem;
-  }
-
-  .v-step[data-popper-placement^="left"] .v-step__arrow {
-    border-width: 0.5rem 0 0.5rem 0.5rem;
-    border-top-color: transparent;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-    right: -0.5rem;
-    top: calc(50% - 1rem);
-    margin-left: 0;
-    margin-right: 0;
+  .v-step[data-popper-placement^="left"] > .v-step__arrow {
+    right: -5px;
   }
 
   /* Custom */

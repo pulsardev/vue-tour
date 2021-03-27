@@ -51,7 +51,8 @@ export const DEFAULT_STEP_OPTIONS = {
     {
       name: 'arrow',
       options: {
-        element: '.v-step__arrow'
+        element: '.v-step__arrow',
+        padding: 10
       }
     },
     {
