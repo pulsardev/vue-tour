@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:class="{ 'v-step-sticky': isSticky }" class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
+  <div v-bind:class="{ 'v-step--sticky': isSticky }" class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
     <slot name="header">
       <div v-if="step.header" class="v-step__header">
         <div v-if="step.header.title" v-html="step.header.title"></div>
@@ -96,8 +96,11 @@ export default {
         ...this.step.params // Then use local step parameters if defined
       }
     },
+    /**
+     * A step is considered sticky if it has no target.
+     */
     isSticky () {
-      return (this.params.type === 'sticky')
+      return !this.step.target
     }
   },
   methods: {
@@ -107,37 +110,26 @@ export default {
       }
 
       if (this.isSticky) {
-        this.targetElement = document.getElementById(STICKY.ID)
+        document.body.appendChild(this.$refs['v-step-' + this.hash])
+      } else {
+        if (this.targetElement) {
+          this.enableScrolling()
+          this.createHighlight()
 
-        if (!this.targetElement) {
-          const newDiv = document.createElement('div')
-          newDiv.id = STICKY.ID
-
-          this.targetElement = document.body.appendChild(newDiv)
+          /* eslint-disable no-new */
+          new Popper(
+            this.targetElement,
+            this.$refs['v-step-' + this.hash],
+            this.params
+          )
         } else {
-          this.targetElement.style.display = 'block'
-        }
-      } else {
-        document.getElementById(STICKY.ID).style.display = 'none'
-      }
-
-      if (this.targetElement) {
-        this.enableScrolling()
-        this.createHighlight()
-
-        /* eslint-disable no-new */
-        new Popper(
-          this.targetElement,
-          this.$refs['v-step-' + this.hash],
-          this.params
-        )
-      } else {
-        if (this.debug) {
-          console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
-        }
-        this.$emit('targetNotFound', this.step)
-        if (this.stopOnFail) {
-          this.stop()
+          if (this.debug) {
+            console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
+          }
+          this.$emit('targetNotFound', this.step)
+          if (this.stopOnFail) {
+            this.stop()
+          }
         }
       }
     },
@@ -216,17 +208,20 @@ export default {
     color: white;
     max-width: 320px;
     border-radius: 3px;
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     padding: 1rem;
+    pointer-events: auto;
     text-align: center;
     z-index: 10000;
 
     &--sticky {
-      position: absolute;
-      left: 0;
-      right: 0;
-      width: 50vw;
-      max-width: 100vw;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
 
       & .v-step__arrow {
         display: none;
