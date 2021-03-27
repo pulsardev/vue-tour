@@ -1,5 +1,5 @@
 <template>
-  <div class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
+  <div v-bind:class="{ 'v-step--sticky': isSticky }" class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
     <slot name="header">
       <div v-if="step.header" class="v-step__header">
         <div v-if="step.header.title" v-html="step.header.title"></div>
@@ -95,6 +95,12 @@ export default {
         ...{ enabledButtons: Object.assign({}, this.enabledButtons) },
         ...this.step.params // Then use local step parameters if defined
       }
+    },
+    /**
+     * A step is considered sticky if it has no target.
+     */
+    isSticky () {
+      return !this.step.target
     }
   },
   methods: {
@@ -103,23 +109,27 @@ export default {
         console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', this.targetElement)
       }
 
-      if (this.targetElement) {
-        this.enableScrolling()
-        this.createHighlight()
-
-        /* eslint-disable no-new */
-        new Popper(
-          this.targetElement,
-          this.$refs['v-step-' + this.hash],
-          this.params
-        )
+      if (this.isSticky) {
+        document.body.appendChild(this.$refs['v-step-' + this.hash])
       } else {
-        if (this.debug) {
-          console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
-        }
-        this.$emit('targetNotFound', this.step)
-        if (this.stopOnFail) {
-          this.stop()
+        if (this.targetElement) {
+          this.enableScrolling()
+          this.createHighlight()
+
+          /* eslint-disable no-new */
+          new Popper(
+            this.targetElement,
+            this.$refs['v-step-' + this.hash],
+            this.params
+          )
+        } else {
+          if (this.debug) {
+            console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
+          }
+          this.$emit('targetNotFound', this.step)
+          if (this.stopOnFail) {
+            this.stop()
+          }
         }
       }
     },
@@ -198,10 +208,25 @@ export default {
     color: white;
     max-width: 320px;
     border-radius: 3px;
-    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+      rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     padding: 1rem;
+    pointer-events: auto;
     text-align: center;
     z-index: 10000;
+
+    &--sticky {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      & .v-step__arrow {
+        display: none;
+      }
+    }
   }
 
   .v-step .v-step__arrow {

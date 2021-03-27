@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/pulsardev/vue-tour/compare/v1.5.0...v1.6.0) (2021-03-27)
+
+
+### Bug Fixes
+
+* move the keyup listener before the return ([f42f637](https://github.com/pulsardev/vue-tour/commit/f42f637))
+
+
+### Features
+
+* add sticky step ([1777d08](https://github.com/pulsardev/vue-tour/commit/1777d08))
+
 ## [1.5.0](https://github.com/pulsardev/vue-tour/compare/v1.4.0...v1.5.0) (2020-07-10)
 
 
