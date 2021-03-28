@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import Vue from 'vue'
 import VueTour from '@/main'
 import VTour from '@/components/VTour.vue'
@@ -41,7 +41,7 @@ describe('VTour.vue', () => {
   })
 
   it('stays within the boundaries of the number of steps', async () => {
-    const wrapper = mount(VTour, {
+    const wrapper = shallowMount(VTour, {
       propsData: {
         name: 'myTestTour',
         steps
@@ -109,7 +109,7 @@ describe('VTour.vue', () => {
     ]
 
     it('invokes before() on start()', async () => {
-      const wrapper = mount(VTour, {
+      const wrapper = shallowMount(VTour, {
         propsData: {
           name: 'myTestTour',
           steps: beforeSteps
@@ -125,7 +125,7 @@ describe('VTour.vue', () => {
     })
 
     it('invokes before() on nextStep()', async () => {
-      const wrapper = mount(VTour, {
+      const wrapper = shallowMount(VTour, {
         propsData: {
           name: 'myTestTour',
           steps: beforeSteps
@@ -161,7 +161,7 @@ describe('VTour.vue', () => {
     })
 
     it('handles before() promise rejection on nextStep()', async () => {
-      const wrapper = mount(VTour, {
+      const wrapper = shallowMount(VTour, {
         propsData: {
           name: 'myTestTour',
           steps: beforeSteps
@@ -180,7 +180,7 @@ describe('VTour.vue', () => {
     })
 
     it('handles before() promise rejection on previousStep()', async () => {
-      const wrapper = mount(VTour, {
+      const wrapper = shallowMount(VTour, {
         propsData: {
           name: 'myTestTour',
           steps: beforeSteps

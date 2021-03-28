@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [2.0.0](https://github.com/pulsardev/vue-tour/compare/v1.6.0...v2.0.0) (2021-03-28)
+
+
+### Bug Fixes
+
+* change offset and shadow ([6359b43](https://github.com/pulsardev/vue-tour/commit/6359b43))
+* fix the arrow position ([4a2297b](https://github.com/pulsardev/vue-tour/commit/4a2297b))
+
+
+### Features
+
+* update Popper.js to v2.x ([5d8f790](https://github.com/pulsardev/vue-tour/pull/177/commits/5d8f790))
+
+
+### BREAKING CHANGES
+
+* **Popper.js:** as Popper.js has been updated, all custom Popper.js options passed in step params must be changed to their Popper.js v2.x equivalent.
+* **options:** all custom options are now in camelCase. If you customized highlight classes, you should change the options' keys to camelCase. See ([9041d2f](https://github.com/pulsardev/vue-tour/commit/9041d2f)) for the complete change.
+
 ## [1.6.0](https://github.com/pulsardev/vue-tour/compare/v1.5.0...v1.6.0) (2021-03-27)
 
 

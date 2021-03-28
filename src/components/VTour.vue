@@ -206,13 +206,13 @@ export default {
       }
       switch (e.keyCode) {
         case KEYS.ARROW_RIGHT:
-          this.isKeyEnabled('ARROW_RIGHT') && this.nextStep()
+          this.isKeyEnabled('arrowRight') && this.nextStep()
           break
         case KEYS.ARROW_LEFT:
-          this.isKeyEnabled('ARROW_LEFT') && this.previousStep()
+          this.isKeyEnabled('arrowLeft') && this.previousStep()
           break
         case KEYS.ESCAPE:
-          this.isKeyEnabled('ESCAPE') && this.stop()
+          this.isKeyEnabled('escape') && this.stop()
           break
       }
     },
