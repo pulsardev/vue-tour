@@ -1,8 +1,7 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-<a name="2.0.0"></a>
 # [2.0.0](https://github.com/pulsardev/vue-tour/compare/v1.6.0...v2.0.0) (2021-03-28)
 
 
@@ -12,6 +11,75 @@ All notable changes to this project will be documented in this file. See [standa
 * fix the arrow position ([4a2297b](https://github.com/pulsardev/vue-tour/commit/4a2297b))
 
 
+### Features
+
+* update Popper.js to v2.x ([5d8f790](https://github.com/pulsardev/vue-tour/pull/177/commits/5d8f790))
+
+
+### BREAKING CHANGES
+
+* **Popper.js:** as Popper.js has been updated, all custom Popper.js options passed in step params must be changed to their Popper.js v2.x equivalent.
+* **options:** all custom options are now in camelCase. If you customized highlight classes, you should change the options' keys to camelCase. See ([9041d2f](https://github.com/pulsardev/vue-tour/commit/9041d2f)) for the complete change.
+
+## [1.6.0](https://github.com/pulsardev/vue-tour/compare/v1.5.0...v1.6.0) (2021-03-27)
+
+
+### Bug Fixes
+
+* move the keyup listener before the return ([f42f637](https://github.com/pulsardev/vue-tour/commit/f42f637))
+
+
+### Features
+
+* add sticky step ([1777d08](https://github.com/pulsardev/vue-tour/commit/1777d08))
+
+## [1.5.0](https://github.com/pulsardev/vue-tour/compare/v1.4.0...v1.5.0) (2020-07-10)
+
+
+### Features
+
+* **before:** adds support for rejecting promises from the before method along with supporting unit tests ([bfee650](https://github.com/pulsardev/vue-tour/commit/bfee65028af3bb7af38257af2196272d00237df1))
+* **tour:** added promises for start, next, and prev so that users of the component may do async operations to get the UI in a good state ([3af3496](https://github.com/pulsardev/vue-tour/commit/3af3496c8c32ebc27461df62ada62b0263670db3))
+
+## [1.4.0](https://github.com/pulsardev/vue-tour/compare/v1.3.1...v1.4.0) (2020-05-30)
+
+
+### Features
+
+* enable specific navigation keys ([89ff650](https://github.com/pulsardev/vue-tour/commit/89ff650ffbde5c4a87614bcb31f774231f336a2e))
+
+### [1.3.1](https://github.com/pulsardev/vue-tour/compare/v1.3.0...v1.3.1) (2020-05-08)
+
+
+### Features
+
+* provide types for typescript ([eee7fef](https://github.com/pulsardev/vue-tour/commit/eee7fef6d7ae549b28a7b640bafdda621814f147))
+
+## [1.3.0](https://github.com/pulsardev/vue-tour/compare/v1.2.0...v1.3.0) (2020-02-06)
+
+
+### Features
+
+* add example step title and link to placement options ([4cd8ccc](https://github.com/pulsardev/vue-tour/commit/4cd8ccc0794f739cee2ef3d8141ad291ee92faa2))
+* add options.debug flag for console output ([effbd1d](https://github.com/pulsardev/vue-tour/commit/effbd1dd18708a610670765bdad2416af9e18d7d)), closes [#101](https://github.com/pulsardev/vue-tour/issues/101)
+* **buttons:** support global and per step button configuration ([86fd9b8](https://github.com/pulsardev/vue-tour/commit/86fd9b813fa6416f2c99b45a3f781384361eb162))
+* add BEM compliant class names to step buttons ([34b9625](https://github.com/pulsardev/vue-tour/commit/34b96254c501ac0f243d243fd837b4e9eadb261a))
+* add highlight ([e6a2a2d](https://github.com/pulsardev/vue-tour/commit/e6a2a2d4da7d146340e22e750efb811a214b8d33))
+* **highlight:** add the possibility to highlight elements during the tour ([f828b12](https://github.com/pulsardev/vue-tour/commit/f828b1210257aaf6a39b0151022701c0b1332cac))
+* add enabledButtons new props (all true by default) which can ([1354557](https://github.com/pulsardev/vue-tour/commit/13545575e78327e40e20af9fab7fc9889e8061c6))
+
+
+### Bug Fixes
+
+* pass a copy of the enabledButtons configuration object ([9fb0ec9](https://github.com/pulsardev/vue-tour/commit/9fb0ec92f1176905edf7cca36f18eda0894ffb70))
+
+## [1.2.0](https://github.com/pulsardev/vue-tour/compare/v1.1.0...v1.2.0) (2019-12-29)
+
+
+### Features
+
+* **highlight:** add the possibility to highlight elements during the tour ([317ff35](https://github.com/pulsardev/vue-tour/commit/317ff359ff2be18a2f8d8ffe3a3c5be93e458175))
+* add highlight ([5363d42](https://github.com/pulsardev/vue-tour/commit/5363d42fc6c1b7eca23b8c6e4c33d3108184924f))
 
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/pulsardev/vue-tour/compare/v1.0.1...v1.1.0) (2018-10-16)
