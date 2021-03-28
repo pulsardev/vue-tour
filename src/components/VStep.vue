@@ -116,8 +116,7 @@ export default {
           this.enableScrolling()
           this.createHighlight()
 
-          /* eslint-disable no-new */
-          new Popper(
+          createPopper(
             this.targetElement,
             this.$refs['v-step-' + this.hash],
             this.params
