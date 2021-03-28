@@ -148,33 +148,33 @@ export default {
     },
     createHighlight () {
       if (this.isHighlightEnabled()) {
-        document.body.classList.add(HIGHLIGHT.CLASSES.ACTIVE)
+        document.body.classList.add(HIGHLIGHT.classes.active)
         const transitionValue = window.getComputedStyle(this.targetElement).getPropertyValue('transition')
 
         // Make sure our background doesn't flick on transitions
         if (transitionValue !== 'all 0s ease 0s') {
-          this.targetElement.style.transition = `${transitionValue}, ${HIGHLIGHT.TRANSITION}`
+          this.targetElement.style.transition = `${transitionValue}, ${HIGHLIGHT.transition}`
         }
 
-        this.targetElement.classList.add(HIGHLIGHT.CLASSES.TARGET_HIGHLIGHTED)
+        this.targetElement.classList.add(HIGHLIGHT.classes.targetHighlighted)
         // The element must have a position, if it doesn't have one, add a relative position class
         if (!this.targetElement.style.position) {
-          this.targetElement.classList.add(HIGHLIGHT.CLASSES.TARGET_RELATIVE)
+          this.targetElement.classList.add(HIGHLIGHT.classes.targetRelative)
         }
       } else {
-        document.body.classList.remove(HIGHLIGHT.CLASSES.ACTIVE)
+        document.body.classList.remove(HIGHLIGHT.classes.active)
       }
     },
     removeHighlight () {
       if (this.isHighlightEnabled()) {
         const target = this.targetElement
         const currentTransition = this.targetElement.style.transition
-        this.targetElement.classList.remove(HIGHLIGHT.CLASSES.TARGET_HIGHLIGHTED)
-        this.targetElement.classList.remove(HIGHLIGHT.CLASSES.TARGET_RELATIVE)
+        this.targetElement.classList.remove(HIGHLIGHT.classes.targetHighlighted)
+        this.targetElement.classList.remove(HIGHLIGHT.classes.targetRelative)
         // Remove our transition when step is finished.
-        if (currentTransition.includes(HIGHLIGHT.TRANSITION)) {
+        if (currentTransition.includes(HIGHLIGHT.transition)) {
           setTimeout(() => {
-            target.style.transition = currentTransition.replace(`, ${HIGHLIGHT.TRANSITION}`, '')
+            target.style.transition = currentTransition.replace(`, ${HIGHLIGHT.transition}`, '')
           }, 0)
         }
       }

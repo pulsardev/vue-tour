@@ -22,25 +22,23 @@ export const DEFAULT_OPTIONS = {
     buttonStop: true
   },
   startTimeout: 0,
+  stopOnTargetNotFound: true,
   useKeyboardNavigation: true,
   enabledNavigationKeys: {
-    ESCAPE: true,
-    ARROW_RIGHT: true,
-    ARROW_LEFT: true
+    escape: true,
+    arrowRight: true,
+    arrowLeft: true
   },
   debug: false
 }
 
 export const HIGHLIGHT = {
-  CLASSES: {
-    ACTIVE: 'v-tour--active',
-    TARGET_HIGHLIGHTED: 'v-tour__target--highlighted',
-    TARGET_RELATIVE: 'v-tour__target--relative'
+  classes: {
+    active: 'v-tour--active',
+    targetHighlighted: 'v-tour__target--highlighted',
+    targetRelative: 'v-tour__target--relative'
   },
-  TRANSITION: 'box-shadow 0s ease-in-out 0s',
-  useKeyboardNavigation: true,
-  startTimeout: 0,
-  stopOnTargetNotFound: true
+  transition: 'box-shadow 0s ease-in-out 0s'
 }
 
 export const DEFAULT_STEP_OPTIONS = {
