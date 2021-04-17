@@ -79,6 +79,9 @@ export default {
     },
     debug: {
       type: Boolean
+    },
+    ionic: {
+      type: Boolean
     }
   },
   data () {
@@ -142,7 +145,7 @@ export default {
             a11y: false
           }
 
-          jump(this.targetElement, jumpOptions)
+          !this.ionic ? jump(this.targetElement, jumpOptions) : this.ionicScroll(jumpOptions)
         } else {
           // Use the native scroll by default if no scroll options has been defined
           this.targetElement.scrollIntoView({ behavior: 'smooth' })
@@ -190,6 +193,19 @@ export default {
     },
     isButtonEnabled (name) {
       return this.params.enabledButtons.hasOwnProperty(name) ? this.params.enabledButtons[name] : true
+    },
+    getOffset (jumpOptions) {
+      const elemRect = this.targetElement.getBoundingClientRect()
+      let offset = elemRect.top
+      if (jumpOptions.offset) {
+        offset += jumpOptions.offset
+      }
+
+      return offset
+    },
+    ionicScroll (jumpOptions) {
+      const offset = this.getOffset(jumpOptions)
+      document.querySelector('ion-content').scrollByPoint(0, offset, this.step.duration || 1000)
     }
   },
   mounted () {
