@@ -72,7 +72,7 @@ export default {
   mounted () {
     this.$tours[this.name] = this
   },
-  beforeDestroy () {
+  beforeUnmount () {
     // Remove the keyup listener if it has been defined
     if (this.customOptions.useKeyboardNavigation) {
       window.removeEventListener('keyup', this.handleKeyup)

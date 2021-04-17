@@ -195,7 +195,7 @@ export default {
   mounted () {
     this.createStep()
   },
-  destroyed () {
+  unmounted () {
     this.removeHighlight()
   }
 }

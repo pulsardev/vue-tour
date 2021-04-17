@@ -1,9 +1,6 @@
 import { mount, shallowMount } from '@vue/test-utils'
-import Vue from 'vue'
 import VueTour from '@/main'
 import VTour from '@/components/VTour.vue'
-
-Vue.use(VueTour)
 
 const steps = [
   {
@@ -22,6 +19,9 @@ describe('VTour.vue', () => {
       propsData: {
         name: 'myTestTour',
         steps
+      },
+      global: {
+        plugins: [VueTour]
       }
     })
 
@@ -33,6 +33,9 @@ describe('VTour.vue', () => {
       propsData: {
         name: 'myTestTour',
         steps: []
+      },
+      global: {
+        plugins: [VueTour]
       }
     })
 
@@ -45,6 +48,9 @@ describe('VTour.vue', () => {
       propsData: {
         name: 'myTestTour',
         steps
+      },
+      global: {
+        plugins: [VueTour]
       }
     })
 
@@ -113,6 +119,9 @@ describe('VTour.vue', () => {
         propsData: {
           name: 'myTestTour',
           steps: beforeSteps
+        },
+        global: {
+          plugins: [VueTour]
         }
       })
 
@@ -129,6 +138,9 @@ describe('VTour.vue', () => {
         propsData: {
           name: 'myTestTour',
           steps: beforeSteps
+        },
+        global: {
+          plugins: [VueTour]
         }
       })
 
@@ -148,6 +160,9 @@ describe('VTour.vue', () => {
         propsData: {
           name: 'myTestTour',
           steps: beforeSteps
+        },
+        global: {
+          plugins: [VueTour]
         }
       })
 
@@ -165,6 +180,9 @@ describe('VTour.vue', () => {
         propsData: {
           name: 'myTestTour',
           steps: beforeSteps
+        },
+        global: {
+          plugins: [VueTour]
         }
       })
 
@@ -184,6 +202,9 @@ describe('VTour.vue', () => {
         propsData: {
           name: 'myTestTour',
           steps: beforeSteps
+        },
+        global: {
+          plugins: [VueTour]
         }
       })
 
