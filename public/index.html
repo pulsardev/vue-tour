@@ -98,7 +98,7 @@
                 <button @click="nextStep" class="btn btn-lg mr-2">Next step</button>
                 <button @click="showLastStep" class="btn btn-lg">Show last step</button>
 
-                <v-tour name="myTour" :steps="steps" :callbacks="callbacks" :options="{ highlight: true, debug: true, ionic: true }">
+                <v-tour name="myTour" :steps="steps" :callbacks="callbacks" :options="{ highlight: true }">
                   <template v-slot="tour">
                     <transition name="fade">
                       <tour-steps :tour="tour"></tour-steps>
@@ -259,7 +259,6 @@
                :is-last="tour.isLast"
                :labels="tour.labels"
                :highlight="tour.highlight"
-               :ionic="true"
        >
          <template v-if="tour.currentStep === 2">
            <div slot="actions">
