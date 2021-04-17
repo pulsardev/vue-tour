@@ -299,7 +299,7 @@ export default {
     margin: 0 0 1rem 0;
   }
 
-  ::v-deep .v-step__button {
+  ::v-deep(.v-step__button) {
     background: transparent;
     border: .05rem solid white;
     border-radius: .1rem;
