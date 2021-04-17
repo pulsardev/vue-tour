@@ -25,8 +25,7 @@
   "dependencies": {
     "@popperjs/core": "^2.9.1",
     "hash-sum": "^2.0.0",
-    "jump.js": "^1.0.2",
-    "rollup-plugin-copy": "^3.4.0"
+    "jump.js": "^1.0.2"
   },
   "devDependencies": {
     "@rollup/plugin-dynamic-import-vars": "^1.1.1",
@@ -46,6 +45,7 @@
     "sass-loader": "^8.0.2",
     "vite": "^2.1.5",
     "vue": "^3.0.11",
-    "webpack": "^4.46.0"
+    "webpack": "^4.46.0",
+    "rollup-plugin-copy": "^3.4.0"
   }
 }
