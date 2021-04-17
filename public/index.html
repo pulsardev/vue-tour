@@ -98,12 +98,10 @@
                 <button @click="nextStep" class="btn btn-lg mr-2">Next step</button>
                 <button @click="showLastStep" class="btn btn-lg">Show last step</button>
 
-                <v-tour name="myTour" :steps="steps" :callbacks="callbacks" :options="{ highlight: true }">
-                  <template v-slot="tour">
-                    <transition name="fade">
+                <v-tour v-slot="tour" name="myTour" :steps="steps" :callbacks="callbacks" :options="{ highlight: true }">
+                  <transition name="fade">
                       <tour-steps :tour="tour"></tour-steps>
                     </transition>
-                  </template>
                 </v-tour>
               </div>
 
@@ -260,8 +258,8 @@
                :labels="tour.labels"
                :highlight="tour.highlight"
        >
-         <template v-if="tour.currentStep === 2">
-           <div slot="actions">
+         <template v-slot:actions>
+           <div v-if="tour.currentStep === 2">
              <button @click="tour.previousStep" class="btn btn-primary mr-2">Previous step</button>
              <button @click="tour.nextStep" class="btn btn-primary">Next step</button>
            </div>
