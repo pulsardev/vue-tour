@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <base href="/" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="./favicon.ico">
     <title>vue-tour-landing</title>
 
-    <script src="https://unpkg.com/vue"></script>
-    <script src="../dist/vue-tour.umd.min.js"></script>
-    <link rel="stylesheet" href="../dist/vue-tour.css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="vue-tour.umd.js"></script>
+    <link rel="stylesheet" href="vue-tour.css">
     <link rel="stylesheet" href="./css/app.css">
   </head>
 
@@ -97,31 +98,10 @@
                 <button @click="nextStep" class="btn btn-lg mr-2">Next step</button>
                 <button @click="showLastStep" class="btn btn-lg">Show last step</button>
 
-                <v-tour name="myTour" :steps="steps" :callbacks="callbacks" :options="{ highlight: true }">
-                  <template slot-scope="tour">
-                    <transition name="fade">
-                      <v-step
-                        v-if="tour.currentStep === index"
-                        v-for="(step, index) of tour.steps"
-                        :key="index"
-                        :step="step"
-                        :previous-step="tour.previousStep"
-                        :next-step="tour.nextStep"
-                        :stop="tour.stop"
-                        :is-first="tour.isFirst"
-                        :is-last="tour.isLast"
-                        :labels="tour.labels"
-                        :highlight="tour.highlight"
-                      >
-                        <template v-if="tour.currentStep === 2">
-                          <div slot="actions">
-                            <button @click="tour.previousStep" class="btn btn-primary mr-2">Previous step</button>
-                            <button @click="tour.nextStep" class="btn btn-primary">Next step</button>
-                          </div>
-                        </template>
-                      </v-step>
+                <v-tour v-slot="tour" name="myTour" :steps="steps" :callbacks="callbacks" :options="{ highlight: true }">
+                  <transition name="fade">
+                      <tour-steps :tour="tour"></tour-steps>
                     </transition>
-                  </template>
                 </v-tour>
               </div>
 
@@ -184,10 +164,10 @@
   </body>
 
   <script>
-  new Vue({
+    const app = Vue.createApp({
     data () {
       return {
-        version: '1.1.0',
+        version: '3.0.0',
 
         steps: [
           {
@@ -260,6 +240,36 @@
         }
       }
     }
-  }).$mount('#app')
+  }).use(VueTour)
+
+  app.component('tour-steps', {
+      props: ['tour'],
+      template: `
+     <div>
+       <div v-for="(step, index) of tour.steps" :key="index">
+       <v-step
+               v-if="tour.currentStep === index"
+               :step="step"
+               :previous-step="tour.previousStep"
+               :next-step="tour.nextStep"
+               :stop="tour.stop"
+               :is-first="tour.isFirst"
+               :is-last="tour.isLast"
+               :labels="tour.labels"
+               :highlight="tour.highlight"
+       >
+         <template v-slot:actions>
+           <div v-if="tour.currentStep === 2">
+             <button @click="tour.previousStep" class="btn btn-primary mr-2">Previous step</button>
+             <button @click="tour.nextStep" class="btn btn-primary">Next step</button>
+           </div>
+         </template>
+       </v-step>
+     </div>
+     </div>`
+  })
+
+  app.mount('#app')
+
   </script>
 </html>

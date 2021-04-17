@@ -32,6 +32,7 @@
         :highlight="customOptions.highlight"
         :stop-on-fail="customOptions.stopOnTargetNotFound"
         :debug="customOptions.debug"
+        :ionic="customOptions.ionic"
         @targetNotFound="$emit('targetNotFound', $event)"
       >
         <!--<div v-if="index === 2" slot="actions">
@@ -72,7 +73,7 @@ export default {
   mounted () {
     this.$tours[this.name] = this
   },
-  beforeDestroy () {
+  beforeUnmount () {
     // Remove the keyup listener if it has been defined
     if (this.customOptions.useKeyboardNavigation) {
       window.removeEventListener('keyup', this.handleKeyup)
