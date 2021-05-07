@@ -77,6 +77,12 @@ export default {
     stopOnFail: {
       type: Boolean
     },
+    continueWhenFail: {
+      type: Boolean
+    },
+    forward: {
+      type: Boolean
+    },
     debug: {
       type: Boolean
     }
@@ -128,6 +134,12 @@ export default {
           this.$emit('targetNotFound', this.step)
           if (this.stopOnFail) {
             this.stop()
+          } else if (this.continueWhenFail) {
+            if (this.forward) {
+              this.nextStep()
+            } else {
+              this.previousStep()
+            }
           }
         }
       }
@@ -176,15 +188,17 @@ export default {
     },
     removeHighlight () {
       if (this.isHighlightEnabled()) {
-        const target = this.targetElement
-        const currentTransition = this.targetElement.style.transition
-        this.targetElement.classList.remove(HIGHLIGHT.classes.targetHighlighted)
-        this.targetElement.classList.remove(HIGHLIGHT.classes.targetRelative)
-        // Remove our transition when step is finished.
-        if (currentTransition.includes(HIGHLIGHT.transition)) {
-          setTimeout(() => {
-            target.style.transition = currentTransition.replace(`, ${HIGHLIGHT.transition}`, '')
-          }, 0)
+        if (this.targetElement) {
+          const target = this.targetElement
+          const currentTransition = this.targetElement.style.transition
+          this.targetElement.classList.remove(HIGHLIGHT.classes.targetHighlighted)
+          this.targetElement.classList.remove(HIGHLIGHT.classes.targetRelative)
+          // Remove our transition when step is finished.
+          if (currentTransition.includes(HIGHLIGHT.transition)) {
+            setTimeout(() => {
+              target.style.transition = currentTransition.replace(`, ${HIGHLIGHT.transition}`, '')
+            }, 0)
+          }
         }
       }
     },

@@ -27,10 +27,12 @@
         :finish="finish"
         :is-first="isFirst"
         :is-last="isLast"
+        :forward="forward"
         :labels="customOptions.labels"
         :enabled-buttons="customOptions.enabledButtons"
         :highlight="customOptions.highlight"
         :stop-on-fail="customOptions.stopOnTargetNotFound"
+        :continue-when-fail="customOptions.continueWhenTargetNotFound"
         :debug="customOptions.debug"
         @targetNotFound="$emit('targetNotFound', $event)"
       >
@@ -66,7 +68,8 @@ export default {
   },
   data () {
     return {
-      currentStep: -1
+      currentStep: -1,
+      forward: true
     }
   },
   mounted () {
@@ -144,6 +147,7 @@ export default {
       let futureStep = this.currentStep - 1
 
       let process = () => new Promise((resolve, reject) => {
+        this.forward = false
         this.customCallbacks.onPreviousStep(this.currentStep)
         this.currentStep = futureStep
         resolve()
@@ -167,6 +171,7 @@ export default {
       let futureStep = this.currentStep + 1
 
       let process = () => new Promise((resolve, reject) => {
+        this.forward = true
         this.customCallbacks.onNextStep(this.currentStep)
         this.currentStep = futureStep
         resolve()
