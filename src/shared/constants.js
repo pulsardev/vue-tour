@@ -23,6 +23,7 @@ export const DEFAULT_OPTIONS = {
   },
   startTimeout: 0,
   stopOnTargetNotFound: true,
+  continueWhenTargetNotFound: false,
   useKeyboardNavigation: true,
   enabledNavigationKeys: {
     escape: true,
