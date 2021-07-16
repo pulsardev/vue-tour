@@ -8,7 +8,11 @@
 
     <slot name="content">
       <div class="v-step__content">
-        <div v-if="step.content" v-html="step.content"></div>
+         <component v-if="step.component" :is="step.component.vue" v-bind="step.component.data" v-on="step.component.listeners">
+          <template v-if="step.component.content"> {{ step.component.content }} </template>
+          <template v-else-if="step.component.html" v-html="step.component.html"/>
+         </component>
+         <div v-else-if="step.content" v-html="step.content"></div>
         <div v-else>This is a demo step! The id of this step is {{ hash }} and it targets {{ step.target }}.</div>
       </div>
     </slot>
@@ -121,6 +125,11 @@ export default {
             this.$refs['v-step-' + this.hash],
             this.params
           )
+          
+          if (this.step.targetIsBtn) {
+            this.attachClickListener()
+          }
+          
         } else {
           if (this.debug) {
             console.error('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] does not exist!')
@@ -190,6 +199,11 @@ export default {
     },
     isButtonEnabled (name) {
       return this.params.enabledButtons.hasOwnProperty(name) ? this.params.enabledButtons[name] : true
+    },
+    attachClickListener() {
+      this.targetElement.addEventListener("click", () => {
+        typeof this.step.targetIsBtn === "function" ? this.step.targetIsBtn() : this.nextStep();
+      })
     }
   },
   mounted () {
