@@ -20,7 +20,10 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib src/main.js",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.1",
@@ -41,6 +44,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "sass": "^1.32.8",
     "sass-loader": "^8.0.2",
+    "vitepress": "^0.18.1",
     "vue-template-compiler": "^2.6.12"
   }
 }
