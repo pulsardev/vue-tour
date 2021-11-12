@@ -94,6 +94,12 @@ this.$tours['myTour'].start()
 
 For a more detailed documentation, checkout the [docs for vue-tour](https://github.com/pulsardev/vue-tour/wiki).
 
+### Alternative CDN usage
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-tour/2.0.0/vue-tour.umd.min.js"></script>
+```
+
 ## `before()` UI step functions
 
 If you need to do UI setup work before a step, there's a `before` function you may include in any/each of 
