@@ -32,6 +32,7 @@
         :highlight="customOptions.highlight"
         :stop-on-fail="customOptions.stopOnTargetNotFound"
         :debug="customOptions.debug"
+        :theme="customOptions.theme"
         @targetNotFound="$emit('targetNotFound', $event)"
       >
         <!--<div v-if="index === 2" slot="actions">

@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:class="{ 'v-step--sticky': isSticky }" class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash">
+  <div v-bind:class="{ 'v-step--sticky': isSticky }" class="v-step" :id="'v-step-' + hash" :ref="'v-step-' + hash" :style="{'--theme': theme}">
     <slot name="header">
       <div v-if="step.header" class="v-step__header">
         <div v-if="step.header.title" v-html="step.header.title"></div>
@@ -79,6 +79,10 @@ export default {
     },
     debug: {
       type: Boolean
+    },
+    theme: {
+      type: String,
+      default: DEFAULT_STEP_OPTIONS.theme
     }
   },
   data () {
@@ -203,7 +207,7 @@ export default {
 
 <style lang="scss" scoped>
   .v-step {
-    background: #50596c; /* #ffc107, #35495e */
+    background: var(--theme);
     color: white;
     max-width: 320px;
     border-radius: 3px;
@@ -241,7 +245,7 @@ export default {
 
     &--dark {
       &:before {
-        background: #454d5d;
+        background: var(--theme);
       }
     }
   }
@@ -274,7 +278,7 @@ export default {
   .v-step__header {
     margin: -1rem -1rem 0.5rem;
     padding: 0.5rem;
-    background-color: #454d5d;
+    background-color: var(--theme);
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
   }
@@ -304,7 +308,7 @@ export default {
 
     &:hover {
       background-color: rgba(white, 0.95);
-      color: #50596c;
+      color: var(--theme);
     }
   }
 </style>
