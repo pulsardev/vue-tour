@@ -29,7 +29,8 @@ export const DEFAULT_OPTIONS = {
     arrowRight: true,
     arrowLeft: true
   },
-  debug: false
+  debug: false,
+  theme: '#50596c'
 }
 
 export const HIGHLIGHT = {
@@ -66,7 +67,8 @@ export const DEFAULT_STEP_OPTIONS = {
       }
     }
   ],
-  placement: 'bottom'
+  placement: 'bottom',
+  theme: '#50596c'
 }
 
 export const KEYS = {
