@@ -84,7 +84,7 @@ export default {
   data () {
     return {
       hash: sum(this.step.target),
-      targetElement: document.querySelector(this.step.target)
+      targetElement: this.step.target.startsWith('.') ? this.wrapTargets(this.step.target) : document.querySelector(this.step.target)
     }
   },
   computed: {
@@ -104,6 +104,22 @@ export default {
     }
   },
   methods: {
+    wrapTargets (targetClassSelector) {
+      /**
+       * Given a target class selector, wrap the elements identified by the selector, and
+       * insert the wrapped elements at the beginning of the parent. Additionally set the
+       * id attribute on the wrapper element.
+       * Note: This will likely be ugly if the target elements aren't next to each other.
+       */
+      const elements = document.querySelectorAll(targetClassSelector)
+      const wrapper = document.createElement('div')
+      elements[0].parentNode.insertBefore(wrapper, elements[0])
+      for (let el of elements) {
+        wrapper.appendChild(el)
+      }
+      wrapper.setAttribute('id', targetClassSelector.replace(/\./, ''))
+      return wrapper
+    },
     createStep () {
       if (this.debug) {
         console.log('[Vue Tour] The target element ' + this.step.target + ' of .v-step[id="' + this.hash + '"] is:', this.targetElement)
