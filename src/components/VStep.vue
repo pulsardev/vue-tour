@@ -145,7 +145,7 @@ export default {
           jump(this.targetElement, jumpOptions)
         } else {
           // Use the native scroll by default if no scroll options has been defined
-          this.targetElement.scrollIntoView({ behavior: 'smooth' })
+          this.targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
         }
       }
     },
