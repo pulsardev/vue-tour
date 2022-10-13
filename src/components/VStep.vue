@@ -177,14 +177,16 @@ export default {
     removeHighlight () {
       if (this.isHighlightEnabled()) {
         const target = this.targetElement
-        const currentTransition = this.targetElement.style.transition
-        this.targetElement.classList.remove(HIGHLIGHT.classes.targetHighlighted)
-        this.targetElement.classList.remove(HIGHLIGHT.classes.targetRelative)
-        // Remove our transition when step is finished.
-        if (currentTransition.includes(HIGHLIGHT.transition)) {
-          setTimeout(() => {
-            target.style.transition = currentTransition.replace(`, ${HIGHLIGHT.transition}`, '')
-          }, 0)
+        if (target) {
+          const currentTransition = this.targetElement.style.transition
+          this.targetElement.classList.remove(HIGHLIGHT.classes.targetHighlighted)
+          this.targetElement.classList.remove(HIGHLIGHT.classes.targetRelative)
+          // Remove our transition when step is finished.
+          if (currentTransition.includes(HIGHLIGHT.transition)) {
+            setTimeout(() => {
+              target.style.transition = currentTransition.replace(`, ${HIGHLIGHT.transition}`, '')
+            }, 0)
+          }
         }
       }
     },
